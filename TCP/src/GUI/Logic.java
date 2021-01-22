@@ -6,7 +6,11 @@ import java.sql.ResultSet;
 
 import javax.swing.JOptionPane;
 
+import jsonClasses.*;
+import tcpClasses.TCPClient;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Logic {
 
@@ -14,8 +18,11 @@ public class Logic {
 		private Container container;
 		private String action;
 		private int loggedIn;
+		
+		TCPClient tcp = new TCPClient();
+		Gson gson = new GsonBuilder().create();
 	
-		public Logic(){
+		public GUILogic(){
 			container = new Container();
 			
 			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
@@ -37,17 +44,25 @@ public class Logic {
 
 					String userName = container.getLoginPanel().getTextFieldUsername()
 							.getText().trim();
-					char[] pass = container.getLoginPanel().getTextFieldPassword()
-							.getPassword();
-					String password = String.valueOf(pass);
-					
+					String pass = container.getLoginPanel().getTextFieldPassword()
+							.getText();
+										
 					if ((action.equals("btnLogin"))) {
 						System.out.println("hit1");
-						//mangler auth.
-						//loggedIn = auth.authenticate(userName, password, true);
+						
+						//Creates object of jsonClasses.ClientLogin
+						ClientLogin cl = new ClientLogin();
+						//Sets login information
+						cl.setEmail(userName);
+						cl.setPassWord(pass);
+						//Converts object to jsonString
+						String gsonString = gson.toJson(cl);
+						//Sends object to server using tcpClient.TCPClient and receives response as string serverResponse
+						String serverResponse = tcp.TalkToServer(gsonString);
 						System.out.println("hit2");
-
-						if (loggedIn == 0)
+						
+						//Uses serveResponse as a check for login confirmation
+						if (serverResponse != "")
 
 						{
 

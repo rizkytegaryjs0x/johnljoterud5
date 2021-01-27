@@ -75,11 +75,11 @@ public class Logic {
 									"\nLogin failed, error: " + loggedIn,
 									"Error message", JOptionPane.PLAIN_MESSAGE);
 						}
-
+					
 					}
 				}catch (Exception e3) {
 				}
-			
+			}	
 		
 		private class CalendarPanelActionListener implements ActionListener {
 			public void actionPerformed(ActionEvent e) {

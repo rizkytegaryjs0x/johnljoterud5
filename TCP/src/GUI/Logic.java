@@ -34,6 +34,8 @@ public class Logic {
 			container.show(Container.LOGINPANEL);
 			container.setVisible(true);
 		}
+	}
+}
 //		private class LoginPanelActionListener implements ActionListener {
 //			public void actionPerformed(ActionEvent e) {
 //				try {

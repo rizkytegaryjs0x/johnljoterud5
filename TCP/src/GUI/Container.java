@@ -14,7 +14,6 @@ public class Container extends JFrame {
 	
 	private JPanel contentPane;
 	private final LoginPanel loginPanel = new LoginPanel();
-	private final CalendarPanel calendarPanel = new CalendarPanel();
 	CardLayout c;
 	
 
@@ -42,7 +41,7 @@ public class Container extends JFrame {
 		
 		loginPanel.getBtnLogin().setContentAreaFilled(false);
 		contentPane.add(loginPanel, "hejsa");
-		contentPane.add(calendarPanel, "hej");
+
 		
 
 		
@@ -51,9 +50,7 @@ public class Container extends JFrame {
 	public LoginPanel getLoginPanel() {
 		return loginPanel;
 	}
-	public CalendarPanel getCalendarPanel() {
-		return calendarPanel;
-	}
+
 	public void show(String card) {
 		c.show(getContentPane(),  card);
 }

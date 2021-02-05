@@ -7,6 +7,7 @@ import javax.swing.JButton;
 
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 
 public class LoginPanel extends JPanel {
 
@@ -19,7 +20,7 @@ public class LoginPanel extends JPanel {
 	
 	public LoginPanel() {
 
-		setSize(Container.SIZE);
+		setSize(new Dimension(1366, 768));
 		setLayout(null);
 		
 		

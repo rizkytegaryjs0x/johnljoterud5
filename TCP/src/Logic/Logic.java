@@ -1,4 +1,4 @@
-package GUI;
+package Logic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
 
 import tcpClasses.TCPClient;
+import GUI.Container;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

@@ -23,29 +23,29 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 public class NewCalendar{
-    static JLabel lblWeek, lblYear;
-    static JButton btnPrev, btnNext;
-    static JTable tblCalendar;
-    static JComboBox cmbYear;
-    static JFrame frmMain;
-    static Container pane;
-    static DefaultTableModel mtblCalendar; //Table model
-    static JScrollPane stblCalendar; //The scrollpane
-    static JPanel pnlCalendar;
-    static int realYear, realWeek, realDay, currentYear, currentWeek;
-    private static JTextField txtTekstTilEvents;
-    private static JTextField textField_1;
-    private static JLabel lblWeatherForecast;
-    private static JTextField textField_2;
-    private static JLabel lblQotd;
-    private static JButton btnLogout;
-    private static JButton btnChangeCalendar;
-    private static JButton btnShareCalendar;
-    private static JButton btnAddCalendar;
-    private static JButton btnAddEvent;
-    private static JButton btnAddNote;
+    private JLabel lblWeek, lblYear;
+    private JButton btnPrev, btnNext;
+    private JTable tblCalendar;
+    private JComboBox cmbYear;
+    private JFrame frmMain;
+    private Container pane;
+    private DefaultTableModel mtblCalendar; //Table model
+    private JScrollPane stblCalendar; //The scrollpane
+    private JPanel pnlCalendar;
+    private int realYear, realWeek, realDay, currentYear, currentWeek;
+     private JTextField txtTekstTilEvents;
+     private JTextField textField_1;
+     private JLabel lblWeatherForecast;
+     private JTextField textField_2;
+     private JLabel lblQotd;
+     private JButton btnLogout;
+     private JButton btnChangeCalendar;
+     private JButton btnShareCalendar;
+     private JButton btnAddCalendar;
+     private JButton btnAddEvent;
+     private JButton btnAddNote;
     
-    public static void main (String args[]){
+    public void main (String args[]){
         //Look and feel
         try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
         catch (ClassNotFoundException e) {}
@@ -191,7 +191,7 @@ public class NewCalendar{
         
     }
     
-    public static void refreshCalendar(int week, int year){
+    public void refreshCalendar(int week, int year){
         //Variables
         String[] weeks =  {"Week 1", "Week 2", "Week 3", "Week 4", "Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10", "Week 11", "Week 12", "Week 13", "Week 14", "Week 15", "Week 16", "Week 17", "Week 18", "Week 19", "Week 20", "Week 21", "Week 22", "Week 23", "Week 24", "Week 25", "Week 26", "Week 27", "Week 28", "Week 29", "Week 30", "Week 31", "Week 32", "Week 33", "Week 34", "Week 35", "Week 36", "Week 37", "Week 38", "Week 39", "Week 40", "Week 41", "Week 42", "Week 43", "Week 44", "Week 45", "Week 46", "Week 47", "Week 48", "Week 49", "Week 50", "Week 51", "Week 52"};
 //        int nod, sow; //Number Of Days, Start Of Weeks
@@ -232,7 +232,7 @@ public class NewCalendar{
     }
   
     
-    static class tblCalendarRenderer extends DefaultTableCellRenderer{
+    private class tblCalendarRenderer extends DefaultTableCellRenderer{
         public Component getTableCellRendererComponent (JTable table, Object value, boolean selected, boolean focused, int row, int column){
             super.getTableCellRendererComponent(table, value, selected, focused, row, column);
             if (column == 5 || column == 6){ //Week-end
@@ -252,7 +252,7 @@ public class NewCalendar{
         }
     }
     
-    static class btnPrev_Action implements ActionListener{
+    private class btnPrev_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
             if (currentWeek == 0){ //Back one year
                 currentWeek = 51;
@@ -264,7 +264,7 @@ public class NewCalendar{
             refreshCalendar(currentWeek, currentYear);
         }
     }
-    static class btnNext_Action implements ActionListener{
+    private class btnNext_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
             if (currentWeek == 51){ //Foward one year
                 currentWeek = 0;
@@ -276,7 +276,7 @@ public class NewCalendar{
             refreshCalendar(currentWeek, currentYear);
         }
     }
-    static class cmbYear_Action implements ActionListener{
+    private class cmbYear_Action implements ActionListener{
         public void actionPerformed (ActionEvent e){
             if (cmbYear.getSelectedItem() != null){
                 String b = cmbYear.getSelectedItem().toString();

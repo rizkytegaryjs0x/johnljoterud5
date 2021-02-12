@@ -1,4 +1,4 @@
-package newCalendar;
+package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
@@ -17,21 +17,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
-public class NewCalendar{
+public class ShowCalendar extends JPanel{
     private JLabel lblWeek, lblYear;
     private JButton btnPrev, btnNext;
     private JTable tblCalendar;
     private JComboBox cmbYear;
-    private JFrame frmMain;
-    private Container pane;
     private DefaultTableModel mtblCalendar; //Table model
     private JScrollPane stblCalendar; //The scrollpane
-    private JPanel pnlCalendar;
     private int realYear, realWeek, realDay, currentYear, currentWeek;
      private JTextField txtTekstTilEvents;
      private JTextField textField_1;
@@ -45,21 +40,19 @@ public class NewCalendar{
      private JButton btnAddEvent;
      private JButton btnAddNote;
     
-    public void main (String args[]){
+    public ShowCalendar(){
         //Look and feel
-        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-        catch (ClassNotFoundException e) {}
-        catch (InstantiationException e) {}
-        catch (IllegalAccessException e) {}
-        catch (UnsupportedLookAndFeelException e) {}
+//        try {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
+//        catch (ClassNotFoundException e) {}
+//        catch (InstantiationException e) {}
+//        catch (IllegalAccessException e) {}
+//        catch (UnsupportedLookAndFeelException e) {}
         
         //Prepare frame
-        frmMain = new JFrame ("Calendar"); //Create frame
-        frmMain.setSize(1366, 768); //Set size to 400x400 pixels
-        pane = frmMain.getContentPane(); //Get content pane
-        pane.setLayout(null); //Apply null layout
-        frmMain.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //Close when X is clicked
-        
+        setLayout(null);//Create frame
+        setSize(1366, 768); //Set size to 400x400 pixels
+  
+       
         //Create controls
         lblWeek = new JLabel ("January");
         btnPrev = new JButton ("<<");
@@ -67,32 +60,30 @@ public class NewCalendar{
         mtblCalendar = new DefaultTableModel(){public boolean isCellEditable(int rowIndex, int mColIndex){return false;}};
         tblCalendar = new JTable(mtblCalendar);
         stblCalendar = new JScrollPane(tblCalendar);
-        pnlCalendar = new JPanel(null);
         
         //Set border
-        pnlCalendar.setBorder(BorderFactory.createTitledBorder("Calendar"));
-        
+        setBorder(BorderFactory.createTitledBorder("Calendar"));
+        setBounds(6, 6, 1354, 734);
         //Register action listeners
         btnPrev.addActionListener(new btnPrev_Action());
         btnNext.addActionListener(new btnNext_Action());
         
         //Add controls to pane
-        pane.add(pnlCalendar);
-        pnlCalendar.add(lblWeek);
-        pnlCalendar.add(btnPrev);
-        pnlCalendar.add(btnNext);
-        pnlCalendar.add(stblCalendar);
+       
+        add(lblWeek);
+        add(btnPrev);
+        add(btnNext);
+        add(stblCalendar);
         
         //Set bounds
-        pnlCalendar.setBounds(6, 6, 1354, 734);
+       
         lblWeek.setBounds(160-lblWeek.getPreferredSize().width/2, 25, 100, 25);
         btnPrev.setBounds(10, 25, 50, 25);
         btnNext.setBounds(260, 25, 50, 25);
         stblCalendar.setBounds(10, 183, 1189, 451);
         
         //Make frame visible
-        frmMain.setResizable(false);
-        frmMain.setVisible(true);
+        setVisible(true);
         
         //Get real month/year
         GregorianCalendar cal = new GregorianCalendar(); //Create calendar
@@ -123,58 +114,58 @@ public class NewCalendar{
         tblCalendar.setRowHeight(60);
         cmbYear = new JComboBox();
         cmbYear.setBounds(1063, 25, 136, 32);
-        pnlCalendar.add(cmbYear);
+        add(cmbYear);
         lblYear = new JLabel ("Change year:");
         lblYear.setBounds(931, 21, 108, 32);
-        pnlCalendar.add(lblYear);
+        add(lblYear);
         
         btnChangeCalendar = new JButton("Change calendar");
         btnChangeCalendar.setBounds(1218, 564, 117, 29);
-        pnlCalendar.add(btnChangeCalendar);
+        add(btnChangeCalendar);
         
         btnShareCalendar = new JButton("Share calendar");
         btnShareCalendar.setBounds(1218, 523, 117, 29);
-        pnlCalendar.add(btnShareCalendar);
+        add(btnShareCalendar);
         
         btnAddCalendar = new JButton("Add calendar");
         btnAddCalendar.setBounds(1218, 482, 117, 29);
-        pnlCalendar.add(btnAddCalendar);
+        add(btnAddCalendar);
         
         btnAddEvent = new JButton("Add event");
         btnAddEvent.setBounds(1218, 441, 117, 29);
-        pnlCalendar.add(btnAddEvent);
+        add(btnAddEvent);
         
         btnAddNote = new JButton("Add note");
         btnAddNote.setBounds(1218, 400, 117, 29);
-        pnlCalendar.add(btnAddNote);
+        add(btnAddNote);
         
         btnLogout = new JButton("Logout");
         btnLogout.setBounds(1218, 605, 117, 29);
-        pnlCalendar.add(btnLogout);
+        add(btnLogout);
         
         txtTekstTilEvents = new JTextField();
         txtTekstTilEvents.setBounds(6, 646, 1197, 82);
-        pnlCalendar.add(txtTekstTilEvents);
+        add(txtTekstTilEvents);
         txtTekstTilEvents.setText("Tekst til events!");
         txtTekstTilEvents.setColumns(10);
         
         textField_2 = new JTextField();
         textField_2.setBounds(83, 89, 400, 82);
-        pnlCalendar.add(textField_2);
+        add(textField_2);
         textField_2.setColumns(10);
         
         lblQotd = new JLabel("QOTD");
         lblQotd.setBounds(23, 122, 61, 16);
-        pnlCalendar.add(lblQotd);
+        add(lblQotd);
         
         textField_1 = new JTextField();
         textField_1.setBounds(799, 89, 400, 82);
-        pnlCalendar.add(textField_1);
+        add(textField_1);
         textField_1.setColumns(10);
         
         lblWeatherForecast = new JLabel("Weather Forecast");
         lblWeatherForecast.setBounds(680, 122, 124, 16);
-        pnlCalendar.add(lblWeatherForecast);
+        add(lblWeatherForecast);
         cmbYear.addActionListener(new cmbYear_Action());
         mtblCalendar.setColumnCount(7);
         mtblCalendar.setRowCount(14);

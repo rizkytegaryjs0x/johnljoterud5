@@ -11,12 +11,15 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JButton;
 
 public class ChangeCalendar extends JPanel {
 
 	private JTable chooseCalendar;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
+	private JButton btnChoose;
+	private JButton btnBack;
 	
 	
 	public ChangeCalendar() {
@@ -48,6 +51,14 @@ public class ChangeCalendar extends JPanel {
 		JLabel lblChooseCalendar = new JLabel("Choose Calendar");
 		lblChooseCalendar.setBounds(639, 84, 131, 16);
 		add(lblChooseCalendar);
+		
+		btnChoose = new JButton("Choose");
+		btnChoose.setBounds(628, 612, 117, 29);
+		add(btnChoose);
+		
+		btnBack = new JButton("Back");
+		btnBack.setBounds(628, 669, 117, 29);
+		add(btnBack);
 		
 	}
 

@@ -14,6 +14,7 @@ public class Container extends JFrame {
 	
 	private JPanel contentPane;
 	private final LoginPanel loginPanel = new LoginPanel();
+	private final ShowCalendar showCalendar  = new ShowCalendar();
 	CardLayout c;
 	
 
@@ -23,9 +24,8 @@ public class Container extends JFrame {
 	public final static Dimension BUTTON = new Dimension(118, 29);
 	public final static Dimension MAINBUTTON = new Dimension(225, 70);
 	
-	public static final String LOGINPANEL = "login";
-	public static final String CALENDARPANEL = "calendar";
-
+	public static final String LOGINPANEL = "LOGIN";
+	public static final String SHOWCALENDAR = "SHOWCALENDAR";
 	
 	
 	public Container() {
@@ -35,20 +35,25 @@ public class Container extends JFrame {
 		setSize(FRAMESIZE);
 		
 		JPanel contentPane = (JPanel) this.getContentPane();
-		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		this.setContentPane(contentPane);
-		contentPane.setLayout(new CardLayout(0, 0));
+		contentPane.setLayout(new CardLayout(0,0));
 		
-		loginPanel.getBtnLogin().setContentAreaFilled(false);
-		contentPane.add(loginPanel, "hejsa");
+		
+		contentPane.add(loginPanel, "LOGIN");
+		
+		contentPane.add(showCalendar, "SHOWCALENDAR");
 
 		
-
+		c = (CardLayout) getContentPane().getLayout();
 		
 	}
 
 	public LoginPanel getLoginPanel() {
 		return loginPanel;
+	}
+
+	public ShowCalendar getShowCalendar() {
+		return showCalendar;
 	}
 
 	public void show(String card) {

@@ -7,13 +7,14 @@ import javax.swing.JOptionPane;
 
 import tcpClasses.TCPClient;
 import GUI.Container;
+import GUI.ShowCalendar;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class Logic {
 
-	public class GUILogic {
+	
 		private Container container;
 		private String action;
 		private int loggedIn;
@@ -21,22 +22,39 @@ public class Logic {
 		TCPClient tcp = new TCPClient();
 		Gson gson = new GsonBuilder().create();
 	
-		public GUILogic(){
+		public Logic(){
 			container = new Container();
 			
 //			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
-
+			container.getShowCalendar().addActionlistener(new ShowCalendarActionListener());
 			
 		}
 	
 		
 		public void run() {
 
-			container.show(Container.LOGINPANEL);
+			container.show(Container.SHOWCALENDAR);
 			container.setVisible(true);
 		}
+		
+		
+		private class ShowCalendarActionListener implements ActionListener{
+
+			
+			public void actionPerformed(ActionEvent e) {
+				
+				if (e.getSource() == container.getShowCalendar().getBtnNext()){
+					
+					
+				}
+				
+			}
+			
+		}
+		
+		
 	}
-}
+
 //		private class LoginPanelActionListener implements ActionListener {
 //			public void actionPerformed(ActionEvent e) {
 //				try {

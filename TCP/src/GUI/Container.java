@@ -20,7 +20,7 @@ public class Container extends JFrame {
 
 
 	public final static Dimension SIZE = new Dimension(1366,768);
-	public final static Dimension FRAMESIZE = new Dimension(670,470);
+	public final static Dimension FRAMESIZE = new Dimension(1366,768);
 	public final static Dimension BUTTON = new Dimension(118, 29);
 	public final static Dimension MAINBUTTON = new Dimension(225, 70);
 	

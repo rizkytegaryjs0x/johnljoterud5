@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ public class ChangeCalendar extends JPanel {
 	private JScrollPane scrollPane;
 	private JButton btnChoose;
 	private JButton btnBack;
+	private JLabel lblChooseCalendar;
 	
 	
 	public ChangeCalendar() {
@@ -48,7 +50,7 @@ public class ChangeCalendar extends JPanel {
 
 		add(scrollPane);
 		
-		JLabel lblChooseCalendar = new JLabel("Choose Calendar");
+		lblChooseCalendar = new JLabel("Choose Calendar");
 		lblChooseCalendar.setBounds(639, 84, 131, 16);
 		add(lblChooseCalendar);
 		
@@ -61,5 +63,8 @@ public class ChangeCalendar extends JPanel {
 		add(btnBack);
 		
 	}
-
+	public void addActionListener(ActionListener l) {
+		btnChoose.addActionListener(l);
+		btnBack.addActionListener(l);
+	}
 }

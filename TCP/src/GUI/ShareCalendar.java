@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -18,6 +19,10 @@ public class ShareCalendar extends JPanel {
 	private JTable chooseUser;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
+	private JButton btnChooseCalendar;
+	private JButton btnChooseUser;
+	private JButton btnShare;
+	private JButton btnBack;
 
 	/**
 	 * Create the panel.
@@ -76,22 +81,42 @@ public class ShareCalendar extends JPanel {
 
 		add(scrollPane);
 		
-		JButton btnChoosecalendar = new JButton("ChooseCalendar");
-		btnChoosecalendar.setBounds(341, 600, 117, 29);
-		add(btnChoosecalendar);
 		
-		JButton btnChooseuser = new JButton("ChooseUser");
-		btnChooseuser.setBounds(992, 600, 117, 29);
-		add(btnChooseuser);
+		btnChooseCalendar = new JButton("Choose Calendar");
+		btnChooseCalendar.setBounds(341, 600, 117, 29);
+		add(btnChooseCalendar);
 		
-		JButton btnShare = new JButton("Share");
+		btnChooseUser = new JButton("Choose User");
+		btnChooseUser.setBounds(992, 600, 117, 29);
+		add(btnChooseUser);
+		
+		btnShare = new JButton("Share");
 		btnShare.setBounds(669, 635, 117, 29);
 		add(btnShare);
 		
-		JButton btnBack = new JButton("Back");
+		btnBack = new JButton("Back");
 		btnBack.setBounds(669, 688, 117, 29);
 		add(btnBack);
 		
 		
 	}
+	public void addActionListener(ActionListener l) {
+		btnChooseCalendar.addActionListener(l);
+		btnShare.addActionListener(l);
+		btnChooseUser.addActionListener(l);
+		btnBack.addActionListener(l);
+	}
+	public JButton getBtnChooseCalendar() {
+		return btnChooseCalendar;
+	}
+	public JButton getBtnChooseUser() {
+		return btnChooseUser;
+	}
+	public JButton getBtnShare() {
+		return btnShare;
+	}
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	
 }

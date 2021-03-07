@@ -15,6 +15,11 @@ public class Container extends JFrame {
 	private JPanel contentPane;
 	private final LoginPanel loginPanel = new LoginPanel();
 	private final ShowCalendar showCalendar  = new ShowCalendar();
+	private final AddEvent addEvent = new AddEvent();
+	private final AddNote addNote = new AddNote();
+	private final ChangeCalendar changeCalendar = new ChangeCalendar();
+	private final CreateCalendar createCalendar = new CreateCalendar();
+	private final ShareCalendar shareCalendar = new ShareCalendar();
 	CardLayout c;
 	
 
@@ -26,6 +31,12 @@ public class Container extends JFrame {
 	
 	public static final String LOGINPANEL = "LOGIN";
 	public static final String SHOWCALENDAR = "SHOWCALENDAR";
+	public static final String ADDEVENT = "ADDEVENT";
+	public static final String ADDNOTE = "ADDNOTE";
+	public static final String CHANGECALENDAR = "CHANGECALENDAR";
+	public static final String CREATECALENDAR = "CREATECALENDAR";
+	public static final String SHARECALENDAR = "SHARECALENDAR";
+	
 	
 	
 	public Container() {
@@ -43,6 +54,15 @@ public class Container extends JFrame {
 		
 		contentPane.add(showCalendar, "SHOWCALENDAR");
 
+		contentPane.add(addEvent, "ADDEVENT");
+	
+		contentPane.add(addNote, "ADDNOTE");
+		
+		contentPane.add(changeCalendar, "CHANGECALENDAR");
+		
+		contentPane.add(createCalendar, "CREATECALENDAR");
+		
+		contentPane.add(shareCalendar, "SHARECALENDAR");
 		
 		c = (CardLayout) getContentPane().getLayout();
 		
@@ -54,6 +74,21 @@ public class Container extends JFrame {
 
 	public ShowCalendar getShowCalendar() {
 		return showCalendar;
+	}
+	public AddEvent getAddEvent() {
+		return addEvent;
+	}
+	public AddNote getAddNote() {
+		return addNote;
+	}
+	public ChangeCalendar getChangeCalendar() {
+		return changeCalendar;
+	}
+	public CreateCalendar getCreateCalendar() {
+		return createCalendar;
+	}
+	public ShareCalendar getShareCalendar() {
+		return shareCalendar;
 	}
 
 	public void show(String card) {

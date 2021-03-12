@@ -16,9 +16,7 @@ public class Logic {
 
 	
 		private Container container;
-		private String action;
-		private int loggedIn;
-		
+
 		TCPClient tcp = new TCPClient();
 		Gson gson = new GsonBuilder().create();
 	

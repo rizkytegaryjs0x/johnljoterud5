@@ -28,7 +28,7 @@ public class Container extends JFrame {
 	public final static Dimension FRAMESIZE = new Dimension(1366,768);
 	public final static Dimension BUTTON = new Dimension(118, 29);
 	public final static Dimension MAINBUTTON = new Dimension(225, 70);
-	
+	 
 	public static final String LOGINPANEL = "LOGIN";
 	public static final String SHOWCALENDAR = "SHOWCALENDAR";
 	public static final String ADDEVENT = "ADDEVENT";

@@ -2,27 +2,34 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
 public class ShareCalendar extends JPanel {
-	private JTable chooseCalendar;
-	private JTable chooseUser;
-	private DefaultTableModel model;
-	private JScrollPane scrollPane;
+	private JTable tableCalendar;
+	private JTable tableUser;
+	private DefaultTableModel modelCalendar;
+	private DefaultTableModel modelUser;
+	private JScrollPane scrollPaneCalendar;
+	private JScrollPane scrollPaneUser;
 	private JButton btnChooseCalendar;
 	private JButton btnChooseUser;
 	private JButton btnShare;
 	private JButton btnBack;
+	private JLabel lblShareCalendar;
 
 	/**
 	 * Create the panel.
@@ -34,56 +41,69 @@ public class ShareCalendar extends JPanel {
 		
 
 		
-		JLabel lblShareCalendar = new JLabel("Share Calendar");
-		lblShareCalendar.setBounds(669, 58, 116, 16);
-		add(lblShareCalendar);
+
 		
 		
 				String[] columnNames = { "ID", "Name"};
 		
-    	model = (DefaultTableModel)chooseCalendar.getModel();
-    	model.setColumnIdentifiers(columnNames);
-		chooseCalendar = new JTable();
-		chooseCalendar.setBounds(103, 138, 327, 288);
-		add(chooseCalendar);
-		
-				String[] columnNames2 = { "ID", "Email"};
-		
-    	model = (DefaultTableModel)chooseUser.getModel();
-    	model.setColumnIdentifiers(columnNames2);
-		chooseUser = new JTable();
-		chooseUser.setBounds(572, 138, 327, 288);
-		add(chooseUser);
-		
-		scrollPane = new JScrollPane(chooseCalendar);
-		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
-		scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				null));
-		scrollPane.setBounds(149, 171, 500, 376);
+				String[] columnNames2 = { "CalendarID", "Name", "Active", "CreatedBy",
+						"PrivatePublic","IsCBS" };
+			
+				
+				
+				tableUser = new JTable();
+				modelUser = (DefaultTableModel) tableUser.getModel();
+				modelUser.setColumnIdentifiers(columnNames2);
+				tableUser.setSurrendersFocusOnKeystroke(true);
+				tableUser.setPreferredScrollableViewportSize(new Dimension(500, 100));
+				tableUser.setFillsViewportHeight(true);
+				tableUser.setRowSelectionAllowed(true);
 
-		add(scrollPane);
-		
-		scrollPane = new JScrollPane(chooseUser);
-		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
-		scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				null));
-		scrollPane.setBounds(800, 171, 500, 376);
 
-		add(scrollPane);
-		
+
+				// Create the scroll pane and add the table to it.
+				scrollPaneUser = new JScrollPane(tableCalendar);
+				scrollPaneUser.setBorder(new CompoundBorder(new BevelBorder(
+						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+								255), new Color(0, 0, 205), new Color(255, 255, 255)),
+						new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
+				scrollPaneUser.setViewportBorder(new CompoundBorder(new BevelBorder(
+						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+								255), new Color(0, 0, 205), new Color(255, 255, 255)),
+						null));
+				scrollPaneUser.setBounds(186, 241, 432, 315);
+
+				// Add the scroll pane to this panel.
+				add(scrollPaneUser);
+				
+				
+				tableCalendar = new JTable();
+				modelCalendar = (DefaultTableModel) tableCalendar.getModel();
+				modelCalendar.setColumnIdentifiers(columnNames2);
+				tableCalendar.setSurrendersFocusOnKeystroke(true);
+				tableCalendar.setPreferredScrollableViewportSize(new Dimension(500, 100));
+				tableCalendar.setFillsViewportHeight(true);
+				tableCalendar.setRowSelectionAllowed(true);
+
+
+
+				// Create the scroll pane and add the table to it.
+				scrollPaneCalendar = new JScrollPane(tableCalendar);
+				scrollPaneCalendar.setBorder(new CompoundBorder(new BevelBorder(
+						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+								255), new Color(0, 0, 205), new Color(255, 255, 255)),
+						new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
+				scrollPaneCalendar.setViewportBorder(new CompoundBorder(new BevelBorder(
+						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
+								255), new Color(0, 0, 205), new Color(255, 255, 255)),
+						null));
+				scrollPaneCalendar.setBounds(764, 241, 553, 315);
+
+				// Add the scroll pane to this panel.
+				add(scrollPaneCalendar);
 		
 		btnChooseCalendar = new JButton("Choose Calendar");
-		btnChooseCalendar.setBounds(341, 600, 117, 29);
+		btnChooseCalendar.setBounds(341, 600, 152, 29);
 		add(btnChooseCalendar);
 		
 		btnChooseUser = new JButton("Choose User");
@@ -97,6 +117,10 @@ public class ShareCalendar extends JPanel {
 		btnBack = new JButton("Back");
 		btnBack.setBounds(669, 688, 117, 29);
 		add(btnBack);
+		
+		lblShareCalendar = new JLabel("Share Calendar");
+		lblShareCalendar.setBounds(669, 58, 116, 16);
+		add(lblShareCalendar);
 		
 		
 	}

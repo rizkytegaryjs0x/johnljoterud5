@@ -181,9 +181,16 @@ public class ShowCalendar extends JPanel{
         
         
     }
-    public void addActionlistener(ActionListener l){
+    public void addActionListener(ActionListener l){
     	btnNext.addActionListener(l);
     	btnPrev.addActionListener(l);
+    	btnAddCalendar.addActionListener(l);
+    	btnAddEvent.addActionListener(l);;
+    	btnAddNote.addActionListener(l);
+    	btnChangeCalendar.addActionListener(l);
+    	btnLogout.addActionListener(l);
+    	btnShareCalendar.addActionListener(l);
+    	
     }
     public JButton getBtnPrev() {
 		return btnPrev;

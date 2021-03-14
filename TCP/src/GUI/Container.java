@@ -90,7 +90,6 @@ public class Container extends JFrame {
 	public ShareCalendar getShareCalendar() {
 		return shareCalendar;
 	}
-
 	public void show(String card) {
 		c.show(getContentPane(),  card);
 }

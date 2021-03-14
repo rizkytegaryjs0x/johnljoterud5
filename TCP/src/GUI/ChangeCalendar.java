@@ -74,4 +74,11 @@ public class ChangeCalendar extends JPanel {
 		btnChoose.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
+	public JButton getBtnChoose() {
+		return btnChoose;
+	}
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+	
 }

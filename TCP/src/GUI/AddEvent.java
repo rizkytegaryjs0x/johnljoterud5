@@ -344,6 +344,6 @@ import javax.swing.border.CompoundBorder;
 
 		public JButton getBtnBack() {
 			return btnBack;
+		}
 		
-	}
 }

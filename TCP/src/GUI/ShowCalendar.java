@@ -5,6 +5,9 @@ import java.awt.Component;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
 import javax.swing.BorderFactory;
@@ -19,6 +22,7 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class ShowCalendar extends JPanel{
     private JLabel lblWeek, lblYear;
@@ -39,6 +43,7 @@ public class ShowCalendar extends JPanel{
      private JButton btnAddCalendar;
      private JButton btnAddEvent;
      private JButton btnAddNote;
+     private TableColumnModel columnModel;
     
     public ShowCalendar(){
         //Look and feel
@@ -51,7 +56,6 @@ public class ShowCalendar extends JPanel{
         //Prepare frame
         setLayout(null);//Create frame
         setSize(1366, 768); //Set size to 400x400 pixels
-  
        
         //Create controls
         lblWeek = new JLabel ("January");
@@ -243,6 +247,13 @@ public class ShowCalendar extends JPanel{
             for (int j=0; j<7; j++){
                 mtblCalendar.setValueAt(null, i, j);
             }
+        }
+       
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+      
+        String[] headers = {}; //All headers
+        for (int i=0; i<7; i++){
+            tblCalendar.getColumnModel().getColumn(i).setHeaderValue("date");
         }
         
 //        //Get first day of month and number of days

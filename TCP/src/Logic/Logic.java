@@ -24,7 +24,7 @@ public class Logic {
 			container = new Container();
 			
 //			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
-			container.getShowCalendar().addActionlistener(new ShowCalendarActionListener());
+			container.getShowCalendar().addActionListener(new ShowCalendarActionListener());
 			
 		}
 	

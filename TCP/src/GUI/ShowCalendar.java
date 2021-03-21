@@ -44,6 +44,7 @@ public class ShowCalendar extends JPanel{
      private JButton btnAddEvent;
      private JButton btnAddNote;
      private TableColumnModel columnModel;
+     GregorianCalendar cal = new GregorianCalendar();
     
     public ShowCalendar(){
         //Look and feel
@@ -90,19 +91,12 @@ public class ShowCalendar extends JPanel{
         setVisible(true);
         
         //Get real month/year
-        GregorianCalendar cal = new GregorianCalendar(); //Create calendar
         realDay = cal.get(GregorianCalendar.DAY_OF_WEEK); //Get day
         realWeek = cal.get(GregorianCalendar.WEEK_OF_YEAR); //Get month
         realYear = cal.get(GregorianCalendar.YEAR); //Get year
         currentWeek = realWeek; //Match month and year
         currentYear = realYear;
-        
-        //Add headers
-        String[] headers = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"}; //All headers
-        for (int i=0; i<7; i++){
-            mtblCalendar.addColumn(headers[i]);
-        }
-        
+              
         tblCalendar.getParent().setBackground(tblCalendar.getBackground()); //Set background
         
         //No resize/reorder
@@ -248,12 +242,15 @@ public class ShowCalendar extends JPanel{
                 mtblCalendar.setValueAt(null, i, j);
             }
         }
-       
-        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-      
-        String[] headers = {}; //All headers
-        for (int i=0; i<7; i++){
-            tblCalendar.getColumnModel().getColumn(i).setHeaderValue("date");
+      //Add headers
+        
+        String[] headers = { "Mon ", "Tue ", "Wed ", "Thu ", "Fri ", "Sat ", "Sun "}; //All headers 
+        for (int i=0; i<6; i++){
+        	System.out.println(i);
+        	
+        	cal.setWeekDate(year, week, i+1);
+        	System.out.println("DayOfWeek: " + cal.get(GregorianCalendar.DAY_OF_WEEK) + "\nDayOfMonth: " + cal.get(GregorianCalendar.DAY_OF_MONTH));
+            tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[cal.get(GregorianCalendar.DAY_OF_WEEK)] + cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" + cal.get(GregorianCalendar.MONTH));
         }
         
 //        //Get first day of month and number of days

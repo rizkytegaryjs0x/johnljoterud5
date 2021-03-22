@@ -174,6 +174,8 @@ public class ShowCalendar extends JPanel{
         }
         
         //Refresh calendar
+        System.out.println("REALWEEK L 177: " + realWeek);
+        System.out.println("REALWEEK L 178: " + realYear);
         refreshCalendar (realWeek, realYear); //Refresh calendar
         
         
@@ -243,16 +245,24 @@ public class ShowCalendar extends JPanel{
             }
         }
       //Add headers
-        
-        String[] headers = { "Mon ", "Tue ", "Wed ", "Thu ", "Fri ", "Sat ", "Sun "}; //All headers 
-        for (int i=0; i<6; i++){
-        	System.out.println(i);
-        	
-        	cal.setWeekDate(year, week, i+1);
+        System.out.println("YEAR: " + year);
+        System.out.println("WEEK: " + week);
+        String[] headers = {"", "Mon ", "Tue ", "Wed ", "Thu ", "Fri ", "Sat ", "Sun "}; //All headers 
+        int temp = 2;
+        for (int i=0; i<7; i++){
+        	System.out.println("i: " + i);
+        	if (temp != 8)
+        	cal.setWeekDate(year, week, temp);
+        	else{
+        		temp = 1;
+        		cal.setWeekDate(year, week, temp);
+        	}
         	System.out.println("DayOfWeek: " + cal.get(GregorianCalendar.DAY_OF_WEEK) + "\nDayOfMonth: " + cal.get(GregorianCalendar.DAY_OF_MONTH));
-            tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[cal.get(GregorianCalendar.DAY_OF_WEEK)] + cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" + cal.get(GregorianCalendar.MONTH));
+            tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[i+1] + cal.get(GregorianCalendar.DAY_OF_MONTH) + "/" + cal.get(GregorianCalendar.MONTH));
+            System.out.println(".MONTH: " + GregorianCalendar.MONTH);
+            temp++;
         }
-        
+        	
 //        //Get first day of month and number of days
 //        GregorianCalendar cal = new GregorianCalendar(year, month, 1);
 //        nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);

@@ -20,20 +20,32 @@ public class CalendarHandler {
 		
 		return weekEvents;
 	}
+	/**
+	 * 
+	 * @param calendar
+	 */
 	public void setCalendar(ArrayList<ArrayList<UserEvent>> calendar) {
 		this.calendar = calendar;
 	}
 	
-	public String[] YearAndWeekDates(int week, int year){
-		String[] dates = {};
+	 static public ArrayList<String> YearAndWeekDates(int week, int year){
+		ArrayList<String> dates = new ArrayList<String>();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("MM dd yyyy");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.WEEK_OF_YEAR, week);        
-		cal.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
-		System.out.println(sdf.format(cal.getTime()));  
+		cal.set(Calendar.WEEK_OF_YEAR, week);
+
 		
+		for(int i=2 ; i<7 ; i++){
+		cal.set(Calendar.DAY_OF_WEEK, i);
+		dates.add(sdf.format(cal.getTime()));
+		}
+		for(int i=0 ; i<2 ; i++){
+			cal.set(Calendar.DAY_OF_WEEK, i);
+			dates.add(sdf.format(cal.getTime())); 
+		}
+
 		return dates;
+	 }
 	}
-}

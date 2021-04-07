@@ -8,7 +8,7 @@ public class test {
 	
 	public static void main (String[] args){
 		ArrayList<String> dateArray = new ArrayList<String>();
-		dateArray = YearAndWeekDates(48, 2014);
+		dateArray = YearAndWeekDates(12, 2015);
 		System.out.println(dateArray.get(3));
 	}
 	 static public ArrayList<String> YearAndWeekDates(int week, int year){

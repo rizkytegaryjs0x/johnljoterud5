@@ -10,13 +10,13 @@ public class TCPClient {
 	public TCPClient (){
 		
 	}
-	public String TalkToServer (String gString) throws UnknownHostException, IOException{
+	public String TalkToServer (String gsonString) throws UnknownHostException, IOException{
 		String modifiedSentence;
 
 		Socket clientSocket = new Socket("localhost", 6666);
 		DataOutputStream outToServer = new DataOutputStream(
 				clientSocket.getOutputStream());
-		byte[] input = gString.getBytes();
+		byte[] input = gsonString.getBytes();
 		byte key = (byte) 3.1470;
 		byte[] encrypted = input;
 		for (int i = 0; i < encrypted.length; i++)

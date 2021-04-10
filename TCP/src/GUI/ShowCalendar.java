@@ -3,6 +3,7 @@ package GUI;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -34,7 +35,8 @@ public class ShowCalendar extends JPanel {
 	private JComboBox cmbYear;
 	private DefaultTableModel mtblCalendar; // Table model
 	private JScrollPane stblCalendar; // The scrollpane
-	private int realYear, realWeek, realDay, currentYear, currentWeek, currentDay;
+	private int realYear, realWeek, realDay, currentYear, currentWeek,
+			currentDay;
 	private JTextField txtTekstTilEvents;
 	private JTextField textField_1;
 	private JLabel lblWeatherForecast;
@@ -79,7 +81,6 @@ public class ShowCalendar extends JPanel {
 		setBorder(BorderFactory.createTitledBorder("Calendar"));
 		setBounds(6, 6, 1354, 734);
 		// Register action listeners
-		
 
 		// Add controls to pane
 
@@ -94,8 +95,7 @@ public class ShowCalendar extends JPanel {
 				25);
 		btnPrev.setBounds(10, 25, 50, 25);
 		btnNext.setBounds(260, 25, 50, 25);
-		
-		
+
 		stblCalendar.setBounds(10, 183, 1189, 451);
 
 		// Make frame visible
@@ -105,6 +105,9 @@ public class ShowCalendar extends JPanel {
 		realDay = cal.get(GregorianCalendar.DAY_OF_WEEK); // Get day
 		realWeek = cal.get(GregorianCalendar.WEEK_OF_YEAR); // Get month
 		realYear = cal.get(GregorianCalendar.YEAR); // Get year
+		cal.setFirstDayOfWeek(GregorianCalendar.MONDAY);
+		cal.set(GregorianCalendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
+		
 		currentDay = realDay;
 		currentWeek = realWeek; // Match month and year
 		currentYear = realYear;
@@ -179,8 +182,8 @@ public class ShowCalendar extends JPanel {
 		add(lblWeatherForecast);
 		mtblCalendar.setColumnCount(7);
 		mtblCalendar.setRowCount(14);
-		
 
+		
 
 		// Populate table
 		for (int i = realYear - 5; i <= realYear + 25; i++) {
@@ -195,7 +198,7 @@ public class ShowCalendar extends JPanel {
 	}
 
 	public void addActionListener(ActionListener l) {
-	
+
 		btnAddCalendar.addActionListener(l);
 		btnAddEvent.addActionListener(l);
 		btnAddNote.addActionListener(l);
@@ -242,20 +245,18 @@ public class ShowCalendar extends JPanel {
 
 	public void refreshCalendar(int week, int year) {
 		// Variables
-		
-		
-		
-		String[] weeks = { "0","Week 1", "Week 2", "Week 3", "Week 4", "Week 5",
-				"Week 6", "Week 7", "Week 8", "Week 9", "Week 10", "Week 11",
-				"Week 12", "Week 13", "Week 14", "Week 15", "Week 16",
-				"Week 17", "Week 18", "Week 19", "Week 20", "Week 21",
-				"Week 22", "Week 23", "Week 24", "Week 25", "Week 26",
-				"Week 27", "Week 28", "Week 29", "Week 30", "Week 31",
-				"Week 32", "Week 33", "Week 34", "Week 35", "Week 36",
-				"Week 37", "Week 38", "Week 39", "Week 40", "Week 41",
-				"Week 42", "Week 43", "Week 44", "Week 45", "Week 46",
-				"Week 47", "Week 48", "Week 49", "Week 50", "Week 51",
-				"Week 52" };
+
+		String[] weeks = { "0", "Week 1", "Week 2", "Week 3", "Week 4",
+				"Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10",
+				"Week 11", "Week 12", "Week 13", "Week 14", "Week 15",
+				"Week 16", "Week 17", "Week 18", "Week 19", "Week 20",
+				"Week 21", "Week 22", "Week 23", "Week 24", "Week 25",
+				"Week 26", "Week 27", "Week 28", "Week 29", "Week 30",
+				"Week 31", "Week 32", "Week 33", "Week 34", "Week 35",
+				"Week 36", "Week 37", "Week 38", "Week 39", "Week 40",
+				"Week 41", "Week 42", "Week 43", "Week 44", "Week 45",
+				"Week 46", "Week 47", "Week 48", "Week 49", "Week 50",
+				"Week 51", "Week 52" };
 		// int nod, sow; //Number Of Days, Start Of Weeks
 
 		// Allow/disallow buttons
@@ -267,47 +268,54 @@ public class ShowCalendar extends JPanel {
 		if (week == 51 && year >= realYear + 100) {
 			btnNext.setEnabled(false);
 		} // Too late
+		
 		lblWeek.setText(weeks[week]); // Refresh the month label (at the top)
 		lblWeek.setBounds(160 - lblWeek.getPreferredSize().width / 2, 25, 180,
 				25); // Re-align label with calendar
 		cmbYear.setSelectedItem(String.valueOf(year)); // Select the correct
-														// year in the combo box
+		// year in the combo box
 
 		// Clear table
 		for (int i = 0; i < 14; i++) {
 			for (int j = 0; j < 7; j++) {
 				mtblCalendar.setValueAt(null, i, j);
-		
+				
 			}
 		}
-		
-		//Add headers
-        System.out.println("YEAR: " + year);
-        System.out.println("WEEK: " + week);
-        String[] headers = {"", "Mon ", "Tue ", "Wed ", "Thu ", "Fri ", "Sat ", "Sun "}; //All headers 
-        int temp = 2;
-        for (int i=0; i<7; i++){
-//        	System.out.println("i: " + i);
-//        	if (temp != 8)
-//        	cal.setWeekDate(year, week, temp);
-//        	else{
-//        		temp = 1;
-//        		cal.setWeekDate(year, week, temp);
-//        	}
-//        	
-        	  
-     			dateArray = YearAndWeekDates(week, year);
-     			
-     			tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[i+1] +dateArray.get(i));
-//             mtblCalendar.setColumnIdentifiers(newIdentifiers);
-//     			System.out.println("this is the current week: " + currentWeek + "\n +and the currentyear" +currentYear);
-         
-        }
-		
-		
+
+		// Add headers
+		System.out.println("YEAR: " + year);
+		System.out.println("WEEK: " + week);
+		// All headers
+		int temp = 2;
+		String[] headers = { "", "Mon ", "Tue ", "Wed ", "Thu ", "Fri ",
+				"Sat ", "Sun " };
+		for (int i = 0; i < 7; i++) {
+			// System.out.println("i: " + i);
+			// if (temp != 8)
+			// cal.setWeekDate(year, week, temp);
+			// else{
+			// temp = 1;
+			// cal.setWeekDate(year, week, temp);
+			// }
+			//
+
+			dateArray = YearAndWeekDates(week, year);
+
+			 tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[i+1]);
+			
+
+			tblCalendar.setValueAt(dateArray.get(i), 0, i);
+
+			
+
+			// System.out.println("this is the current week: " + currentWeek +
+			// "\n +and the currentyear" +currentYear);
+
+		}
 
 		// //Get first day of month and number of days
-		// GregorianCalendar cal = new GregorianCalendar(year, month, 1);
+		// GregorianCalendar cal = new GregorianCalendar(year, w, 1);
 		// nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
 		// som = cal.get(GregorianCalendar.DAY_OF_WEEK);
 		//
@@ -321,10 +329,9 @@ public class ShowCalendar extends JPanel {
 		//
 
 		// Apply renderers
-		tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0),
-				new tblCalendarRenderer());
+		 tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0),
+		 new tblCalendarRenderer());
 	}
-
 
 	private class tblCalendarRenderer extends DefaultTableCellRenderer {
 		public Component getTableCellRendererComponent(JTable table,
@@ -337,17 +344,21 @@ public class ShowCalendar extends JPanel {
 			} else { // Week
 				setBackground(new Color(220, 255, 220));
 			}
-			if (value != null) {
-				if (Integer.parseInt(value.toString()) == realDay
-						&& currentWeek == realWeek && currentYear == realYear) { // Today
-					setBackground(new Color(220, 220, 255));
-				}
+			if(row == 0){
+				setBackground(new Color(100, 255, 210));
 			}
+//			if (value != null) {
+//				if (Integer.parseInt(value.toString()) == realDay
+//						&& currentWeek == realWeek && currentYear == realYear) { // Today
+//					setBackground(new Color(220, 220, 255));
+//				}
+//			}
 			setBorder(null);
 			setForeground(Color.black);
 			return this;
 		}
 	}
+
 	public ArrayList<String> YearAndWeekDates(int week, int year) {
 		ArrayList<String> dates = new ArrayList<String>();
 
@@ -367,6 +378,7 @@ public class ShowCalendar extends JPanel {
 
 		return dates;
 	}
+
 	private class btnPrev_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (currentWeek == 0) { // Back one year
@@ -381,16 +393,17 @@ public class ShowCalendar extends JPanel {
 
 	private class btnNext_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
-			
+
 			if (currentWeek == 52) { // Foward one year
 				currentWeek = 1;
 				currentYear += 1;
 			} else { // Foward one month
 				currentWeek += 1;
-				
+
 			}
 			refreshCalendar(currentWeek, currentYear);
-			System.out.println(("current week: " + currentWeek + "\n current year: " + currentYear));
+			System.out.println(("current week: " + currentWeek
+					+ "\n current year: " + currentYear));
 		}
 	}
 

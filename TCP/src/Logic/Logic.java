@@ -19,18 +19,23 @@ public class Logic {
 
 		TCPClient tcp = new TCPClient();
 		Gson gson = new GsonBuilder().create();
+//		int week;
+//		int year;
 	
 		public Logic(){
+			
+		
 			container = new Container();
 			
 //			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
 			container.getShowCalendar().addActionListener(new ShowCalendarActionListener());
 			
+			
 		}
 	
 		
 		public void run() {
-
+//			container.getShowCalendar().refreshCalendar(week, year);
 			container.show(Container.SHOWCALENDAR);
 			container.setVisible(true);
 		}
@@ -41,11 +46,22 @@ public class Logic {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				if (e.getSource() == container.getShowCalendar().getBtnNext()){
-					
-					
-					
-				}
+//				if (e.getSource() == container.getShowCalendar().getBtnNext()){
+//					week = container.getShowCalendar().getCurrentWeek();
+//					year = container.getShowCalendar().getCurrentYear();
+//					if (week == 52) { // Foward one year
+//						container.getShowCalendar().setCurrentWeek(1);
+//						container.getShowCalendar().setCurrentYear(year += 1);
+//					} else { // Foward one month
+//						container.getShowCalendar().setCurrentWeek(week +=1);
+//					}
+//					container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
+//					System.out.println(("current week: " + week + "\n current year: " + year));
+//				
+//					
+//				}
+				
+				
 				
 			}
 			

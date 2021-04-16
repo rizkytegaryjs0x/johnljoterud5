@@ -9,26 +9,44 @@ import JsonClasses.UserEvent;
 public class CalendarHandler {
 	private ArrayList <ArrayList<UserEvent>> calendar;
 
-	public CalendarHandler(ArrayList<ArrayList<UserEvent>> calendar) {
-		setCalendar(calendar);
+	public CalendarHandler() {
+		
 	}
-	public ArrayList<ArrayList<UserEvent>> getWeekEvents(int weeknumber, int year){
+	public ArrayList<UserEvent> getWeekEvents(int weeknumber, int year){
 		
-		ArrayList<ArrayList<UserEvent>> weekEvents = new ArrayList<ArrayList<UserEvent>>();
+		ArrayList<UserEvent> weekEvents = new ArrayList<UserEvent>();
 		
+		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
+		for(String tempdate : dates){
+			System.out.println("tempdate is empty: " + tempdate.isEmpty());
+			System.out.println("dates is empty: " + dates.isEmpty());
+			for(ArrayList<UserEvent> tempcal : calendar){
+				System.out.println("calendar is empty: " + calendar.isEmpty());
+				System.out.println("tempcal is empty: " + tempcal.isEmpty());
+				for (int i = 0 ; i <= tempcal.size(); i++){
+					
+					if(tempcal.get(i).getStart().contains(tempdate)){
+						weekEvents.add(tempcal.get(i));
+					}
+					
+				}
+			}
+		}
 		
 		return weekEvents;
 	}
-	/**
-	 * 
-	 * @param calendar
-	 */
+
 	public void setCalendar(ArrayList<ArrayList<UserEvent>> calendar) {
 		this.calendar = calendar;
 	}
 	
-	 static public ArrayList<String> YearAndWeekDates(int week, int year){
+	/**Method to get dates of given week in a given year, in the "yyyy-MM-dd" format
+	 * @author Niklas Broge
+	 * @param 
+	 * @return ArrayList<String> of dates
+	 */
+	 public ArrayList<String> YearAndWeekDates(int week, int year){
 		ArrayList<String> dates = new ArrayList<String>();
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
@@ -47,5 +65,6 @@ public class CalendarHandler {
 		}
 
 		return dates;
-	 }
-	}
+	 }	
+
+}

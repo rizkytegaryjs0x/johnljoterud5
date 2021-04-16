@@ -1,35 +1,36 @@
 package Logic;
 
-import java.text.SimpleDateFormat;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
-import java.util.Calendar;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import tcpClasses.*;
+import JsonClasses.*;
 
 public class test {
 	
-	public static void main (String[] args){
-		ArrayList<String> dateArray = new ArrayList<String>();
-		dateArray = YearAndWeekDates(12, 2015);
-		System.out.println(dateArray.get(3));
-	}
-	 static public ArrayList<String> YearAndWeekDates(int week, int year){
-		ArrayList<String> dates = new ArrayList<String>();
+	public static void main (String[] args) throws UnknownHostException, IOException{
+		CalendarHandler ch = new CalendarHandler();
+		TCPClient tcp = new TCPClient();
+		ClientLogin cl = new ClientLogin();
+		cl.setEmail("nibr13ae");
+		cl.setPassWord("1234");
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance();
-		cal.set(Calendar.YEAR, year);
-		cal.set(Calendar.WEEK_OF_YEAR, week);
-
+		Gson gson = new GsonBuilder().create();
+		String gsonString = gson.toJson(cl);
 		
-		for(int i=2 ; i<7 ; i++){
-		cal.set(Calendar.DAY_OF_WEEK, i);
-		dates.add(sdf.format(cal.getTime()));
-		}
-		for(int i=0 ; i<2 ; i++){
-			cal.set(Calendar.DAY_OF_WEEK, i);
-			dates.add(sdf.format(cal.getTime())); 
-		}
-
-		return dates;
+		String jsonString = tcp.TalkToServer(gsonString);
+		
+		ClientLogin cl2 = (ClientLogin)gson.fromJson(jsonString, ClientLogin.class);
+		System.out.println(cl2.getCalendars().get(2).get(10).getStart());
+		ch.setCalendar(cl2.getCalendars());
+		
+		ArrayList<UserEvent> weekEvents = ch.getWeekEvents(48, 2014);
+		
+		System.out.println(weekEvents.get(1).getEventid());
 	}
 }
 

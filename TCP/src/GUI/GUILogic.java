@@ -33,7 +33,7 @@ public class GUILogic {
 			}
 	}
 	}
-	private class AddEventActionListener implements ActionListener {
+	public class AddEventActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (e.getSource() == container.getAddEvent().getBtnBack()) {
 				container.show(Container.SHOWCALENDAR);
@@ -44,7 +44,7 @@ public class GUILogic {
 			}
 	}
 	}
-	private class AddNoteActionListener implements ActionListener {
+	public class AddNoteActionListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == container.getAddNote().getBtnBack()) {
 			container.show(Container.SHOWCALENDAR);

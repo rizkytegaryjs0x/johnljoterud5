@@ -313,7 +313,7 @@ public class ShowCalendar extends JPanel {
 			// "\n +and the currentyear" +currentYear);
 
 		}
-
+		System.out.println(tblCalendar.getValueAt(0, 1));
 		// //Get first day of month and number of days
 		// GregorianCalendar cal = new GregorianCalendar(year, w, 1);
 		// nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);

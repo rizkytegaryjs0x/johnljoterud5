@@ -66,5 +66,40 @@ public class CalendarHandler {
 
 		return dates;
 	 }	
-
+	 
+	 public int getWeekDay(String date){
+		 int column = 0;
+		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			Calendar cal = Calendar.getInstance();
+			int d = Integer.valueOf(date);
+			cal.set(Calendar.DATE,d);
+			sdf.format(cal.getTime());
+			
+			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
+			if (dayOfWeek == 1) {
+				column = 6;
+			}
+			else if (dayOfWeek == 2){
+				column = 0;
+			}
+			else if (dayOfWeek == 3){
+				column = 1;
+			}
+			else if (dayOfWeek == 4){
+				column = 2;
+			}
+			else if (dayOfWeek == 5){
+				column = 3;
+			}
+			else if (dayOfWeek == 6){
+				column = 4;
+			}
+			else if (dayOfWeek == 7){
+				column = 5;
+			}	
+		System.out.println(column);
+		return column;
+	
+	 }
+	
 }

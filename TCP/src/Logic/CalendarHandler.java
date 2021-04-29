@@ -19,17 +19,17 @@ public class CalendarHandler {
 		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
 		for(String tempdate : dates){
-			System.out.println("tempdate is empty: " + tempdate.isEmpty());
-			System.out.println("dates is empty: " + dates.isEmpty());
+
 			for(ArrayList<UserEvent> tempcal : calendar){
-				System.out.println("calendar is empty: " + calendar.isEmpty());
-				System.out.println("tempcal is empty: " + tempcal.isEmpty());
-				for (int i = 0 ; i <= tempcal.size(); i++){
-					
-					if(tempcal.get(i).getStart().contains(tempdate)){
-						weekEvents.add(tempcal.get(i));
+
+				for (int i = 0 ; i < tempcal.size(); i++){
+					if(tempcal.size()>0){
+						System.out.println("Is " + tempcal.get(i).getStart() + " = " + tempdate + " ?");
+						if(tempcal.get(i).getStart().contains(tempdate)){
+							weekEvents.add(tempcal.get(i));
+							System.out.println("an event was added to weekevents.");
+						}
 					}
-					
 				}
 			}
 		}

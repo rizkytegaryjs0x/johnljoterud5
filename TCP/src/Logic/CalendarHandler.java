@@ -102,4 +102,16 @@ public class CalendarHandler {
 	
 	 }
 	
+	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
+		 if(!dayEvents.isEmpty()){
+			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
+			 CellModel cm = new CellModel();
+			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
+			 
+			 for(UserEvent de : dayEvents){
+				 cm.setRow(Integer.valueOf(sdf.format(de.getStart())));
+				 
+			 }
+		 }
+	 }
 }

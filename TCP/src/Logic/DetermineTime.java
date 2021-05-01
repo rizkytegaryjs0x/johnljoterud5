@@ -1,27 +1,27 @@
-package Logic;
+	package Logic;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class DetermineDate {
+public class DetermineTime {
 
-	public static final String course1 = "8:00";
-	public static final String course2 = "9:00";
-	public static final String course3 = "10:00";
-	public static final String course4 = "11:00";
-	public static final String course5 = "12:00";
-	public static final String course6 = "13:00";
-	public static final String course7 = "14:00";
-	public static final String course8 = "15:00";
-	public static final String course9 = "16:00";
-	public static final String course10 = "17:00";
-	public static final String course11 = "18:00";
-	public static final String course12 = "19:00";
-	public static final String course13 = "20:00";
-	public static final String course14 = "21:00";
+	public static final int course1 = 8;
+	public static final int course2 = 9;
+	public static final int course3 = 10;
+	public static final int course4 = 11;
+	public static final int course5 = 12;
+	public static final int course6 = 13;
+	public static final int course7 = 14;
+	public static final int course8 = 15;
+	public static final int course9 = 16;
+	public static final int course10 = 17;
+	public static final int course11 = 18;
+	public static final int course12 = 19;
+	public static final int course13 = 20;
+	public static final int course14 = 21;
 	
 
-	public DetermineDate() {
+	public DetermineTime() {
 		int row = 0;
 			
 			int timeOfDay = cal.get(Calendar.DAY_OF_WEEK);
@@ -70,4 +70,6 @@ public class DetermineDate {
 		System.out.println(row);
 		return row;
 	}
+
 }
+

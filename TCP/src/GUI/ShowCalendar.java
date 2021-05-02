@@ -28,6 +28,9 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import JsonClasses.UserEvent;
+import Logic.CellModel;
+
 public class ShowCalendar extends JPanel {
 	private JLabel lblWeek, lblYear;
 	private JButton btnPrev, btnNext;
@@ -416,4 +419,22 @@ public class ShowCalendar extends JPanel {
 			}
 		}
 	}
+	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
+		 if(!dayEvents.isEmpty()){
+			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
+			 CellModel cm = new CellModel();
+			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
+			 
+			 for(UserEvent de : dayEvents){
+				 cm.setRowNumber(Integer.valueOf(sdf.format(de.getStart())));
+				 cm.setText(de.getTitle());
+				 alcm.add(cm);
+				 
+			 }
+			 for (CellModel cmTemp : alcm){
+				 tblCalendar.setValueAt(cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
+			 }
+			 
+		 }
+	 }
 }

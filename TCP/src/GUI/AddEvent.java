@@ -122,17 +122,13 @@ import javax.swing.border.CompoundBorder;
 			add(textFieldStartMonth);
 			
 			btnBack = new JButton("Back");
-			btnBack.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-				}
-			});
 			btnBack.setBorder(new CompoundBorder(new BevelBorder(
 					BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0,
 							0), new Color(255, 255, 255), new Color(0, 0, 0)),
 					new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 							new Color(0, 0, 0), new Color(255, 255, 255),
 							new Color(0, 0, 0))));
-			btnBack.setForeground(new Color(255, 255, 255));
+			btnBack.setForeground(new Color(0, 0, 0));
 			btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 			btnBack.setContentAreaFilled(false);
 			btnBack.setBounds(552, 650, 194, 50);
@@ -141,11 +137,11 @@ import javax.swing.border.CompoundBorder;
 			textField_Location = new JTextField();
 			textField_Location.setForeground(new Color(105, 105, 105));
 			textField_Location.setColumns(10);
-			textField_Location.setBounds(753, 231, 120, 34);
+			textField_Location.setBounds(753, 231, 380, 34);
 			add(textField_Location);
 
 			lblEmail = new JLabel("Location");
-			lblEmail.setForeground(new Color(255, 255, 255));
+			lblEmail.setForeground(new Color(0, 0, 0));
 			lblEmail.setFont(new Font("Arial", Font.BOLD, 26));
 			lblEmail.setBounds(483, 235, 109, 30);
 			add(lblEmail);
@@ -157,7 +153,7 @@ import javax.swing.border.CompoundBorder;
 			add(textFieldStartYear);
 
 			lblCreateddate = new JLabel("Start");
-			lblCreateddate.setForeground(new Color(255, 255, 255));
+			lblCreateddate.setForeground(new Color(0, 0, 0));
 			lblCreateddate.setFont(new Font("Arial", Font.BOLD, 26));
 			lblCreateddate.setBounds(483, 300, 159, 31);
 			add(lblCreateddate);
@@ -171,31 +167,31 @@ import javax.swing.border.CompoundBorder;
 					new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255),
 							new Color(0, 0, 0), new Color(255, 255, 255),
 							new Color(0, 0, 0))));
-			btnSubmit.setForeground(new Color(255, 255, 255));
+			btnSubmit.setForeground(new Color(0, 0, 0));
 			btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
 			btnSubmit.setBounds(552, 580, 194, 50);
 			add(btnSubmit);
 
 			lblCreate = new JLabel("Create event");
-			lblCreate.setForeground(Color.WHITE);
+			lblCreate.setForeground(new Color(0, 0, 0));
 			lblCreate.setFont(new Font("Arial", Font.BOLD, 78));
 			lblCreate.setBounds(451, 90, 466, 91);
 			add(lblCreate);
 
 			lblEnd = new JLabel("End");
-			lblEnd.setForeground(Color.WHITE);
+			lblEnd.setForeground(new Color(0, 0, 0));
 			lblEnd.setFont(new Font("Arial", Font.BOLD, 26));
 			lblEnd.setBounds(483, 349, 159, 31);
 			add(lblEnd);
 
 			lblName = new JLabel("Name");
-			lblName.setForeground(Color.WHITE);
+			lblName.setForeground(new Color(0, 0, 0));
 			lblName.setFont(new Font("Arial", Font.BOLD, 26));
 			lblName.setBounds(483, 182, 159, 31);
 			add(lblName);
 
 			lblText = new JLabel("Text");
-			lblText.setForeground(Color.WHITE);
+			lblText.setForeground(new Color(0, 0, 0));
 			lblText.setFont(new Font("Arial", Font.BOLD, 26));
 			lblText.setBounds(483, 406, 159, 31);
 			add(lblText);
@@ -203,7 +199,7 @@ import javax.swing.border.CompoundBorder;
 			textField_Name = new JTextField();
 			textField_Name.setForeground(SystemColor.controlDkShadow);
 			textField_Name.setColumns(10);
-			textField_Name.setBounds(753, 182, 120, 34);
+			textField_Name.setBounds(753, 182, 380, 34);
 			add(textField_Name);
 
 			textField_Text = new JTextField();
@@ -215,11 +211,11 @@ import javax.swing.border.CompoundBorder;
 			textField_Type = new JTextField();
 			textField_Type.setForeground(SystemColor.controlDkShadow);
 			textField_Type.setColumns(10);
-			textField_Type.setBounds(755, 485, 120, 34);
+			textField_Type.setBounds(755, 485, 378, 34);
 			add(textField_Type);
 
 			lblType = new JLabel("Type");
-			lblType.setForeground(Color.WHITE);
+			lblType.setForeground(new Color(0, 0, 0));
 			lblType.setFont(new Font("Arial", Font.BOLD, 26));
 			lblType.setBounds(483, 483, 159, 31);
 			add(lblType);

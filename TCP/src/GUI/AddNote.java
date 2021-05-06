@@ -37,19 +37,19 @@ public AddNote(){
 	setLayout(null);
 
 	lblAddUser = new JLabel("Add note");
-	lblAddUser.setForeground(Color.WHITE);
+	lblAddUser.setForeground(new Color(0, 0, 0));
 	lblAddUser.setFont(new Font("Arial", Font.BOLD, 78));
 	lblAddUser.setBounds(509, 107, 464, 90);
 	add(lblAddUser);
 	
 	lblCreatedBy = new JLabel("Created by:");
-	lblCreatedBy.setForeground(Color.WHITE);
+	lblCreatedBy.setForeground(new Color(0, 0, 0));
 	lblCreatedBy.setFont(new Font("Arial", Font.BOLD, 26));
 	lblCreatedBy.setBounds(473, 261, 147, 39);
 	add(lblCreatedBy);
 	
 	lblNote = new JLabel("Note:");
-	lblNote.setForeground(Color.WHITE);
+	lblNote.setForeground(new Color(0, 0, 0));
 	lblNote.setFont(new Font("Arial", Font.BOLD, 26));
 	lblNote.setBounds(473, 312, 105, 31);
 	add(lblNote);
@@ -65,12 +65,8 @@ public AddNote(){
 	textFieldText.setColumns(10);
 	
 	btnAddNote = new JButton("Add note");
-	btnAddNote.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-		}
-	});
 	btnAddNote.setContentAreaFilled(false);
-	btnAddNote.setForeground(Color.WHITE);
+	btnAddNote.setForeground(new Color(0, 0, 0));
 	btnAddNote.setFont(new Font("Arial", Font.BOLD, 30));
 	btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnAddNote.setBackground(Color.WHITE);
@@ -79,7 +75,7 @@ public AddNote(){
 	
 	btnBack = new JButton("Back");
 	btnBack.setContentAreaFilled(false);
-	btnBack.setForeground(Color.WHITE);
+	btnBack.setForeground(new Color(0, 0, 0));
 	btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 	btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnBack.setBackground(Color.WHITE);

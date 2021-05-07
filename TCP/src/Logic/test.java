@@ -2,6 +2,7 @@ package Logic;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import com.google.gson.Gson;
@@ -12,14 +13,14 @@ import JsonClasses.*;
 
 public class test {
 	
-	public static void main (String[] args) throws UnknownHostException, IOException{
+	public static void main (String[] args) throws UnknownHostException, IOException, ParseException{
 		CalendarHandler ch = new CalendarHandler();
 		TCPClient tcp = new TCPClient();
 		ClientLogin cl = new ClientLogin();
 		
 		
 		
-		ch.getWeekDay("20140212");
+		ch.getWeekDay("2014-10-13");
 		
 //		cl.setEmail("nibr13ae");
 //		cl.setPassWord("1234");

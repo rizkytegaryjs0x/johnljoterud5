@@ -6,12 +6,15 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class TCPClient {
-	public TCPClient (){
-		
-	}
-	public String TalkToServer (String gsonString) throws UnknownHostException, IOException{
+
+	public String TalkToServer (String StringFromClient) throws UnknownHostException, IOException{
 		String modifiedSentence;
+		Gson gson = new GsonBuilder().create();
+		String gsonString = StringFromClient;
 
 		Socket clientSocket = new Socket("localhost", 6666);
 		DataOutputStream outToServer = new DataOutputStream(

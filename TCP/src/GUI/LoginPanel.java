@@ -68,7 +68,6 @@ public class LoginPanel extends JPanel {
 	}
 	public void addActionListener(ActionListener l) {
 		btnLogin.addActionListener(l);
-		btnLogin.setActionCommand("btnLogin");
 	
 }
 }

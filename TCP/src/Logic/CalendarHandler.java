@@ -1,8 +1,10 @@
 package Logic;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 
 import JsonClasses.UserEvent;
 
@@ -67,14 +69,12 @@ public class CalendarHandler {
 		return dates;
 	 }	
 	 
-	 public int getWeekDay(String date){
+	 public int getWeekDay(String date) throws ParseException{
 		 int column = 0;
-		 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			Calendar cal = Calendar.getInstance();
-			int d = Integer.valueOf(date);
-			cal.set(Calendar.DATE,d);
-			sdf.format(cal.getTime());
-			
+			Date d =  new SimpleDateFormat("yyyy-MM-dd").parse(date);
+			cal.setTime(d);
+			System.out.println(d);
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			if (dayOfWeek == 1) {
 				column = 6;

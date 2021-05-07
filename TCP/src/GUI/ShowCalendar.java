@@ -183,8 +183,12 @@ public class ShowCalendar extends JPanel {
 		lblWeatherForecast = new JLabel("Weather Forecast");
 		lblWeatherForecast.setBounds(680, 122, 124, 16);
 		add(lblWeatherForecast);
+		
+		
+		
+		
 		mtblCalendar.setColumnCount(7);
-		mtblCalendar.setRowCount(14);
+		mtblCalendar.setRowCount(15);
 
 		
 
@@ -279,7 +283,7 @@ public class ShowCalendar extends JPanel {
 		// year in the combo box
 
 		// Clear table
-		for (int i = 0; i < 14; i++) {
+		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 7; j++) {
 				mtblCalendar.setValueAt(null, i, j);
 				

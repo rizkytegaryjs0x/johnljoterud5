@@ -2,6 +2,8 @@ package Logic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
@@ -9,6 +11,8 @@ import tcpClasses.TCPClient;
 import GUI.Container;
 import GUI.ShowCalendar;
 
+
+import JsonClasses.ClientLogin;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -20,6 +24,7 @@ public class Logic {
 
 		TCPClient tcp = new TCPClient();
 		Gson gson = new GsonBuilder().create();
+		String stringSendToServer;
 //		int week;
 //		int year;
 	
@@ -43,7 +48,7 @@ public class Logic {
 		
 		public void run() {
 //			container.getShowCalendar().refreshCalendar(week, year);
-			container.show(Container.SHOWCALENDAR);
+			container.show(Container.LOGINPANEL);
 			container.setVisible(true);
 		}
 		
@@ -138,7 +143,22 @@ public class Logic {
 				private class LoginPanelActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getLoginPanel().getBtnLogin()) {
-					//mangler	
+					
+						ClientLogin cl = new ClientLogin();
+						cl.setEmail(container.getLoginPanel().getTextFieldUsername().getText());
+						cl.setPassWord(container.getLoginPanel().getTextFieldPassword().getText());
+						stringSendToServer = gson.toJson(cl);
+						try {
+							tcp.TalkToServer(stringSendToServer);
+						} catch (UnknownHostException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						container.show(Container.SHOWCALENDAR);
+						
 					}
 					}
 

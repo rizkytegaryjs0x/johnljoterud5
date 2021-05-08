@@ -65,7 +65,7 @@ public class CreateCalendar extends JPanel {
 		add(chckbxIfYesCheck);
 		
 		lblShareCalendar = new JLabel("Share this calendar?");
-		lblShareCalendar.setForeground(Color.WHITE);
+		lblShareCalendar.setForeground(new Color (0, 0, 0));
 		lblShareCalendar.setFont(new Font("Arial", Font.BOLD, 26));
 		lblShareCalendar.setBounds(476, 425, 260, 39);
 		add(lblShareCalendar);
@@ -88,7 +88,7 @@ public class CreateCalendar extends JPanel {
 		// Add the scroll pane to this panel.
 		add(scrollPane);
 		lblShareWith = new JLabel("Share with:");
-		lblShareWith.setForeground(Color.WHITE);
+		lblShareWith.setForeground(new Color (0, 0, 0));
 		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
 		lblShareWith.setBounds(476, 468, 147, 39);
 		lblShareWith.setVisible(false);
@@ -101,13 +101,13 @@ public class CreateCalendar extends JPanel {
 		add(txtShare);
 		
 		lblHeader = new JLabel("Add Calendar");
-		lblHeader.setForeground(Color.WHITE);
+		lblHeader.setForeground(new Color (0, 0, 0));
 		lblHeader.setFont(new Font("Arial", Font.BOLD, 78));
 		lblHeader.setBounds(424, 81, 515, 90);
 		add(lblHeader);
 		
 		btnBack = new JButton("Back");
-		btnBack.setForeground(Color.WHITE);
+		btnBack.setForeground(new Color (0, 0, 0));
 		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
@@ -115,7 +115,7 @@ public class CreateCalendar extends JPanel {
 		add(btnBack);
 		
 		btnLogout = new JButton("Log out");
-		btnLogout.setForeground(Color.WHITE);
+		btnLogout.setForeground(new Color (0, 0, 0));
 		btnLogout.setFont(new Font("Arial", Font.BOLD, 30));
 		btnLogout.setContentAreaFilled(false);
 		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
@@ -123,7 +123,7 @@ public class CreateCalendar extends JPanel {
 		add(btnLogout);
 		
 		btnSubmit = new JButton("Submit");
-		btnSubmit.setForeground(Color.WHITE);
+		btnSubmit.setForeground(new Color (0, 0, 0));
 		btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
 		btnSubmit.setContentAreaFilled(false);
 		btnSubmit.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
@@ -131,13 +131,13 @@ public class CreateCalendar extends JPanel {
 		add(btnSubmit);
 		
 		lblName = new JLabel("Name:");
-		lblName.setForeground(Color.WHITE);
+		lblName.setForeground(new Color (0, 0, 0));
 		lblName.setFont(new Font("Arial", Font.BOLD, 26));
 		lblName.setBounds(476, 345, 147, 39);
 		add(lblName);
 		
 		lblPrivateOrPublic = new JLabel("Private or public:");
-		lblPrivateOrPublic.setForeground(Color.WHITE);
+		lblPrivateOrPublic.setForeground(new Color (0, 0, 0));
 		lblPrivateOrPublic.setFont(new Font("Arial", Font.BOLD, 26));
 		lblPrivateOrPublic.setBounds(476, 385, 223, 39);
 		add(lblPrivateOrPublic);

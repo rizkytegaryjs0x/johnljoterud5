@@ -20,8 +20,6 @@ public class AddNote extends JPanel {
 
 private JButton btnAddNote;
 private JTextField textFieldText;
-private JTextField textFieldCreatedBy;
-private JLabel lblCreatedBy;
 private JLabel lblNote;
 private JLabel lblAddUser;
 private JButton btnBack;
@@ -42,25 +40,14 @@ public AddNote(){
 	lblAddUser.setBounds(509, 107, 464, 90);
 	add(lblAddUser);
 	
-	lblCreatedBy = new JLabel("Created by:");
-	lblCreatedBy.setForeground(new Color(0, 0, 0));
-	lblCreatedBy.setFont(new Font("Arial", Font.BOLD, 26));
-	lblCreatedBy.setBounds(473, 261, 147, 39);
-	add(lblCreatedBy);
-	
 	lblNote = new JLabel("Note:");
 	lblNote.setForeground(new Color(0, 0, 0));
 	lblNote.setFont(new Font("Arial", Font.BOLD, 26));
 	lblNote.setBounds(473, 312, 105, 31);
 	add(lblNote);
 	
-	textFieldCreatedBy = new JTextField();
-	textFieldCreatedBy.setBounds(651, 267, 231, 22);
-	add(textFieldCreatedBy);
-	textFieldCreatedBy.setColumns(10);
-	
 	textFieldText = new JTextField();
-	textFieldText.setBounds(651, 302, 231, 119);
+	textFieldText.setBounds(576, 305, 231, 119);
 	add(textFieldText);
 	textFieldText.setColumns(10);
 	
@@ -70,7 +57,7 @@ public AddNote(){
 	btnAddNote.setFont(new Font("Arial", Font.BOLD, 30));
 	btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnAddNote.setBackground(Color.WHITE);
-	btnAddNote.setBounds(661, 475, 194, 50);
+	btnAddNote.setBounds(591, 483, 194, 50);
 	add(btnAddNote);
 	
 	btnBack = new JButton("Back");
@@ -79,7 +66,7 @@ public AddNote(){
 	btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 	btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnBack.setBackground(Color.WHITE);
-	btnBack.setBounds(661, 545, 194, 50);
+	btnBack.setBounds(591, 558, 194, 50);
 	add(btnBack);
 	}
 

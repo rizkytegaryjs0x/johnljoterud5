@@ -56,17 +56,31 @@ public class ChangeCalendar extends JPanel {
 
 		// Add the scroll pane to this panel.
 		add(scrollPane);
+		
 		lblChooseCalendar = new JLabel("Choose Calendar");
-		lblChooseCalendar.setBounds(639, 84, 131, 16);
+		lblChooseCalendar.setForeground(new Color(0, 0, 0));
+		lblChooseCalendar.setFont(new Font("Arial", Font.BOLD, 78));
+		lblChooseCalendar.setBounds(381, 90, 680, 91);
 		add(lblChooseCalendar);
 
-		btnChoose = new JButton("Choose");
-		btnChoose.setBounds(628, 612, 117, 29);
+		btnChoose = new JButton("Add note");
+		btnChoose.setContentAreaFilled(false);
+		btnChoose.setForeground(new Color(0, 0, 0));
+		btnChoose.setFont(new Font("Arial", Font.BOLD, 30));
+		btnChoose.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnChoose.setBackground(Color.WHITE);
+		btnChoose.setBounds(616, 610, 194, 50);
 		add(btnChoose);
-
+		
 		btnBack = new JButton("Back");
-		btnBack.setBounds(628, 669, 117, 29);
+		btnBack.setContentAreaFilled(false);
+		btnBack.setForeground(new Color(0, 0, 0));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
+		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnBack.setBackground(Color.WHITE);
+		btnBack.setBounds(616, 691, 194, 50);
 		add(btnBack);
+		
 
 	}
 

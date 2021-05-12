@@ -97,29 +97,47 @@ public class ShareCalendar extends JPanel {
 						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 								255), new Color(0, 0, 205), new Color(255, 255, 255)),
 						null));
-				scrollPaneCalendar.setBounds(764, 241, 553, 315);
+				scrollPaneCalendar.setBounds(764, 241, 432, 315);
 
 				// Add the scroll pane to this panel.
 				add(scrollPaneCalendar);
 		
 		btnChooseCalendar = new JButton("Choose Calendar");
-		btnChooseCalendar.setBounds(341, 600, 152, 29);
+		btnChooseCalendar.setForeground(new Color (0, 0, 0));
+		btnChooseCalendar.setFont(new Font("Arial", Font.BOLD, 30));
+		btnChooseCalendar.setContentAreaFilled(false);
+		btnChooseCalendar.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnChooseCalendar.setBounds(249, 600, 266, 50);
 		add(btnChooseCalendar);
 		
 		btnChooseUser = new JButton("Choose User");
-		btnChooseUser.setBounds(992, 600, 117, 29);
+		btnChooseUser.setForeground(new Color (0, 0, 0));
+		btnChooseUser.setFont(new Font("Arial", Font.BOLD, 30));
+		btnChooseUser.setContentAreaFilled(false);
+		btnChooseUser.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnChooseUser.setBounds(876, 600, 266, 50);
 		add(btnChooseUser);
 		
 		btnShare = new JButton("Share");
-		btnShare.setBounds(669, 635, 117, 29);
+		btnShare.setForeground(new Color (0, 0, 0));
+		btnShare.setFont(new Font("Arial", Font.BOLD, 30));
+		btnShare.setContentAreaFilled(false);
+		btnShare.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnShare.setBounds(598, 600, 194, 50);
 		add(btnShare);
 		
 		btnBack = new JButton("Back");
-		btnBack.setBounds(669, 688, 117, 29);
+		btnBack.setForeground(new Color (0, 0, 0));
+		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
+		btnBack.setContentAreaFilled(false);
+		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnBack.setBounds(598, 673, 194, 50);
 		add(btnBack);
 		
 		lblShareCalendar = new JLabel("Share Calendar");
-		lblShareCalendar.setBounds(669, 58, 116, 16);
+		lblShareCalendar.setForeground(new Color (0, 0, 0));
+		lblShareCalendar.setFont(new Font("Arial", Font.BOLD, 78));
+		lblShareCalendar.setBounds(393, 83, 667, 90);
 		add(lblShareCalendar);
 		
 		

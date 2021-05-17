@@ -71,7 +71,6 @@ public AddNote(){
 	}
 
 public void addActionListener(ActionListener l) {
-	textFieldCreatedBy.addActionListener(l);
 	textFieldText.addActionListener(l);
 	btnAddNote.addActionListener(l);
 	btnBack.addActionListener(l);
@@ -82,9 +81,6 @@ public JButton getBtnAddNote() {
 }
 public JTextField getTextFieldText() {
 	return textFieldText;
-}
-public JTextField getTextFieldCreatedBy() {
-	return textFieldCreatedBy;
 }
 public JButton getBtnBack() {
 	return btnBack;

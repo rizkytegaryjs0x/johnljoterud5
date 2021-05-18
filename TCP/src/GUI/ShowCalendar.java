@@ -29,6 +29,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 import JsonClasses.UserEvent;
+import Logic.CalendarHandler;
 import Logic.CellModel;
 
 public class ShowCalendar extends JPanel {
@@ -52,6 +53,7 @@ public class ShowCalendar extends JPanel {
 	private JButton btnAddEvent;
 	private JButton btnAddNote;
 	private TableColumnModel columnModel;
+	private CalendarHandler ch = new CalendarHandler();
 	GregorianCalendar cal = new GregorianCalendar();
 	ArrayList<String> dateArray = new ArrayList<String>();
 
@@ -334,6 +336,26 @@ public class ShowCalendar extends JPanel {
 		// }
 		//
 		//
+		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
+		ArrayList <UserEvent> we = ch.getWeekEvents(week, year);
+		
+	
+		for (String date : weekDates){
+			ArrayList <UserEvent> de = new ArrayList <UserEvent>();
+			for(UserEvent event : we){			
+							
+				if(event.getStart().contains(date)){
+					de.add(event);
+				}
+			}
+			int column = ch.getWeekDay(date);
+			PopulateTable(de, column);
+			
+		}
+		
+		
+		
+		
 
 		// Apply renderers
 		 tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0),
@@ -435,8 +457,14 @@ public class ShowCalendar extends JPanel {
 				 alcm.add(cm);
 				 
 			 }
+			 String newCell;
 			 for (CellModel cmTemp : alcm){
-				 tblCalendar.setValueAt(cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
+				 if(tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().isEmpty())
+					tblCalendar.setValueAt(cmTemp.getText() + "\n", cmTemp.getRowNumber(), dayOfWeek);
+				 else{
+					newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
+				 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
+				 }
 			 }
 			 
 		 }

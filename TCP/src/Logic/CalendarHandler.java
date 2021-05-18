@@ -6,24 +6,25 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import JsonClasses.CalendarInfo;
 import JsonClasses.UserEvent;
 
 public class CalendarHandler {
-	private ArrayList <ArrayList<UserEvent>> calendar;
+	private ArrayList <CalendarInfo> calendar;
 
 	public CalendarHandler() {
 		
 	}
-	public ArrayList<UserEvent> getWeekEvents(int weeknumber, int year){
+	public CalendarInfo getWeekEvents(int weeknumber, int year){
 		
-		ArrayList<UserEvent> weekEvents = new ArrayList<UserEvent>();
+		CalendarInfo weekEvents = new CalendarInfo();
 		
 		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
 		for(String tempdate : dates){
 			System.out.println("tempdate is empty: " + tempdate.isEmpty());
 			System.out.println("dates is empty: " + dates.isEmpty());
-			for(ArrayList<UserEvent> tempcal : calendar){
+			for(CalendarInfo tempcal : calendar){
 				System.out.println("calendar is empty: " + calendar.isEmpty());
 				System.out.println("tempcal is empty: " + tempcal.isEmpty());
 				for (int i = 0 ; i <= tempcal.size(); i++){
@@ -39,7 +40,7 @@ public class CalendarHandler {
 		return weekEvents;
 	}
 
-	public void setCalendar(ArrayList<ArrayList<UserEvent>> calendar) {
+	public void setCalendar(ArrayList<CalendarInfo> calendar) {
 		this.calendar = calendar;
 	}
 	
@@ -55,7 +56,6 @@ public class CalendarHandler {
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.WEEK_OF_YEAR, week);
-
 		
 		for(int i=2 ; i<7 ; i++){
 		cal.set(Calendar.DAY_OF_WEEK, i);

@@ -5,13 +5,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-import javax.swing.JOptionPane;
-
 import tcpClasses.TCPClient;
 import GUI.Container;
-import GUI.ShowCalendar;
-
-
+import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
 
 import com.google.gson.Gson;
@@ -26,8 +22,11 @@ public class Logic {
 		Gson gson = new GsonBuilder().create();
 		String stringSendToServer;
 //		int week;
+		
+		
 //		int year;
-	
+		ClientLogin cl = new ClientLogin();
+		
 		public Logic(){
 			
 		
@@ -144,12 +143,19 @@ public class Logic {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getLoginPanel().getBtnLogin()) {
 					
-						ClientLogin cl = new ClientLogin();
+						
 						cl.setEmail(container.getLoginPanel().getTextFieldUsername().getText());
 						cl.setPassWord(container.getLoginPanel().getTextFieldPassword().getText());
 						stringSendToServer = gson.toJson(cl);
 						try {
-							tcp.TalkToServer(stringSendToServer);
+							
+							String answer = tcp.TalkToServer(stringSendToServer);
+							cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+							updateTable();
+							container.show(Container.CHANGECALENDAR);
+							
+							
+							container.show(Container.CHANGECALENDAR);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -157,7 +163,8 @@ public class Logic {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						container.show(Container.SHOWCALENDAR);
+						
+						
 						
 					}
 					}
@@ -183,7 +190,7 @@ public class Logic {
 
 
 				
-			}
+			
 		
 
 				
@@ -247,5 +254,30 @@ public class Logic {
 	
 //	}
 
+				public void updateTable() {
+
+					try{
+					container.getChangeCalendar().getModel().getDataVector().removeAllElements();
+
+					
+					for(CalendarInfo c  : cl.getCalendars()){
+						System.out.println(c.getCalenderName());
+					
+
+						
+						container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
+							c.getCalenderName()
 							
+						});
+						
+						
+						}
+					
+					}catch(Exception ex)
+					{
+						ex.printStackTrace();
+					}
+				}
+	
+}
 	

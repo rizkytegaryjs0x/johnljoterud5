@@ -11,20 +11,24 @@ public class ClientLogin {
 	String passWord;
 	int userID;
 	String role;
-	ArrayList <ArrayList<UserEvent>> calendars = new ArrayList <ArrayList<UserEvent>>();
+	ArrayList <CalendarInfo> calendars = new ArrayList <CalendarInfo>();
 	boolean loggedIn = false;
 	
 	public ClientLogin (){
 		
 	}
 	
-	public ArrayList<ArrayList<UserEvent>> getCalendars() {
+
+
+	public ArrayList<CalendarInfo> getCalendars() {
 		return calendars;
 	}
 
-	public void setCalendars(ArrayList<ArrayList<UserEvent>> calendars) {
+
+	public void setCalendars(ArrayList<CalendarInfo> calendars) {
 		this.calendars = calendars;
 	}
+
 
 	public int getUserID() {
 		return userID;

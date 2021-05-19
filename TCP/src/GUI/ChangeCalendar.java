@@ -2,13 +2,11 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
-import javax.swing.JPanel;
+import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
@@ -16,7 +14,6 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JButton;
 
 public class ChangeCalendar extends JPanel {
 
@@ -32,7 +29,7 @@ public class ChangeCalendar extends JPanel {
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
-		String[] columnNames = { "ID", "Email" };
+		String[] columnNames = { "Name" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -83,6 +80,27 @@ public class ChangeCalendar extends JPanel {
 		
 
 	}
+
+
+	public JTable getTable() {
+		return table;
+	}
+
+
+	public void setTable(JTable table) {
+		this.table = table;
+	}
+
+
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
+
+	public void setModel(DefaultTableModel model) {
+		this.model = model;
+	}
+
 
 	public void addActionListener(ActionListener l) {
 		btnChoose.addActionListener(l);

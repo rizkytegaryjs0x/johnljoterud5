@@ -7,10 +7,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 import JsonClasses.CalendarInfo;
-import JsonClasses.UserEvent;
 
 public class CalendarHandler {
-	private ArrayList <CalendarInfo> calendar;
+	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
 
 	public CalendarHandler() {
 		
@@ -22,15 +21,13 @@ public class CalendarHandler {
 		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
 		for(String tempdate : dates){
-			System.out.println("tempdate is empty: " + tempdate.isEmpty());
-			System.out.println("dates is empty: " + dates.isEmpty());
+
 			for(CalendarInfo tempcal : calendar){
-				System.out.println("calendar is empty: " + calendar.isEmpty());
-				System.out.println("tempcal is empty: " + tempcal.isEmpty());
-				for (int i = 0 ; i <= tempcal.size(); i++){
+
+				for (int i = 0 ; i <= tempcal.getCalendars().size(); i++){
 					
-					if(tempcal.get(i).getStart().contains(tempdate)){
-						weekEvents.add(tempcal.get(i));
+					if(tempcal.getCalendars().get(i).getStart().contains(tempdate)){
+						weekEvents.getCalendars().add(tempcal.getCalendars().get(i));
 					}
 					
 				}
@@ -69,12 +66,19 @@ public class CalendarHandler {
 		return dates;
 	 }	
 	 
-	 public int getWeekDay(String date) throws ParseException{
+	 public int getWeekDay(String date){
 		 int column = 0;
 			Calendar cal = Calendar.getInstance();
-			Date d =  new SimpleDateFormat("yyyy-MM-dd").parse(date);
-			cal.setTime(d);
-			System.out.println(d);
+			Date d;
+			try {
+				d = new SimpleDateFormat("yyyy-MM-dd").parse(date);
+				cal.setTime(d);
+				System.out.println(d);
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			if (dayOfWeek == 1) {
 				column = 6;

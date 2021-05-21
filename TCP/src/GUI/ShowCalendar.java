@@ -28,6 +28,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+import JsonClasses.CalendarInfo;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
@@ -337,12 +338,12 @@ public class ShowCalendar extends JPanel {
 		//
 		//
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
-		ArrayList <UserEvent> we = ch.getWeekEvents(week, year);
+		CalendarInfo we = ch.getWeekEvents(week, year);
 		
 	
 		for (String date : weekDates){
 			ArrayList <UserEvent> de = new ArrayList <UserEvent>();
-			for(UserEvent event : we){			
+			for(UserEvent event : we.getCalendars()){			
 							
 				if(event.getStart().contains(date)){
 					de.add(event);

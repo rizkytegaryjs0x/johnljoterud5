@@ -27,6 +27,9 @@ public class Logic {
 //		int year;
 		ClientLogin cl = new ClientLogin();
 		
+		private String currentCalendar;
+		private String currentEventId;
+		private String answer;
 		public Logic(){
 			
 		
@@ -66,6 +69,7 @@ public class Logic {
 					container.show(Container.ADDNOTE);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnChangeCalendar()) {
+					updateTableChangeCalendar();
 					container.show(Container.CHANGECALENDAR);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnLogout()) {
@@ -149,13 +153,12 @@ public class Logic {
 						stringSendToServer = gson.toJson(cl);
 						try {
 							
-							String answer = tcp.TalkToServer(stringSendToServer);
+							answer = tcp.TalkToServer(stringSendToServer);
 							cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
-							updateTable();
-							container.show(Container.CHANGECALENDAR);
 							
 							
-							container.show(Container.CHANGECALENDAR);
+							
+							container.show(Container.SHOWCALENDAR);
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -254,7 +257,7 @@ public class Logic {
 	
 //	}
 
-				public void updateTable() {
+				public void updateTableChangeCalendar() {
 
 					try{
 					container.getChangeCalendar().getModel().getDataVector().removeAllElements();
@@ -277,6 +280,26 @@ public class Logic {
 					{
 						ex.printStackTrace();
 					}
+				}
+
+
+				public String getCurrentCalendar() {
+					return currentCalendar;
+				}
+
+
+				public void setCurrentCalendar(String currentCalendar) {
+					this.currentCalendar = currentCalendar;
+				}
+
+
+				public String getCurrentEventId() {
+					return currentEventId;
+				}
+
+
+				public void setCurrentEventId(String currentEventId) {
+					this.currentEventId = currentEventId;
 				}
 	
 }

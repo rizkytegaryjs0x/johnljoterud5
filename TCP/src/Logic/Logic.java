@@ -155,10 +155,10 @@ public class Logic {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
 							cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
-							
-							
-							
+							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
+							System.out.println("cweek: " + container.getShowCalendar().getCurrentWeek() + " cyear: " +  container.getShowCalendar().getCurrentYear());
 							container.show(Container.SHOWCALENDAR);
+							
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

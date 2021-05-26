@@ -350,6 +350,7 @@ public class ShowCalendar extends JPanel {
 				}
 			}
 			int column = ch.getWeekDay(date);
+			System.out.println("populating table...");
 			PopulateTable(de, column);
 			
 		}
@@ -470,4 +471,20 @@ public class ShowCalendar extends JPanel {
 			 
 		 }
 	 }
+
+	public int getCurrentYear() {
+		return currentYear;
+	}
+
+	public void setCurrentYear(int currentYear) {
+		this.currentYear = currentYear;
+	}
+
+	public int getCurrentWeek() {
+		return currentWeek;
+	}
+
+	public void setCurrentWeek(int currentWeek) {
+		this.currentWeek = currentWeek;
+	}
 }

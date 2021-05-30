@@ -5,31 +5,25 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextField;
-
 //import model.QueryBuild.QueryBuilder;
-import javax.swing.JRadioButton;
-import javax.swing.JCheckBox;
 
 
 
 public class CreateCalendar extends JPanel {
-	private JLabel lblBackground;
-	private JLabel label;
+
 	private JLabel lblHeader;
 	private JButton btnBack;
 	private JButton btnLogout;
@@ -45,9 +39,7 @@ public class CreateCalendar extends JPanel {
 	private JTable table;
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
-	private Object[] objects;
-//	QueryBuilder qb = new QueryBuilder();
-	ResultSet rs;
+
 	private JLabel lblShareCalendar;
 	
 	
@@ -159,31 +151,6 @@ public class CreateCalendar extends JPanel {
 		btnBack.addActionListener(l);
 		btnSubmit.addActionListener(l);
 	}
-//	public void updateTable() {
-//		try {
-//			model.getDataVector().removeAllElements();
-//
-//			QueryBuilder qb = new QueryBuilder();
-//			String[] values = {"email"};
-//			rs = qb.selectFrom(values, "users").all().ExecuteQuery();
-//			ResultSetMetaData rsmd = rs.getMetaData();
-//			int colNo = rsmd.getColumnCount();
-//
-//			while (rs.next()) {
-//
-//				objects = new Object[colNo];
-//
-//				for (int i = 0; i < colNo; i++) {
-//					objects[i] = rs.getObject(i + 1);
-//				}
-//				model.addRow(objects);
-//			}
-//			table.setModel(model);
-//
-//		} catch (SQLException e1) {
-//			e1.printStackTrace();
-//		}
-//	}
 	
 	public JCheckBox getChckbxIfYesCheck() {
 		return chckbxIfYesCheck;

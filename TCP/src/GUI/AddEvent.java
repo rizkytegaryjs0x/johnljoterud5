@@ -5,10 +5,8 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -21,13 +19,11 @@ import javax.swing.border.CompoundBorder;
 		private JTextField textFieldStartYear;
 		private JButton btnSubmit;
 		private JButton btnBack;
-		private JLabel lblCBSlogo;
 		private JLabel lblCreate;
 		private JLabel lblEnd;
 		private JLabel lblName;
 		private JLabel lblText;
 		private JLabel lblEmail;
-		private JLabel lblBackground;
 		private JLabel lblCreateddate;
 		private JTextField textField_Name;
 		private JTextField textField_Text;
@@ -36,8 +32,6 @@ import javax.swing.border.CompoundBorder;
 		private JTextField textFieldStartMonth;
 		private JTextField textFieldStartHour;
 		private JTextField textFieldStartMinute;
-		private JTextField textFieldStartSecond;
-		private JTextField textFieldEndSecond;
 		private JTextField textFieldEndMinute;
 		private JTextField textFieldEndHour;
 		private JTextField textFieldEndMonth;
@@ -47,7 +41,6 @@ import javax.swing.border.CompoundBorder;
 		private JLabel lblStartDate;
 		private JLabel lblHour;
 		private JLabel lblNewLabel_1;
-		private JLabel lblSecond;
 
 		//Tilføjer et panel der kan tilføje events. Heri oprettes alle JLabels, JButtons og JTextfields.
 		public AddEvent() {
@@ -66,12 +59,6 @@ import javax.swing.border.CompoundBorder;
 			textFieldStartDateDay.setColumns(10);
 			textFieldStartDateDay.setBounds(885, 297, 53, 34);
 			add(textFieldStartDateDay);
-
-			textFieldEndSecond = new JTextField();
-			textFieldEndSecond.setForeground(SystemColor.controlDkShadow);
-			textFieldEndSecond.setColumns(10);
-			textFieldEndSecond.setBounds(1080, 346, 53, 34);
-			add(textFieldEndSecond);
 
 			textFieldEndMonth = new JTextField();
 			textFieldEndMonth.setForeground(SystemColor.controlDkShadow);
@@ -96,12 +83,6 @@ import javax.swing.border.CompoundBorder;
 			textFieldEndYear.setColumns(10);
 			textFieldEndYear.setBounds(755, 346, 53, 34);
 			add(textFieldEndYear);
-
-			textFieldStartSecond = new JTextField();
-			textFieldStartSecond.setForeground(SystemColor.controlDkShadow);
-			textFieldStartSecond.setColumns(10);
-			textFieldStartSecond.setBounds(1080, 297, 53, 34);
-			add(textFieldStartSecond);
 
 			textFieldStartMinute = new JTextField();
 			textFieldStartMinute.setForeground(SystemColor.controlDkShadow);
@@ -239,10 +220,6 @@ import javax.swing.border.CompoundBorder;
 			lblNewLabel_1 = new JLabel("Minute");
 			lblNewLabel_1.setBounds(1015, 275, 61, 16);
 			add(lblNewLabel_1);
-			
-			lblSecond = new JLabel("Second");
-			lblSecond.setBounds(1080, 275, 61, 16);
-			add(lblSecond);
 
 		}
 		// Actionlisteners tilføjes
@@ -251,23 +228,23 @@ import javax.swing.border.CompoundBorder;
 			btnBack.addActionListener(l);
 		}
 		// Her samles alt input fra textfields angående startdate til en lang string.
-//		public String startDateTimeToString(){
-//			
-//			String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
-//					getTextFieldStartDateDay().getText() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
-//					getTextFieldStartSecond().getText();
-//			
-//			return start;
-//		}
-//		// Her samles alt input fra textfields angående enddate til en lang string.
-//		public String endDateTimeToString(){
-//			
-//			String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
-//					getTextFieldEndDateDay().getText() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
-//					getTextFieldEndSecond().getText();
-//			
-//			return end;
-//		}
+		public String startDateTimeToString(){
+			
+			String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
+					getTextFieldStartDateDay().getText() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
+					"00";
+			
+			return start;
+		}
+		// Her samles alt input fra textfields angående enddate til en lang string.
+		public String endDateTimeToString(){
+			
+			String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
+					getTextFieldEndDateDay().getText() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
+					"00";
+			
+			return end;
+		}
 		
 
 		public JTextField getTextFieldStartDateDay() {
@@ -294,13 +271,6 @@ import javax.swing.border.CompoundBorder;
 			return textFieldStartMinute;
 		}
 
-		public JTextField getTextFieldStartSecond() {
-			return textFieldStartSecond;
-		}
-
-		public JTextField getTextFieldEndSecond() {
-			return textFieldEndSecond;
-		}
 
 		public JTextField getTextFieldEndMinute() {
 			return textFieldEndMinute;

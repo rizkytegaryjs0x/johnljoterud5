@@ -17,16 +17,19 @@ public class CalendarHandler {
 	public CalendarInfo getWeekEvents(int weeknumber, int year){
 		
 		CalendarInfo weekEvents = new CalendarInfo();
-		
+		System.out.println("CalendarHandler line 20. Calendar size: " + calendar.size());
 		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
 		for(String tempdate : dates){
 
 			for(CalendarInfo tempcal : calendar){
 
-				for (int i = 0 ; i <= tempcal.getCalendars().size(); i++){
+				for (int i = 0 ; i < tempcal.getCalendars().size(); i++){
+					
+					System.out.println(tempcal.getCalendars().get(i).getStart() + " = " + tempdate);
 					
 					if(tempcal.getCalendars().get(i).getStart().contains(tempdate)){
+						System.out.println("event added to weekevents");
 						weekEvents.getCalendars().add(tempcal.getCalendars().get(i));
 					}
 					
@@ -49,19 +52,20 @@ public class CalendarHandler {
 	 public ArrayList<String> YearAndWeekDates(int week, int year){
 		ArrayList<String> dates = new ArrayList<String>();
 		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-d");
 		Calendar cal = Calendar.getInstance();
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.WEEK_OF_YEAR, week);
+		cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)-1);
 		
-		for(int i=2 ; i<7 ; i++){
+		for(int i=0 ; i<7 ; i++){
 		cal.set(Calendar.DAY_OF_WEEK, i);
 		dates.add(sdf.format(cal.getTime()));
 		}
-		for(int i=0 ; i<2 ; i++){
-			cal.set(Calendar.DAY_OF_WEEK, i);
-			dates.add(sdf.format(cal.getTime())); 
-		}
+//		for(int i=0 ; i<2 ; i++){
+//			cal.set(Calendar.DAY_OF_WEEK, i);
+//			dates.add(sdf.format(cal.getTime())); 
+//		}
 
 		return dates;
 	 }	

@@ -155,6 +155,7 @@ public class Logic {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
 							cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+							container.getShowCalendar().getCh().setCalendar(cl.getCalendars());
 							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
 							System.out.println("cweek: " + container.getShowCalendar().getCurrentWeek() + " cyear: " +  container.getShowCalendar().getCurrentYear());
 							container.show(Container.SHOWCALENDAR);

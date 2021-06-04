@@ -9,6 +9,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Logic.CalendarHandler;
+
 public class Container extends JFrame {
 
 	
@@ -93,4 +95,8 @@ public class Container extends JFrame {
 	public void show(String card) {
 		c.show(getContentPane(),  card);
 }
+
+	public CalendarHandler getCalendarHandler() {
+		return calendarHandler;
+	}
 }

@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -339,6 +340,7 @@ public class ShowCalendar extends JPanel {
 		//
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
 		CalendarInfo we = ch.getWeekEvents(week, year);
+		System.out.println(we.getCalendars().size());
 		
 	
 		for (String date : weekDates){
@@ -346,11 +348,13 @@ public class ShowCalendar extends JPanel {
 			for(UserEvent event : we.getCalendars()){			
 							
 				if(event.getStart().contains(date)){
+					System.out.println("event is added to de");
 					de.add(event);
 				}
 			}
 			int column = ch.getWeekDay(date);
 			System.out.println("populating table...");
+			System.out.println(de.size());
 			PopulateTable(de, column);
 			
 		}
@@ -448,21 +452,26 @@ public class ShowCalendar extends JPanel {
 		}
 	}
 	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
+		 System.out.println("dayEvents is empty: " + dayEvents.isEmpty());
 		 if(!dayEvents.isEmpty()){
 			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
 			 CellModel cm = new CellModel();
 			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
 			 
 			 for(UserEvent de : dayEvents){
-				 cm.setRowNumber(Integer.valueOf(sdf.format(de.getStart())));
+				 String hours = de.getStart().substring(5, 7).replace("-", "");	 
+				 cm.setRowNumber(Integer.valueOf(hours));
 				 cm.setText(de.getTitle());
 				 alcm.add(cm);
+
 				 
 			 }
 			 String newCell;
 			 for (CellModel cmTemp : alcm){
-				 if(tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().isEmpty())
+				 if(tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().equals(null)){
+					System.out.println("Attempting to add data to cell. " + cmTemp.getRowNumber() + ", " + dayOfWeek);
 					tblCalendar.setValueAt(cmTemp.getText() + "\n", cmTemp.getRowNumber(), dayOfWeek);
+				 }
 				 else{
 					newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
 				 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
@@ -486,5 +495,13 @@ public class ShowCalendar extends JPanel {
 
 	public void setCurrentWeek(int currentWeek) {
 		this.currentWeek = currentWeek;
+	}
+
+	public CalendarHandler getCh() {
+		return ch;
+	}
+
+	public void setCh(CalendarHandler ch) {
+		this.ch = ch;
 	}
 }

@@ -54,7 +54,7 @@ public class ShowCalendar extends JPanel {
 	private JButton btnAddCalendar;
 	private JButton btnAddEvent;
 	private JButton btnAddNote;
-	private TableColumnModel columnModel;
+
 	private CalendarHandler ch = new CalendarHandler();
 	GregorianCalendar cal = new GregorianCalendar();
 	ArrayList<String> dateArray = new ArrayList<String>();

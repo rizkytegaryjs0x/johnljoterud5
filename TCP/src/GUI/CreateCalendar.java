@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -34,10 +33,7 @@ public class CreateCalendar extends JPanel {
 	private JTextField textPrivateOrPublic;
 	private JTextField txtShare;
 	private JCheckBox chckbxIfYesCheck;
-	
-	private JTable table;
 	private DefaultTableModel model;
-	private JScrollPane scrollPane;
 
 	private JLabel lblShareCalendar;
 	
@@ -47,47 +43,27 @@ public class CreateCalendar extends JPanel {
 		setLayout(null);
 		
 		String[] columnNames = { "Email" };
-		table = new JTable();
-		model = (DefaultTableModel) table.getModel();
-		model.setColumnIdentifiers(columnNames);
+		
 		
 		chckbxIfYesCheck = new JCheckBox("If yes, check this box");
-		chckbxIfYesCheck.setBounds(737, 436, 167, 25);
+		chckbxIfYesCheck.setBounds(737, 391, 167, 25);
 		add(chckbxIfYesCheck);
 		
 		lblShareCalendar = new JLabel("Share this calendar?");
 		lblShareCalendar.setForeground(new Color (0, 0, 0));
 		lblShareCalendar.setFont(new Font("Arial", Font.BOLD, 26));
-		lblShareCalendar.setBounds(476, 425, 260, 39);
+		lblShareCalendar.setBounds(476, 380, 260, 39);
 		add(lblShareCalendar);
-		table.setSurrendersFocusOnKeystroke(true);
-		table.setPreferredScrollableViewportSize(new Dimension(500, 100));
-		table.setFillsViewportHeight(true);
-		table.setRowSelectionAllowed(true);
-		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
-		scrollPane = new JScrollPane(table);
-		scrollPane.setBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				new MatteBorder(1, 1, 1, 1, (Color) new Color(255, 255, 255))));
-		scrollPane.setViewportBorder(new CompoundBorder(new BevelBorder(
-				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
-						255), new Color(0, 0, 205), new Color(255, 255, 255)),
-				null));
-		scrollPane.setBounds(547, 184, 260, 148);
-
-		// Add the scroll pane to this panel.
-		add(scrollPane);
 		lblShareWith = new JLabel("Share with:");
 		lblShareWith.setForeground(new Color (0, 0, 0));
 		lblShareWith.setFont(new Font("Arial", Font.BOLD, 26));
-		lblShareWith.setBounds(476, 468, 147, 39);
+		lblShareWith.setBounds(476, 432, 147, 39);
 		lblShareWith.setVisible(false);
 		add(lblShareWith);
 		
 		txtShare = new JTextField();
 		txtShare.setColumns(10);
-		txtShare.setBounds(737, 477, 149, 28);
+		txtShare.setBounds(737, 437, 149, 28);
 		txtShare.setVisible(false);
 		add(txtShare);
 		
@@ -116,25 +92,27 @@ public class CreateCalendar extends JPanel {
 		lblName = new JLabel("Name:");
 		lblName.setForeground(new Color (0, 0, 0));
 		lblName.setFont(new Font("Arial", Font.BOLD, 26));
-		lblName.setBounds(476, 345, 147, 39);
+		lblName.setBounds(476, 271, 147, 39);
 		add(lblName);
 		
 		lblPrivateOrPublic = new JLabel("Private or public:");
 		lblPrivateOrPublic.setForeground(new Color (0, 0, 0));
 		lblPrivateOrPublic.setFont(new Font("Arial", Font.BOLD, 26));
-		lblPrivateOrPublic.setBounds(476, 385, 223, 39);
+		lblPrivateOrPublic.setBounds(476, 328, 223, 39);
 		add(lblPrivateOrPublic);
 		
 		textName = new JTextField();
-		textName.setBounds(737, 354, 149, 28);
+		textName.setBounds(737, 280, 149, 28);
 		add(textName);
 		textName.setColumns(10);
 		
 		textPrivateOrPublic = new JTextField();
-		textPrivateOrPublic.setBounds(737, 394, 149, 28);
+		textPrivateOrPublic.setBounds(737, 337, 149, 28);
 		add(textPrivateOrPublic);
 		textPrivateOrPublic.setColumns(10);
 		
+		lblShareWith.setVisible(true);
+		txtShare.setVisible(true);
 		}
 	
 	public void addActionListener(ActionListener l) {
@@ -157,10 +135,7 @@ public class CreateCalendar extends JPanel {
 	public void setLblShareWith(JLabel lblShareWith) {
 		this.lblShareWith = lblShareWith;
 	}
-	public void showShareFields(){
-		lblShareWith.setVisible(true);
-		txtShare.setVisible(true);
-	}
+
 
 	public void setTxtShare(JTextField txtShare) {
 		this.txtShare = txtShare;

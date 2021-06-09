@@ -82,6 +82,8 @@ public class ShowCalendar extends JPanel {
 			}
 		};
 		tblCalendar = new JTable(mtblCalendar);
+		tblCalendar.setFocusable(false);
+		tblCalendar.setRowSelectionAllowed(false);
 		stblCalendar = new JScrollPane(tblCalendar);
 
 		// Set border
@@ -324,23 +326,9 @@ public class ShowCalendar extends JPanel {
 			// "\n +and the currentyear" +currentYear);
 
 		}
-		System.out.println(tblCalendar.getValueAt(0, 1));
-		// //Get first day of month and number of days
-		// GregorianCalendar cal = new GregorianCalendar(year, w, 1);
-		// nod = cal.getActualMaximum(GregorianCalendar.DAY_OF_MONTH);
-		// som = cal.get(GregorianCalendar.DAY_OF_WEEK);
-		//
-		// //Draw calendar
-		// for (int i=1; i<=nod; i++){
-		// int row = new Integer((i+som-2)/7);
-		// int column = (i+som-2)%7;
-		// mtblCalendar.setValueAt(i, row, column);
-		// }
-		//
-		//
+
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
 		CalendarInfo we = ch.getWeekEvents(week, year);
-		System.out.println(we.getCalendars().size());
 		
 	
 		for (String date : weekDates){
@@ -348,12 +336,11 @@ public class ShowCalendar extends JPanel {
 			for(UserEvent event : we.getCalendars()){			
 							
 				if(event.getStart().contains(date)){
-					System.out.println("event is added to de");
 					de.add(event);
 				}
 			}
 			int column = ch.getWeekDay(date);
-			System.out.println("populating table...");
+			System.out.printf("populating table for weekday %d...", ch.getWeekDay(date));
 			System.out.println(de.size());
 			PopulateTable(de, column);
 			
@@ -390,6 +377,7 @@ public class ShowCalendar extends JPanel {
 //			}
 			setBorder(null);
 			setForeground(Color.black);
+			
 			return this;
 		}
 	}
@@ -410,14 +398,14 @@ public class ShowCalendar extends JPanel {
 			cal.set(Calendar.DAY_OF_WEEK, i);
 			dates.add(sdf.format(cal.getTime()));
 		}
-
+			
 		return dates;
 	}
 
 	private class btnPrev_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			if (currentWeek == 0) { // Back one year
-				currentWeek = 51;
+				currentWeek = 52;
 				currentYear -= 1;
 			} else { // Back one month
 				currentWeek -= 1;
@@ -459,22 +447,30 @@ public class ShowCalendar extends JPanel {
 			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
 			 
 			 for(UserEvent de : dayEvents){
-				 String hours = de.getStart().substring(5, 7).replace("-", "");	 
-				 cm.setRowNumber(Integer.valueOf(hours));
-				 cm.setText(de.getTitle());
+				 String hours = de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().indexOf(":"));
+				 System.out.println("string hours: " + hours);
+				 cm.setRowNumber(Integer.valueOf(hours) - 7);
+				 cm.setText(
+				 		"<html>" + de.getText() + "<br>From: " 
+						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
+						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
 				 alcm.add(cm);
 
 				 
 			 }
+			 
+			 
 			 String newCell;
 			 for (CellModel cmTemp : alcm){
-				 if(tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().equals(null)){
-					System.out.println("Attempting to add data to cell. " + cmTemp.getRowNumber() + ", " + dayOfWeek);
-					tblCalendar.setValueAt(cmTemp.getText() + "\n", cmTemp.getRowNumber(), dayOfWeek);
+				 
+				 Object value = tblCalendar.getValueAt(cmTemp.getRowNumber(),dayOfWeek);
+				 if(value != null){
+						newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
+					 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
 				 }
 				 else{
-					newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
-				 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
+						System.out.println("Attempting to add data to cell. " + cmTemp.getRowNumber() + ", " + dayOfWeek);
+						tblCalendar.setValueAt("<html>" + cmTemp.getText() + "<br></html>", cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }
 			 

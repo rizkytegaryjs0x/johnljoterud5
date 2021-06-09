@@ -62,10 +62,10 @@ public class CalendarHandler {
 		cal.set(Calendar.DAY_OF_WEEK, i);
 		dates.add(sdf.format(cal.getTime()));
 		}
-//		for(int i=0 ; i<2 ; i++){
-//			cal.set(Calendar.DAY_OF_WEEK, i);
-//			dates.add(sdf.format(cal.getTime())); 
-//		}
+		for(int i=0 ; i<2 ; i++){
+			cal.set(Calendar.DAY_OF_WEEK, i);
+			dates.add(sdf.format(cal.getTime())); 
+		}
 
 		return dates;
 	 }	

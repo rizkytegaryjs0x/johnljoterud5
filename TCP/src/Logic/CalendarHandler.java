@@ -58,11 +58,11 @@ public class CalendarHandler {
 		cal.set(Calendar.WEEK_OF_YEAR, week);
 		cal.set(Calendar.MONTH, cal.get(Calendar.MONTH)-1);
 		
-		for(int i=0 ; i<7 ; i++){
+		for(int i=1 ; i<7 ; i++){
 		cal.set(Calendar.DAY_OF_WEEK, i);
 		dates.add(sdf.format(cal.getTime()));
 		}
-		for(int i=0 ; i<2 ; i++){
+		for(int i=0 ; i<1 ; i++){
 			cal.set(Calendar.DAY_OF_WEEK, i);
 			dates.add(sdf.format(cal.getTime())); 
 		}

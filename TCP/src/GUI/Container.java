@@ -96,7 +96,4 @@ public class Container extends JFrame {
 		c.show(getContentPane(),  card);
 }
 
-	public CalendarHandler getCalendarHandler() {
-		return calendarHandler;
-	}
 }

@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,13 +26,15 @@ public class ChangeCalendar extends JPanel {
 	private JButton btnChoose;
 	private JButton btnBack;
 	private JLabel lblChooseCalendar;
+	private int row;
+	private String name;
 
 	public ChangeCalendar() {
 
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
-		String[] columnNames = { "Name" };
+		String[] columnNames = { "CalendarID","Name" };
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -39,6 +43,19 @@ public class ChangeCalendar extends JPanel {
 		table.setFillsViewportHeight(true);
 		table.setRowSelectionAllowed(true);
 		table.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		table.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				
+				row = table.getSelectedRow();
+				if(row != -1){
+				name = table.getValueAt(row, 0).toString();
+				setName(name);
+				
+
+				}
+			}
+		});
 
 		// Create the scroll pane and add the table to it.
 		scrollPane = new JScrollPane(table);
@@ -80,6 +97,16 @@ public class ChangeCalendar extends JPanel {
 		add(btnBack);
 		
 
+	}
+
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 

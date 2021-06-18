@@ -112,7 +112,7 @@ import javax.swing.border.CompoundBorder;
 			btnBack.setForeground(new Color(0, 0, 0));
 			btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 			btnBack.setContentAreaFilled(false);
-			btnBack.setBounds(552, 650, 194, 50);
+			btnBack.setBounds(753, 667, 194, 50);
 			add(btnBack);
 
 			textField_Location = new JTextField();
@@ -150,13 +150,13 @@ import javax.swing.border.CompoundBorder;
 							new Color(0, 0, 0))));
 			btnSubmit.setForeground(new Color(0, 0, 0));
 			btnSubmit.setFont(new Font("Arial", Font.BOLD, 30));
-			btnSubmit.setBounds(552, 580, 194, 50);
+			btnSubmit.setBounds(752, 604, 194, 50);
 			add(btnSubmit);
 
 			lblCreate = new JLabel("Create event");
 			lblCreate.setForeground(new Color(0, 0, 0));
 			lblCreate.setFont(new Font("Arial", Font.BOLD, 78));
-			lblCreate.setBounds(451, 90, 466, 91);
+			lblCreate.setBounds(572, 55, 466, 91);
 			add(lblCreate);
 
 			lblEnd = new JLabel("End");
@@ -186,7 +186,7 @@ import javax.swing.border.CompoundBorder;
 			textField_Text = new JTextField();
 			textField_Text.setForeground(SystemColor.controlDkShadow);
 			textField_Text.setColumns(10);
-			textField_Text.setBounds(755, 406, 378, 66);
+			textField_Text.setBounds(755, 386, 378, 86);
 			add(textField_Text);
 
 			textField_Type = new JTextField();

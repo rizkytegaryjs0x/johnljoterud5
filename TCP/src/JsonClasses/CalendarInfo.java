@@ -6,6 +6,7 @@ public class CalendarInfo implements java.io.Serializable {
 
 		private static final long serialVersionUID = 1L;
 		private String overallID = "calendarInfo";
+		private int calendarId;
 		private String calenderName;
 		private String userName;
 		private int publicOrPrivate;
@@ -16,6 +17,12 @@ public class CalendarInfo implements java.io.Serializable {
 		
 		public String getOverallID() {
 			return overallID;
+		}
+		public int getCalendarId() {
+			return calendarId;
+		}
+		public void setCalendarId(int calendarId) {
+			this.calendarId = calendarId;
 		}
 		public ArrayList<UserEvent> getCalendars() {
 			return calendars;

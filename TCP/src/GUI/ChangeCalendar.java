@@ -78,13 +78,13 @@ public class ChangeCalendar extends JPanel {
 		lblChooseCalendar.setBounds(381, 90, 680, 91);
 		add(lblChooseCalendar);
 
-		btnChoose = new JButton("Add note");
+		btnChoose = new JButton("Set as current calendar");
 		btnChoose.setContentAreaFilled(false);
 		btnChoose.setForeground(new Color(0, 0, 0));
 		btnChoose.setFont(new Font("Arial", Font.BOLD, 30));
 		btnChoose.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 		btnChoose.setBackground(Color.WHITE);
-		btnChoose.setBounds(616, 610, 194, 50);
+		btnChoose.setBounds(530, 608, 360, 50);
 		add(btnChoose);
 		
 		btnBack = new JButton("Back");

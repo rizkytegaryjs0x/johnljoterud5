@@ -12,6 +12,7 @@ import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
+import JsonClasses.GetDailyUpdate;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -33,6 +34,7 @@ public class Logic {
 		ClientLogin clientLogin = new ClientLogin();
 		CreateCalendar createCalendar = new CreateCalendar();
 		CreateEvent createEvent = new CreateEvent();
+		GetDailyUpdate getDailyUpdate = new GetDailyUpdate();
 		private String currentCalendar;
 		private String currentEventId;
 		private String currentUser;
@@ -172,7 +174,17 @@ public class Logic {
 						if (e.getSource() == container.getAddEvent().getBtnSubmit()) {
 						
 							createEvent.setCalendarID(getCurrentCalendar());
+							createEvent.setCreatedby(getCurrentUser());
+							createEvent.setLocation(container.getAddEvent().getTextField_Location().getText());
+							createEvent.setStart(container.getAddEvent().startDateTimeToString());
+							createEvent.setEnd(container.getAddEvent().endDateTimeToString());
+							createEvent.setTitle(container.getAddEvent().getTextField_Name().getText());
+							createEvent.setText(container.getAddEvent().getTextField_Text().getText());
+							createEvent.setType(container.getAddEvent().getTextField_Type().getText());
 							
+								stringSendToServer = gson.toJson(createEvent);
+								
+								
 						}
 				}
 				}
@@ -195,7 +207,13 @@ public class Logic {
 					if (e.getSource() == container.getChangeCalendar().getBtnChoose());
 					
 						setCurrentCalendar(container.getChangeCalendar().getName());
-					}
+						
+							System.out.println(getCurrentCalendar());	
+							
+							//hent events for den valgte kalender. DET MÅ FIKSES
+							
+							container.show(Container.SHOWCALENDAR);
+							}
 
 				}
 				private class LoginPanelActionListener implements ActionListener {
@@ -206,11 +224,27 @@ public class Logic {
 						clientLogin.setEmail(container.getLoginPanel().getTextFieldUsername().getText());
 						clientLogin.setPassWord(container.getLoginPanel().getTextFieldPassword().getText());
 						stringSendToServer = gson.toJson(clientLogin);
+						
+						
+						
+						
 						try {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
 							clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
 							setCurrentUser(clientLogin.getEmail());
+							
+							
+							stringSendToServer = gson.toJson(getDailyUpdate);
+							answer = tcp.TalkToServer(stringSendToServer);
+							getDailyUpdate = (GetDailyUpdate)gson.fromJson(answer, GetDailyUpdate.class);
+							
+							System.out.println("celsius: " + getDailyUpdate.getCelsius());
+							System.out.println("celsius:" + getDailyUpdate.getDesc());
+							
+							
+							
+							
 							
 							container.getShowCalendar().getCh().setCalendar(clientLogin.getCalendars());
 							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
@@ -331,7 +365,7 @@ public class Logic {
 
 						
 						container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
-							c.getCalenderName(), c.getCalendarId()
+							c.getCalendarId(),c.getCalenderName()
 							
 						});
 						

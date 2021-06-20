@@ -37,17 +37,17 @@ public AddNote(){
 	lblAddUser = new JLabel("Add note");
 	lblAddUser.setForeground(new Color(0, 0, 0));
 	lblAddUser.setFont(new Font("Arial", Font.BOLD, 78));
-	lblAddUser.setBounds(509, 107, 464, 90);
+	lblAddUser.setBounds(502, 35, 464, 90);
 	add(lblAddUser);
 	
 	lblNote = new JLabel("Note:");
 	lblNote.setForeground(new Color(0, 0, 0));
 	lblNote.setFont(new Font("Arial", Font.BOLD, 26));
-	lblNote.setBounds(473, 312, 105, 31);
+	lblNote.setBounds(359, 310, 105, 31);
 	add(lblNote);
 	
 	textFieldText = new JTextField();
-	textFieldText.setBounds(576, 305, 231, 119);
+	textFieldText.setBounds(508, 312, 349, 221);
 	add(textFieldText);
 	textFieldText.setColumns(10);
 	
@@ -57,7 +57,7 @@ public AddNote(){
 	btnAddNote.setFont(new Font("Arial", Font.BOLD, 30));
 	btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnAddNote.setBackground(Color.WHITE);
-	btnAddNote.setBounds(591, 483, 194, 50);
+	btnAddNote.setBounds(591, 546, 194, 50);
 	add(btnAddNote);
 	
 	btnBack = new JButton("Back");
@@ -66,7 +66,7 @@ public AddNote(){
 	btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 	btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
 	btnBack.setBackground(Color.WHITE);
-	btnBack.setBounds(591, 558, 194, 50);
+	btnBack.setBounds(591, 628, 194, 50);
 	add(btnBack);
 	}
 

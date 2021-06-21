@@ -204,8 +204,7 @@ public class ShowCalendar extends JPanel {
 		}
 
 		// Refresh calendar
-		System.out.println("REALWEEK L 177: " + realWeek);
-		System.out.println("REALWEEK L 178: " + realYear);
+
 		refreshCalendar(realWeek, realYear); // Refresh calendar
 
 	}
@@ -297,12 +296,12 @@ public class ShowCalendar extends JPanel {
 		}
 
 		// Add headers
-		System.out.println("YEAR: " + year);
-		System.out.println("WEEK: " + week);
+
 		// All headers
 		int temp = 2;
 		String[] headers = { "", "Mon ", "Tue ", "Wed ", "Thu ", "Fri ",
 				"Sat ", "Sun " };
+		dateArray = YearAndWeekDates(week, year);
 		for (int i = 0; i < 7; i++) {
 			// System.out.println("i: " + i);
 			// if (temp != 8)
@@ -313,7 +312,7 @@ public class ShowCalendar extends JPanel {
 			// }
 			//
 
-			dateArray = YearAndWeekDates(week, year);
+			
 
 			 tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[i+1]);
 			
@@ -333,13 +332,15 @@ public class ShowCalendar extends JPanel {
 	
 		for (String date : weekDates){
 			ArrayList <UserEvent> de = new ArrayList <UserEvent>();
+			System.out.printf("Finding events for date %s...\n", date);
 			for(UserEvent event : we.getCalendars()){			
 							
 				if(event.getStart().contains(date)){
+					System.out.printf("Event with start %s added to date %s.\n", event.getStart(), date);
 					de.add(event);
 				}
 			}
-			int column = ch.getWeekDay(date);
+			int column = ch.getArrayWeekDay(date);
 			System.out.printf("populating table for weekday %d...", ch.getWeekDay(date));
 			System.out.println(de.size());
 			PopulateTable(de, column);
@@ -440,7 +441,7 @@ public class ShowCalendar extends JPanel {
 		}
 	}
 	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
-		 System.out.println("dayEvents is empty: " + dayEvents.isEmpty());
+
 		 if(!dayEvents.isEmpty()){
 			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
 			 CellModel cm = new CellModel();
@@ -448,12 +449,14 @@ public class ShowCalendar extends JPanel {
 			 
 			 for(UserEvent de : dayEvents){
 				 String hours = de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().indexOf(":"));
-				 System.out.println("string hours: " + hours);
+
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
+//				 cm.setText(
+//				 		"<html>" + de.getText() + "<br>From: " 
+//						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
+//						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
 				 cm.setText(
-				 		"<html>" + de.getText() + "<br>From: " 
-						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
-						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
+					 		"<html>" + de.getText() + "<br>"+ de.getStart() + "</html>");
 				 alcm.add(cm);
 
 				 
@@ -469,7 +472,7 @@ public class ShowCalendar extends JPanel {
 					 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
 				 }
 				 else{
-						System.out.println("Attempting to add data to cell. " + cmTemp.getRowNumber() + ", " + dayOfWeek);
+						
 						tblCalendar.setValueAt("<html>" + cmTemp.getText() + "<br></html>", cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }

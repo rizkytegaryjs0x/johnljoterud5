@@ -52,9 +52,7 @@ public class CalendarHandler {
 	 public ArrayList<String> YearAndWeekDates(int week, int year){
 		ArrayList<String> dates = new ArrayList<String>();
 		
-		String datehandler = "";
-		
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-d");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-d");
 		Calendar cal = Calendar.getInstance();
 		cal.setFirstDayOfWeek(Calendar.MONDAY);
 		cal.set(Calendar.YEAR, year);
@@ -63,16 +61,14 @@ public class CalendarHandler {
 		
 		for(int i=2 ; i<7 ; i++){
 		cal.set(Calendar.DAY_OF_WEEK, i);
-		datehandler = sdf.format(cal.getTime());
-		dates.add(datehandler.replace("-", "-" + cal.get(Calendar.MONTH) + "-"));
+		dates.add(sdf.format(cal.getTime()));
 		}
 		for(int i=0 ; i<2 ; i++){
 			cal.set(Calendar.DAY_OF_WEEK, i);
-			datehandler = sdf.format(cal.getTime());
-			dates.add(datehandler.replace("-", "-" + cal.get(Calendar.MONTH) + "-"));
+			dates.add(sdf.format(cal.getTime()));
 
 		}
-
+		
 		return dates;
 	 }	
 	 
@@ -120,7 +116,7 @@ public class CalendarHandler {
 	 public int getArrayWeekDay(String arraydate){
 		 int column = 0;
 			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-d");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-d");
 			Date d;
 			String datehandler = "";
 			try {
@@ -130,10 +126,12 @@ public class CalendarHandler {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-
+			
 			datehandler = sdf.format(cal.getTime());
-			int newMonth = cal.get(Calendar.MONTH) + 1;
-			datehandler.replace("-", "-" + newMonth + "-");
+			System.out.println("DATEHANDLER før replace: " + datehandler);
+			int newMonth = cal.get(Calendar.MONTH);
+			newMonth ++;
+			datehandler = datehandler.replace("-MM-", "-" + newMonth + "-");
 			System.out.println("DATEHANDLER: " + datehandler);
 			
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);

@@ -298,10 +298,10 @@ public class ShowCalendar extends JPanel {
 		// Add headers
 
 		// All headers
-		int temp = 2;
+
 		String[] headers = { "", "Mon ", "Tue ", "Wed ", "Thu ", "Fri ",
 				"Sat ", "Sun " };
-		dateArray = YearAndWeekDates(week, year);
+		dateArray = ch.YearAndWeekDates(week, year);
 		for (int i = 0; i < 7; i++) {
 			// System.out.println("i: " + i);
 			// if (temp != 8)
@@ -383,25 +383,8 @@ public class ShowCalendar extends JPanel {
 		}
 	}
 
-	public ArrayList<String> YearAndWeekDates(int week, int year) {
-		ArrayList<String> dates = new ArrayList<String>();
 
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance(Locale.US);
-		cal.set(Calendar.YEAR, currentYear);
-		cal.set(Calendar.WEEK_OF_YEAR, currentWeek);
 
-		for (int i = 2; i < 7; i++) {
-			cal.set(Calendar.DAY_OF_WEEK, i);
-			dates.add(sdf.format(cal.getTime()));
-		}
-		for (int i = 0; i < 2; i++) {
-			cal.set(Calendar.DAY_OF_WEEK, i);
-			dates.add(sdf.format(cal.getTime()));
-		}
-			
-		return dates;
-	}
 
 	private class btnPrev_Action implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -451,12 +434,11 @@ public class ShowCalendar extends JPanel {
 				 String hours = de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().indexOf(":"));
 
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
-//				 cm.setText(
-//				 		"<html>" + de.getText() + "<br>From: " 
-//						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
-//						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
 				 cm.setText(
-					 		"<html>" + de.getText() + "<br>"+ de.getStart() + "</html>");
+				 		"<html>" + de.getText() + "<br>From: " 
+						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
+						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
+
 				 alcm.add(cm);
 
 				 

@@ -2,13 +2,8 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Container;
-import java.awt.color.ColorSpace;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.Date;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,7 +13,6 @@ import java.util.Locale;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -27,7 +21,6 @@ import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumnModel;
 
 import JsonClasses.CalendarInfo;
 import JsonClasses.UserEvent;
@@ -44,9 +37,9 @@ public class ShowCalendar extends JPanel {
 	private int realYear, realWeek, realDay, currentYear, currentWeek,
 			currentDay;
 	private JTextField txtTekstTilEvents;
-	private JTextField textField_1;
+	private JTextField txtForecast;
 	private JLabel lblWeatherForecast;
-	private JTextField textField_2;
+	private JTextField txtQOTD;
 	private JLabel lblQotd;
 	private JButton btnLogout;
 	private JButton btnChangeCalendar;
@@ -60,15 +53,6 @@ public class ShowCalendar extends JPanel {
 	ArrayList<String> dateArray = new ArrayList<String>();
 
 	public ShowCalendar() {
-		// Look and feel
-		// try
-		// {UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());}
-		// catch (ClassNotFoundException e) {}
-		// catch (InstantiationException e) {}
-		// catch (IllegalAccessException e) {}
-		// catch (UnsupportedLookAndFeelException e) {}
-
-		// Prepare frame
 		setLayout(null);// Create frame
 		setSize(1366, 768); // Set size to 400x400 pixels
 
@@ -77,6 +61,11 @@ public class ShowCalendar extends JPanel {
 		btnPrev = new JButton("<<");
 		btnNext = new JButton(">>");
 		mtblCalendar = new DefaultTableModel() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			public boolean isCellEditable(int rowIndex, int mColIndex) {
 				return false;
 			}
@@ -172,19 +161,19 @@ public class ShowCalendar extends JPanel {
 		txtTekstTilEvents.setText("Tekst til events!");
 		txtTekstTilEvents.setColumns(10);
 
-		textField_2 = new JTextField();
-		textField_2.setBounds(83, 89, 400, 82);
-		add(textField_2);
-		textField_2.setColumns(10);
+		txtQOTD = new JTextField();
+		txtQOTD.setBounds(83, 89, 400, 82);
+		add(txtQOTD);
+		txtQOTD.setColumns(10);
 
 		lblQotd = new JLabel("QOTD");
 		lblQotd.setBounds(23, 122, 61, 16);
 		add(lblQotd);
 
-		textField_1 = new JTextField();
-		textField_1.setBounds(799, 89, 400, 82);
-		add(textField_1);
-		textField_1.setColumns(10);
+		txtForecast = new JTextField();
+		txtForecast.setBounds(799, 89, 400, 82);
+		add(txtForecast);
+		txtForecast.setColumns(10);
 
 		lblWeatherForecast = new JLabel("Weather Forecast");
 		lblWeatherForecast.setBounds(680, 122, 124, 16);
@@ -221,6 +210,24 @@ public class ShowCalendar extends JPanel {
 		btnNext.addActionListener(new btnNext_Action());
 		cmbYear.addActionListener(new cmbYear_Action());
 
+	}
+	
+	
+
+	public JTextField getTxtForecast() {
+		return txtForecast;
+	}
+
+	public void setTxtForecast(JTextField txtForecast) {
+		this.txtForecast = txtForecast;
+	}
+
+	public JTextField getTxtQOTD() {
+		return txtQOTD;
+	}
+
+	public void setTxtQOTD(JTextField txtQOTD) {
+		this.txtQOTD = txtQOTD;
 	}
 
 	public JButton getBtnPrev() {
@@ -485,4 +492,6 @@ public class ShowCalendar extends JPanel {
 	public void setCh(CalendarHandler ch) {
 		this.ch = ch;
 	}
+	
+	
 }

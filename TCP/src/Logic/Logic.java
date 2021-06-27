@@ -239,9 +239,17 @@ public class Logic {
 							answer = tcp.TalkToServer(stringSendToServer);
 							getDailyUpdate = (GetDailyUpdate)gson.fromJson(answer, GetDailyUpdate.class);
 							
-							System.out.println("celsius: " + getDailyUpdate.getCelsius());
-							System.out.println("celsius:" + getDailyUpdate.getDesc());
 							
+							String celsius = getDailyUpdate.getCelsius();
+							String desc = getDailyUpdate.getDesc();
+							String qotd = getDailyUpdate.getQuote();
+							
+							
+							
+							
+							container.getShowCalendar().getTxtQOTD().setText("DAGENS QUOTE: "+ qotd);
+							container.getShowCalendar().getTxtForecast().setText("Dagens værutsikter: celsius: "+ celsius 
+									+ "værbeskrivelse: " + desc);
 							
 							
 							

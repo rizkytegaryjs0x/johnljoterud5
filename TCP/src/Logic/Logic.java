@@ -13,6 +13,7 @@ import JsonClasses.ClientLogin;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.GetDailyUpdate;
+import JsonClasses.UserEvent;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -35,14 +36,17 @@ public class Logic {
 		CreateCalendar createCalendar = new CreateCalendar();
 		CreateEvent createEvent = new CreateEvent();
 		GetDailyUpdate getDailyUpdate = new GetDailyUpdate();
+		CalendarHandler cHandler;
 		private String currentCalendar;
 		private String currentEventId;
 		private String currentUser;
 		private String answer;
+		private CalendarInfo thisWeeksInfo = new CalendarInfo();
 		public Logic(){
 			
 		
 			container = new Container();
+			
 			
 //			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
 			container.getShowCalendar().addActionListener(new ShowCalendarActionListener());
@@ -66,6 +70,9 @@ public class Logic {
 		
 		private class ShowCalendarActionListener implements ActionListener{
 
+				int currentWeek = container.getShowCalendar().getCurrentWeek();
+			
+				int currentYear = container.getShowCalendar().getCurrentYear();
 			
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == container.getShowCalendar().getBtnAddCalendar()) {
@@ -89,9 +96,43 @@ public class Logic {
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnNext()) {
 					
+					
+				
+							if (currentWeek == 52) { // Foward one year
+								container.getShowCalendar().setCurrentWeek(1);
+								container.getShowCalendar().setCurrentYear(currentYear +=1);
+							} else { // Foward one month
+								container.getShowCalendar().setCurrentWeek(currentWeek +=1);
+
+							}
+							container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
+							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear));
+					
+					
+					
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnPrev()) {
 					
+					
+					if (currentWeek == 0) { // Back one year
+						
+						container.getShowCalendar().setCurrentWeek(52);
+						container.getShowCalendar().setCurrentYear(currentYear -=1);
+					
+					} else { // Back one month
+						container.getShowCalendar().setCurrentWeek(currentWeek -=1);
+					}
+					container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
+					
+					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
+				if(e.getSource() == container.getShowCalendar().getCmbYear()) {
+					
+					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
+						String b = container.getShowCalendar().getCmbYear().getSelectedItem().toString();
+						container.getShowCalendar().setCurrentYear(Integer.parseInt(b));
+						container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
+					}
+				}
 				}
 				}
 //				if (e.getSource() == container.getShowCalendar().getBtnNext()){
@@ -166,6 +207,10 @@ public class Logic {
 						}
 				}
 				}
+				
+			
+
+
 				private class AddEventActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getAddEvent().getBtnBack()) {
@@ -194,7 +239,7 @@ public class Logic {
 						container.show(Container.SHOWCALENDAR);
 					}
 					if (e.getSource() == container.getAddNote().getBtnAddNote()) {
-						//mangler
+						
 					}
 					}
 
@@ -234,8 +279,9 @@ public class Logic {
 							clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
 							setCurrentUser(clientLogin.getEmail());
 							
+						setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
 							
-							stringSendToServer = gson.toJson(getDailyUpdate);
+						stringSendToServer = gson.toJson(getDailyUpdate);
 							answer = tcp.TalkToServer(stringSendToServer);
 							getDailyUpdate = (GetDailyUpdate)gson.fromJson(answer, GetDailyUpdate.class);
 							
@@ -248,8 +294,8 @@ public class Logic {
 							
 							
 							container.getShowCalendar().getTxtQOTD().setText("DAGENS QUOTE: "+ qotd);
-							container.getShowCalendar().getTxtForecast().setText("Dagens værutsikter: celsius: "+ celsius 
-									+ "værbeskrivelse: " + desc);
+							container.getShowCalendar().getTxtForecast().setText("Dagens værutsikter:\n celsius: "+ celsius 
+									+ "\nværbeskrivelse: " + desc);
 							
 							
 							
@@ -295,71 +341,28 @@ public class Logic {
 				}
 
 
-				
-			
-		
 
-				
-				
-				
+				public void updateTableAddNote(){
+					try{
+						container.getAddNote().getModel().getDataVector().removeAllElements();
 
-				
-				
-			
-			
-		
-		
-		
-	
-
-//		private class LoginPanelActionListener implements ActionListener {
-//			public void actionPerformed(ActionEvent e) {
-//				try {
-//
-//					action = e.getActionCommand();
-//
-//					String userName = container.getLoginPanel().getTextFieldUsername()
-//							.getText().trim();
-//					String pass = container.getLoginPanel().getTextFieldPassword()
-//							.getText();
-//										
-//					if ((action.equals("btnLogin"))) {
-//						System.out.println("hit1");
-//						
-						//Creates object of jsonClasses.ClientLogin
-						//Sets login information
-//						cl.setEmail(userName);
-//						cl.setPassWord(pass);
-//						//Converts object to jsonString
-////						String gsonString = gson.toJson(cl);
-//						//Sends object to server using tcpClient.TCPClient and receives response as string serverResponse
-//						String serverResponse = tcp.TalkToServer(gsonString);
-//						System.out.println("hit2");
-//						
-//						//Uses serveResponse as a check for login confirmation
-//						if (serverResponse != "")
-//
-//						{
-//
-//							container.show(Container.CALENDARPANEL);
-//
-//						}
-//
-//						else if (loggedIn != 0) {
-//							JOptionPane.showMessageDialog(null,
-//									"\nLogin failed, error: " + loggedIn,
-//									"Error message", JOptionPane.PLAIN_MESSAGE);
-//						}
-//					
-//					}
-//				}catch (Exception e3) {
-//				}
-//			}	
-		
-
-	
-//	}
-
+						
+						for(UserEvent temp : thisWeeksInfo.getCalendars()){
+							
+							container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
+								temp.getEventid(),temp.getTitle()
+								
+							});
+							
+							
+							}
+						
+						}catch(Exception ex)
+						{
+							ex.printStackTrace();
+						}
+					
+				}
 				public void updateTableChangeCalendar() {
 
 					try{
@@ -415,6 +418,13 @@ public class Logic {
 				public void setCurrentEventId(String currentEventId) {
 					this.currentEventId = currentEventId;
 				}
-	
+				public CalendarInfo getThisWeeksInfo() {
+					return thisWeeksInfo;
+				}
+
+
+				public void setThisWeeksInfo(CalendarInfo thisWeeksInfo) {
+					this.thisWeeksInfo = thisWeeksInfo;
+				}
 }
 	

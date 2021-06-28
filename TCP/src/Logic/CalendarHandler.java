@@ -128,11 +128,9 @@ public class CalendarHandler {
 			}
 			
 			datehandler = sdf.format(cal.getTime());
-			System.out.println("DATEHANDLER før replace: " + datehandler);
 			int newMonth = cal.get(Calendar.MONTH);
 			newMonth ++;
 			datehandler = datehandler.replace("-MM-", "-" + newMonth + "-");
-			System.out.println("DATEHANDLER: " + datehandler);
 			
 			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 			if (dayOfWeek == 1) {

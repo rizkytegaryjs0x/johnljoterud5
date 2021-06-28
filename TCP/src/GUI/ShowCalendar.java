@@ -2,8 +2,11 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -17,10 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.UIManager;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import JsonClasses.CalendarInfo;
 import JsonClasses.UserEvent;
@@ -74,6 +81,18 @@ public class ShowCalendar extends JPanel {
 		tblCalendar.setFocusable(false);
 		tblCalendar.setRowSelectionAllowed(false);
 		stblCalendar = new JScrollPane(tblCalendar);
+		tblCalendar.addMouseListener(new MouseAdapter() {
+		       @Override
+		       public void mouseClicked(MouseEvent evt) {
+		          
+		           int row = tblCalendar.getSelectedRow();
+		           int col = tblCalendar.getSelectedColumn();
+
+		           tblCalendar.getModel().getValueAt(row, col);
+		           System.out.println("row: " + row + "col: "+col);
+				
+			}
+		});
 
 		// Set border
 		setBorder(BorderFactory.createTitledBorder("Calendar"));
@@ -110,8 +129,6 @@ public class ShowCalendar extends JPanel {
 		currentWeek = realWeek; // Match month and year
 		currentYear = realYear;
 
-		tblCalendar.getParent().setBackground(tblCalendar.getBackground()); // Set
-																			// background
 
 		// No resize/reorder
 		tblCalendar.getTableHeader().setResizingAllowed(false);
@@ -206,9 +223,9 @@ public class ShowCalendar extends JPanel {
 		btnChangeCalendar.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnShareCalendar.addActionListener(l);
-		btnPrev.addActionListener(new btnPrev_Action());
-		btnNext.addActionListener(new btnNext_Action());
-		cmbYear.addActionListener(new cmbYear_Action());
+		btnPrev.addActionListener(l);
+		btnNext.addActionListener(l);
+		cmbYear.addActionListener(l);
 
 	}
 	
@@ -310,27 +327,9 @@ public class ShowCalendar extends JPanel {
 				"Sat ", "Sun " };
 		dateArray = ch.YearAndWeekDates(week, year);
 		for (int i = 0; i < 7; i++) {
-			// System.out.println("i: " + i);
-			// if (temp != 8)
-			// cal.setWeekDate(year, week, temp);
-			// else{
-			// temp = 1;
-			// cal.setWeekDate(year, week, temp);
-			// }
-			//
-
-			
 
 			 tblCalendar.getColumnModel().getColumn(i).setHeaderValue(headers[i+1]);
-			
-
 			tblCalendar.setValueAt(dateArray.get(i), 0, i);
-
-			
-
-			// System.out.println("this is the current week: " + currentWeek +
-			// "\n +and the currentyear" +currentYear);
-
 		}
 
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
@@ -355,81 +354,46 @@ public class ShowCalendar extends JPanel {
 		}
 		
 		
-		
-		
 
-		// Apply renderers
-		 tblCalendar.setDefaultRenderer(tblCalendar.getColumnClass(0),
-		 new tblCalendarRenderer());
+				 tblCalendar.setDefaultRenderer(Object.class, new MultiLineCellRenderer()); 
 	}
 
-	private class tblCalendarRenderer extends DefaultTableCellRenderer {
-		public Component getTableCellRendererComponent(JTable table,
-				Object value, boolean selected, boolean focused, int row,
-				int column) {
-			super.getTableCellRendererComponent(table, value, selected,
-					focused, row, column);
-			if (column == 5 || column == 6) { // Week-end
-				setBackground(new Color(255, 220, 220));
-			} else { // Week
-				setBackground(new Color(220, 255, 220));
-			}
-			if(row == 0){
-				setBackground(new Color(100, 255, 210));
-			}
-//			if (value != null) {
-//				if (Integer.parseInt(value.toString()) == realDay
-//						&& currentWeek == realWeek && currentYear == realYear) { // Today
-//					setBackground(new Color(220, 220, 255));
-//				}
+//	private class btnPrev_Action implements ActionListener {
+//		public void actionPerformed(ActionEvent e) {
+//			if (currentWeek == 0) { // Back one year
+//				currentWeek = 52;
+//				currentYear -= 1;
+//			} else { // Back one month
+//				currentWeek -= 1;
 //			}
-			setBorder(null);
-			setForeground(Color.black);
-			
-			return this;
-		}
-	}
-
-
-
-
-	private class btnPrev_Action implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (currentWeek == 0) { // Back one year
-				currentWeek = 52;
-				currentYear -= 1;
-			} else { // Back one month
-				currentWeek -= 1;
-			}
-			refreshCalendar(currentWeek, currentYear);
-		}
-	}
-
-	private class btnNext_Action implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-
-			if (currentWeek == 52) { // Foward one year
-				currentWeek = 1;
-				currentYear += 1;
-			} else { // Foward one month
-				currentWeek += 1;
-
-			}
-			refreshCalendar(currentWeek, currentYear);
-			System.out.println(("current week: " + currentWeek
-					+ "\n current year: " + currentYear));
-		}
-	}
-
-	private class cmbYear_Action implements ActionListener {
-		public void actionPerformed(ActionEvent e) {
-			if (cmbYear.getSelectedItem() != null) {
-				String b = cmbYear.getSelectedItem().toString();
-				currentYear = Integer.parseInt(b);
-				refreshCalendar(currentWeek, currentYear);
-			}
-		}
-	}
+//			refreshCalendar(currentWeek, currentYear);
+//		}
+//	}
+//
+//	private class btnNext_Action implements ActionListener {
+//		public void actionPerformed(ActionEvent e) {
+//
+//			if (currentWeek == 52) { // Foward one year
+//				currentWeek = 1;
+//				currentYear += 1;
+//			} else { // Foward one month
+//				currentWeek += 1;
+//
+//			}
+//			refreshCalendar(currentWeek, currentYear);
+//			
+//		}
+//	}
+//
+//	private class cmbYear_Action implements ActionListener {
+//		public void actionPerformed(ActionEvent e) {
+//			if (cmbYear.getSelectedItem() != null) {
+//				String b = cmbYear.getSelectedItem().toString();
+//				currentYear = Integer.parseInt(b);
+//				refreshCalendar(currentWeek, currentYear);
+//			}
+//		}cfrcfr
+//	}
 	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
 
 		 if(!dayEvents.isEmpty()){
@@ -442,9 +406,9 @@ public class ShowCalendar extends JPanel {
 
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
 				 cm.setText(
-				 		"<html>" + de.getText() + "<br>From: " 
+				 		de.getText()+ "\n" 
 						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
-						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "</html>");
+						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()));
 
 				 alcm.add(cm);
 
@@ -462,7 +426,7 @@ public class ShowCalendar extends JPanel {
 				 }
 				 else{
 						
-						tblCalendar.setValueAt("<html>" + cmTemp.getText() + "<br></html>", cmTemp.getRowNumber(), dayOfWeek);
+						tblCalendar.setValueAt( cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }
 			 
@@ -485,6 +449,14 @@ public class ShowCalendar extends JPanel {
 		this.currentWeek = currentWeek;
 	}
 
+	public JComboBox getCmbYear() {
+		return cmbYear;
+	}
+
+	public void setCmbYear(JComboBox cmbYear) {
+		this.cmbYear = cmbYear;
+	}
+
 	public CalendarHandler getCh() {
 		return ch;
 	}
@@ -492,6 +464,56 @@ public class ShowCalendar extends JPanel {
 	public void setCh(CalendarHandler ch) {
 		this.ch = ch;
 	}
+	  
+	class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {  
+	  
+	    /**
+		 * 
+		 */
+		private static final long serialVersionUID = 1L;
+
+		public MultiLineCellRenderer() {  
+	        setLineWrap(true);  
+	        setWrapStyleWord(true);  
+	        setOpaque(true);  
+	        setEditable(false); //this line doesn't seem to be doing anything  
+	    }  
+	  
+	    public Component getTableCellRendererComponent(JTable table, Object value,  
+	        boolean isSelected, boolean hasFocus, int row, int column) {
+	    	
+	    	if (column == 5 || column == 6) { // Week-end
+				table.setBackground(new Color(255, 220, 220));
+			} else { // Week
+				table.setBackground(new Color(220, 255, 220));
+			}
+			if(row == 0){
+				table.setBackground(new Color(100, 255, 210));
+			}
+	        if (isSelected) {  
+	            setForeground(table.getSelectionForeground());  
+	            setBackground(table.getSelectionBackground());  
+	        }  
+	        else {  
+	            setForeground(table.getForeground());  
+	            setBackground(table.getBackground());  
+	        }  
+	        setFont(table.getFont());  
+	        if (hasFocus) {  
+	            setBorder(UIManager.getBorder("Table.focusCellHighlightBorder"));  
+	            if (table.isCellEditable(row, column)) {  
+	                setForeground(UIManager.getColor("Table.focusCellForeground"));  
+	                setBackground(UIManager.getColor("Table.focusCellBackground"));  
+	            }  
+	        }  
+	        else {  
+	            setBorder(new EmptyBorder(1, 2, 1, 2));  
+	        }  
+	        setText((value == null) ? "" : value.toString());  
+	        
+	        return this;  
+	    }  
+	}  
 	
 	
 }

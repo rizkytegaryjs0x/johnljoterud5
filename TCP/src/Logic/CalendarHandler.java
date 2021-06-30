@@ -25,9 +25,7 @@ public class CalendarHandler {
 			for(CalendarInfo tempcal : calendar){
 
 				for (int i = 0 ; i < tempcal.getCalendars().size(); i++){
-					
-
-					
+							
 					if(tempcal.getCalendars().get(i).getStart().contains(tempdate + " ")){
 
 						weekEvents.getCalendars().add(tempcal.getCalendars().get(i));

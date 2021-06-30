@@ -408,7 +408,7 @@ public class ShowCalendar extends JPanel {
 				 cm.setText(
 				 		de.getText()+ "\n" 
 						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
-						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()));
+						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "\n");
 
 				 alcm.add(cm);
 
@@ -420,12 +420,14 @@ public class ShowCalendar extends JPanel {
 			 for (CellModel cmTemp : alcm){
 				 
 				 Object value = tblCalendar.getValueAt(cmTemp.getRowNumber(),dayOfWeek);
+
 				 if(value != null){
 						newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
 					 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
+					 	System.out.println("Value was not null");
 				 }
 				 else{
-						
+					 	System.out.println("Value was null");
 						tblCalendar.setValueAt( cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }

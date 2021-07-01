@@ -398,10 +398,11 @@ public class ShowCalendar extends JPanel {
 
 		 if(!dayEvents.isEmpty()){
 			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
-			 CellModel cm = new CellModel();
+
 			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
 			 
 			 for(UserEvent de : dayEvents){
+				 CellModel cm = new CellModel();
 				 String hours = de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().indexOf(":"));
 
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
@@ -425,9 +426,11 @@ public class ShowCalendar extends JPanel {
 						newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
 					 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
 					 	System.out.println("Value was not null");
+					 	System.out.println("Hours: " + cmTemp.getRowNumber());
 				 }
 				 else{
 					 	System.out.println("Value was null");
+					 	System.out.println("Hours: " + cmTemp.getRowNumber());
 						tblCalendar.setValueAt( cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }

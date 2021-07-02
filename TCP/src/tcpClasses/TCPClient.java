@@ -11,10 +11,11 @@ import com.google.gson.GsonBuilder;
 
 public class TCPClient {
 
-	public String TalkToServer (String StringFromClient) throws UnknownHostException, IOException{
+	public String TalkToServer (String StringFromClient) throws UnknownHostException, IOException, Exception{
+		EncryptionAES cryp = new EncryptionAES();
 		String modifiedSentence;
-		Gson gson = new GsonBuilder().create();
-		String gsonString = StringFromClient;
+
+		String gsonString = cryp.encrypt(StringFromClient);
 
 		Socket clientSocket = new Socket("localhost", 8888);
 		DataOutputStream outToServer = new DataOutputStream(
@@ -29,7 +30,7 @@ public class TCPClient {
 		outToServer.flush();
 		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
 				clientSocket.getInputStream()));
-		modifiedSentence = inFromServer.readLine();
+		modifiedSentence = cryp.decrypt(inFromServer.readLine());
 		System.out.println("FROM SERVER: " + modifiedSentence);
 		clientSocket.close();
 		return modifiedSentence;

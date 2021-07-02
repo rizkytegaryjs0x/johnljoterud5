@@ -156,5 +156,41 @@ public class CalendarHandler {
 		return column;
 	
 	 }
+	 public String[] getCellDate(int column, int row, int year, int week){
+		 
+		 System.out.println("column: " + column);
+		 System.out.println("row: " + row);
+		 System.out.println("year: " + year);
+		 System.out.println("week: " + week);
+		 
+		 Calendar cal = Calendar.getInstance();
+		 cal.set(Calendar.YEAR, year);
+		 cal.set(Calendar.WEEK_OF_YEAR, week);
+			
+		 if (column == 0) {
+				cal.set(Calendar.DAY_OF_WEEK, 2);
+			}
+			else if (column == 1){
+				cal.set(Calendar.DAY_OF_WEEK, 3);
+			}
+			else if (column == 2){
+				cal.set(Calendar.DAY_OF_WEEK, 4);
+			}
+			else if (column == 3){
+				cal.set(Calendar.DAY_OF_WEEK, 5);
+			}
+			else if (column == 4){
+				cal.set(Calendar.DAY_OF_WEEK, 6);
+			}
+			else if (column == 5){
+				cal.set(Calendar.DAY_OF_WEEK, 7);
+			}
+			else if (column == 6){
+				cal.set(Calendar.DAY_OF_WEEK, 1);
+			}	
+		 System.out.println("day of week selected: " + String.valueOf(cal.get(Calendar.DAY_OF_WEEK)));
+		 String[] dateReturned = {String.valueOf(cal.get(Calendar.YEAR)), String.valueOf(cal.get(Calendar.MONTH)+1),String.valueOf(cal.get(Calendar.DAY_OF_MONTH)), String.valueOf(row+7)};
+		 return dateReturned;
+	 }
 
 }

@@ -1,12 +1,13 @@
 package Logic;
 
+import tcpClasses.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
-import tcpClasses.TCPClient;
 import GUI.Container;
 import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
@@ -80,6 +81,17 @@ public class Logic {
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnAddEvent()) {
 					container.show(Container.ADDEVENT);
+					String [] dateInfo = container.getShowCalendar().getCh().getCellDate(	container.getShowCalendar().getSelectedColumn(), 
+																							container.getShowCalendar().getSelectedRow(),
+																							container.getShowCalendar().getCurrentYear(),
+																							container.getShowCalendar().getCurrentWeek());
+					container.getAddEvent().getTextFieldStartYear().setText(dateInfo[0]);
+					container.getAddEvent().getTextFieldStartMonth().setText(dateInfo[1]);
+					container.getAddEvent().getTextFieldStartDateDay().setText(dateInfo[2]);
+					container.getAddEvent().getTextFieldStartHour().setText(dateInfo[3]);
+					container.getAddEvent().getTextFieldEndYear().setText(dateInfo[0]);
+					container.getAddEvent().getTextFieldEndMonth().setText(dateInfo[1]);
+					container.getAddEvent().getTextFieldEndDateDay().setText(dateInfo[2]);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnAddNote()) {
 					container.show(Container.ADDNOTE);
@@ -198,6 +210,9 @@ public class Logic {
 								e1.printStackTrace();
 							} catch (IOException e1) {
 								e1.printStackTrace();
+							} catch (Exception e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
 							}
 							
 							
@@ -312,6 +327,9 @@ public class Logic {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}

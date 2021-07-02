@@ -54,6 +54,8 @@ public class ShowCalendar extends JPanel {
 	private JButton btnAddCalendar;
 	private JButton btnAddEvent;
 	private JButton btnAddNote;
+	private int selectedRow;
+	private int selectedColumn;
 
 	private CalendarHandler ch = new CalendarHandler();
 	GregorianCalendar cal = new GregorianCalendar();
@@ -85,12 +87,11 @@ public class ShowCalendar extends JPanel {
 		       @Override
 		       public void mouseClicked(MouseEvent evt) {
 		          
-		           int row = tblCalendar.getSelectedRow();
-		           int col = tblCalendar.getSelectedColumn();
+		           selectedRow = tblCalendar.getSelectedRow();
+		           selectedColumn = tblCalendar.getSelectedColumn();
 
-		           tblCalendar.getModel().getValueAt(row, col);
-		           System.out.println("row: " + row + "col: "+col);
-				
+		           tblCalendar.getModel().getValueAt(selectedRow, selectedColumn);
+		
 			}
 		});
 
@@ -425,12 +426,8 @@ public class ShowCalendar extends JPanel {
 				 if(value != null){
 						newCell = tblCalendar.getValueAt(cmTemp.getRowNumber(), dayOfWeek).toString().concat(cmTemp.getText());
 					 	tblCalendar.setValueAt(newCell, cmTemp.getRowNumber(), dayOfWeek);
-					 	System.out.println("Value was not null");
-					 	System.out.println("Hours: " + cmTemp.getRowNumber());
 				 }
 				 else{
-					 	System.out.println("Value was null");
-					 	System.out.println("Hours: " + cmTemp.getRowNumber());
 						tblCalendar.setValueAt( cmTemp.getText(), cmTemp.getRowNumber(), dayOfWeek);
 				 }
 			 }
@@ -518,6 +515,22 @@ public class ShowCalendar extends JPanel {
 	        
 	        return this;  
 	    }  
+	}
+
+	public int getSelectedRow() {
+		return selectedRow;
+	}
+
+	public void setSelectedRow(int selectedRow) {
+		this.selectedRow = selectedRow;
+	}
+
+	public int getSelectedColumn() {
+		return selectedColumn;
+	}
+
+	public void setSelectedColumn(int selectedColumn) {
+		this.selectedColumn = selectedColumn;
 	}  
 	
 	

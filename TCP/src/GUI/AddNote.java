@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class AddNote extends JPanel { 
 
 private JButton btnAddNote;
-private JTextField textFieldText;
+private JTextField textFieldNote;
 private JLabel lblNote;
 private JLabel lblAddUser;
 private JButton btnBack;
@@ -33,18 +33,19 @@ private DefaultTableModel model;
 private JScrollPane scrollPane;
 
 private int row;
-private JTextField textField;
+private JTextField txtEventID;
 
 public AddNote(){
 	
-	setPreferredSize(new Dimension(1366, 768));
+	
 	setSize(new Dimension(1366, 768));
 	setLayout(null);
 	
-	String[] columnNames = { "EventID", "Name"};
+	String[] columnNames = { "EventID", "Name", "Type"};
 	
 	table = new JTable();
 	model = (DefaultTableModel)table.getModel();
+	
 	model.setColumnIdentifiers(columnNames);
 	table.setSurrendersFocusOnKeystroke(true);
 	table.setPreferredScrollableViewportSize(new Dimension(500, 100));
@@ -58,7 +59,9 @@ public AddNote(){
 			row = table.getSelectedRow();
 			if(row != -1){
 			
-
+			String eventID = table.getValueAt(row, 0).toString();
+			
+			txtEventID.setText(eventID);
 
 			}
 		}
@@ -72,7 +75,7 @@ public AddNote(){
 			BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 					255), new Color(0, 0, 205), new Color(255, 255, 255)),
 			null));
-	scrollPane.setBounds(512, 138, 357, 221);
+	scrollPane.setBounds(512, 138, 454, 221);
 
 	// Add the scroll pane to this panel.
 	add(scrollPane);
@@ -89,10 +92,10 @@ public AddNote(){
 	lblNote.setBounds(403, 458, 105, 31);
 	add(lblNote);
 	
-	textFieldText = new JTextField();
-	textFieldText.setBounds(520, 458, 349, 122);
-	add(textFieldText);
-	textFieldText.setColumns(10);
+	textFieldNote = new JTextField();
+	textFieldNote.setBounds(520, 458, 349, 122);
+	add(textFieldNote);
+	textFieldNote.setColumns(10);
 	
 	btnAddNote = new JButton("Add note");
 	btnAddNote.setContentAreaFilled(false);
@@ -112,10 +115,10 @@ public AddNote(){
 	btnBack.setBounds(591, 675, 194, 50);
 	add(btnBack);
 	
-	textField = new JTextField();
-	textField.setColumns(10);
-	textField.setBounds(522, 382, 136, 50);
-	add(textField);
+	txtEventID = new JTextField();
+	txtEventID.setColumns(10);
+	txtEventID.setBounds(522, 382, 136, 50);
+	add(txtEventID);
 	
 	JLabel lblChoose = new JLabel("Click on specified event");
 	lblChoose.setForeground(Color.BLACK);
@@ -131,17 +134,34 @@ public AddNote(){
 	}
 
 public void addActionListener(ActionListener l) {
-	textFieldText.addActionListener(l);
 	btnAddNote.addActionListener(l);
 	btnBack.addActionListener(l);
 	
 }
+
+
+
+
+public JTextField getTextFieldNote() {
+	return textFieldNote;
+}
+
+public void setTextFieldNote(JTextField textFieldNote) {
+	this.textFieldNote = textFieldNote;
+}
+
+public JTextField getTxtEventID() {
+	return txtEventID;
+}
+
+public void setTxtEventID(JTextField txtEventID) {
+	this.txtEventID = txtEventID;
+}
+
 public JButton getBtnAddNote() {
 	return btnAddNote;
 }
-public JTextField getTextFieldText() {
-	return textFieldText;
-}
+
 public JButton getBtnBack() {
 	return btnBack;
 }

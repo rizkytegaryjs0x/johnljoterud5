@@ -6,15 +6,27 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
+<<<<<<< HEAD
+=======
+import tcpClasses.TCPClient;
+import GUI.AddNote;
+>>>>>>> 9148818bc2969524149bdb67c64a9f2274244045
 import GUI.Container;
 import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
+import JsonClasses.ClientLogout;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
+import JsonClasses.CreateNote;
 import JsonClasses.GetDailyUpdate;
+import JsonClasses.GetUsers;
+import JsonClasses.RetrieveUserCalendar;
+import JsonClasses.ShareCalendars;
 import JsonClasses.UserEvent;
+import JsonClasses.UserInfo;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -37,6 +49,11 @@ public class Logic {
 		CreateCalendar createCalendar = new CreateCalendar();
 		CreateEvent createEvent = new CreateEvent();
 		GetDailyUpdate getDailyUpdate = new GetDailyUpdate();
+		CreateNote createNote = new CreateNote();
+		GetUsers getUsers = new GetUsers();
+		ShareCalendars shareCalendar = new ShareCalendars();
+		
+		
 		CalendarHandler cHandler;
 		private String currentCalendar;
 		private String currentEventId;
@@ -80,6 +97,7 @@ public class Logic {
 					container.show(Container.CREATECALENDAR);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnAddEvent()) {
+					
 					container.show(Container.ADDEVENT);
 					String [] dateInfo = container.getShowCalendar().getCh().getCellDate(	container.getShowCalendar().getSelectedColumn(), 
 																							container.getShowCalendar().getSelectedRow(),
@@ -94,6 +112,7 @@ public class Logic {
 					container.getAddEvent().getTextFieldEndDateDay().setText(dateInfo[2]);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnAddNote()) {
+					updateTableAddNote();
 					container.show(Container.ADDNOTE);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnChangeCalendar()) {
@@ -104,6 +123,8 @@ public class Logic {
 					container.show(Container.LOGINPANEL);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnShareCalendar()) {
+					updateCalendarTableShareCalendar();
+					updateUserTableShareCalendar();
 					container.show(Container.SHARECALENDAR);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnNext()) {
@@ -119,6 +140,7 @@ public class Logic {
 							}
 							container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
 							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear));
+							updateTableAddNote();
 					
 					
 					
@@ -136,7 +158,9 @@ public class Logic {
 					}
 					container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
 					
-					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
+					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear));
+					
+					updateTableAddNote();
 				if(e.getSource() == container.getShowCalendar().getCmbYear()) {
 					
 					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
@@ -255,6 +279,25 @@ public class Logic {
 					}
 					if (e.getSource() == container.getAddNote().getBtnAddNote()) {
 						
+						String eventID = container.getAddNote().getTxtEventID().getText();
+						String note = container.getAddNote().getTextFieldNote().getText();
+						
+						createNote.setCreatedBy(getCurrentUser());
+						createNote.setEventID(eventID);
+						createNote.setText(note);
+						
+						stringSendToServer = gson.toJson(createNote);
+						
+						try {
+							answer = tcp.TalkToServer(stringSendToServer);
+
+							
+							container.show(Container.SHOWCALENDAR);
+						} catch (UnknownHostException e1) {
+							e1.printStackTrace();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
 					}
 					}
 
@@ -294,7 +337,8 @@ public class Logic {
 							clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
 							setCurrentUser(clientLogin.getEmail());
 							
-						setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
+					
+							
 							
 						stringSendToServer = gson.toJson(getDailyUpdate);
 							answer = tcp.TalkToServer(stringSendToServer);
@@ -317,8 +361,9 @@ public class Logic {
 							
 							container.getShowCalendar().getCh().setCalendar(clientLogin.getCalendars());
 							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
-							System.out.println("cweek: " + container.getShowCalendar().getCurrentWeek() + " cyear: " +  container.getShowCalendar().getCurrentYear());
 							
+							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
+							updateTableAddNote();
 							
 							updateTableChangeCalendar();
 							container.show(Container.CHANGECALENDAR);
@@ -346,15 +391,39 @@ public class Logic {
 						container.show(Container.SHOWCALENDAR);
 					}
 					if (e.getSource() == container.getShareCalendar().getBtnShare()) {
-					//mangler
+					
+						String calendarID = container.getShareCalendar().getTextFieldChooseCalendar().getText();						
+						String shareEmail = container.getShareCalendar().getTextFieldChooseUser().getText();
+						
+						ArrayList<String>sharedUsers = new ArrayList<String>();
+						
+						if(calendarID != "" || shareEmail != ""){
+							
+							sharedUsers.add(shareEmail);
+						}else{
+							//feilmelding
+						}
+						
+						shareCalendar.setCalendarID(calendarID);
+						shareCalendar.setEmail(getCurrentUser());
+						shareCalendar.setShareEmail(sharedUsers);
+						
+						stringSendToServer = gson.toJson(shareCalendar);
+						
+							try {
+								answer = tcp.TalkToServer(stringSendToServer);
+							} catch (UnknownHostException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+						container.show(Container.SHOWCALENDAR);
+						
 					}
-					if (e.getSource() == container.getShareCalendar().getBtnChooseCalendar()) {
-					//mangler	
-					}
-					if (e.getSource() == container.getShareCalendar().getBtnChooseUser()) {
-					//mangler
-					}
-					}
+
+					}ddsgasdg
 
 				}
 
@@ -367,8 +436,11 @@ public class Logic {
 						
 						for(UserEvent temp : thisWeeksInfo.getCalendars()){
 							
-							container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
-								temp.getEventid(),temp.getTitle()
+							System.out.println("eventid: " + temp.getEventid() + "title: " +temp.getEventid());
+							
+							container.getAddNote().getModel().insertRow(container.getAddNote().getModel().getRowCount(), new Object[]{
+								temp.getEventid(),temp.getText(),temp.getType()
+								
 								
 							});
 							
@@ -388,9 +460,8 @@ public class Logic {
 
 					
 					for(CalendarInfo c  : clientLogin.getCalendars()){
-						System.out.println("name: " + c.getCalenderName());
-						System.out.println("id: " + c.getCalendarId());
-					
+						
+					System.out.println("somethingsomething: " + c.getCalenderName());
 
 						
 						container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
@@ -406,7 +477,50 @@ public class Logic {
 						ex.printStackTrace();
 					}
 				}
-
+			
+				public void updateUserTableShareCalendar(){
+					try{
+						GetUsers ue = new GetUsers();
+						container.getShareCalendar().getModelUser().getDataVector().removeAllElements();
+						stringSendToServer = gson.toJson(ue);
+						answer = tcp.TalkToServer(stringSendToServer);
+						GetUsers gu = (GetUsers)gson.fromJson(answer, GetUsers.class);
+						for(UserInfo user  : gu.getUserArray()){
+												
+							container.getShareCalendar().getModelUser().insertRow(container.getShareCalendar().getModelUser().getRowCount(), new Object[]{
+								user.getEmail(), user.getActive()
+								
+							});
+						}						
+						}catch(Exception ex)
+						{
+							ex.printStackTrace();
+						}
+					
+				}
+				public void updateCalendarTableShareCalendar(){
+					try{
+					RetrieveUserCalendar ru = new RetrieveUserCalendar();
+					ru.setEmail(getCurrentUser());
+					container.getShareCalendar().getModelCalendar().getDataVector().removeAllElements();
+					stringSendToServer = gson.toJson(ru);
+					answer =  tcp.TalkToServer(stringSendToServer);
+					
+					RetrieveUserCalendar r = (RetrieveUserCalendar)gson.fromJson(answer, RetrieveUserCalendar.class);
+					for(CalendarInfo ci  : r.getUserCalendars()){
+						
+						container.getShareCalendar().getModelCalendar().insertRow(container.getShareCalendar().getModelCalendar().getRowCount(), new Object[]{
+							ci.getCalendarId(),ci.getCalenderName()
+							
+						});
+					}						
+					}catch(Exception ex)
+					{
+						ex.printStackTrace();
+					
+				
+			}
+				}
 
 				public String getCurrentUser() {
 					return currentUser;

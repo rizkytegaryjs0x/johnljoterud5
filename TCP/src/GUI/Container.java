@@ -21,7 +21,7 @@ public class Container extends JFrame {
 	private final AddNote addNote = new AddNote();
 	private final ChangeCalendar changeCalendar = new ChangeCalendar();
 	private final CreateCalendar createCalendar = new CreateCalendar();
-	private final ShareCalendar shareCalendar = new ShareCalendar();
+	private final ShareCalendarGUI shareCalendar = new ShareCalendarGUI();
 	CardLayout c;
 	
 
@@ -89,7 +89,7 @@ public class Container extends JFrame {
 	public CreateCalendar getCreateCalendar() {
 		return createCalendar;
 	}
-	public ShareCalendar getShareCalendar() {
+	public ShareCalendarGUI getShareCalendar() {
 		return shareCalendar;
 	}
 	public void show(String card) {

@@ -11,9 +11,7 @@ import JsonClasses.CalendarInfo;
 public class CalendarHandler {
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
 
-	public CalendarHandler() {
-		
-	}
+
 	public CalendarInfo getWeekEvents(int weeknumber, int year){
 		
 		CalendarInfo weekEvents = new CalendarInfo();

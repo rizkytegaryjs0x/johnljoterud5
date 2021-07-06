@@ -18,51 +18,64 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class ShareCalendar extends JPanel {
+import java.awt.event.ActionEvent;
+
+import javax.swing.JTextField;
+
+public class ShareCalendarGUI extends JPanel {
 	private JTable tableCalendar;
 	private JTable tableUser;
 	private DefaultTableModel modelCalendar;
 	private DefaultTableModel modelUser;
 	private JScrollPane scrollPaneCalendar;
 	private JScrollPane scrollPaneUser;
-	private JButton btnChooseCalendar;
-	private JButton btnChooseUser;
 	private JButton btnShare;
 	private JButton btnBack;
 	private JLabel lblShareCalendar;
+	private JLabel lblChooseACalendar;
+	private JLabel lblChooseAUser;
+	private JTextField textFieldChooseCalendar;
+	private JTextField textFieldChooseUser;
+	private int row;
 
 	/**
 	 * Create the panel.
 	 */
-	public ShareCalendar() {
+	public ShareCalendarGUI() {
 
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
+				String[] columnNames = { "Email", "Active"};
 		
-
-		
-
-		
-		
-				String[] columnNames = { "ID", "Name"};
-		
-				String[] columnNames2 = { "CalendarID", "Name", "Active", "CreatedBy",
-						"PrivatePublic","IsCBS" };
+				String[] columnNames2 = { "CalendarID", "Name"};
 			
 				
 				
 				tableUser = new JTable();
 				modelUser = (DefaultTableModel) tableUser.getModel();
-				modelUser.setColumnIdentifiers(columnNames2);
+				modelUser.setColumnIdentifiers(columnNames);
 				tableUser.setSurrendersFocusOnKeystroke(true);
 				tableUser.setPreferredScrollableViewportSize(new Dimension(500, 100));
 				tableUser.setFillsViewportHeight(true);
 				tableUser.setRowSelectionAllowed(true);
+				tableUser.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						
+						row = tableUser.getSelectedRow();
+						if(row != -1){
+						
+						String email = tableUser.getValueAt(row, 0).toString();
+						
+						textFieldChooseUser.setText(email);
 
+						}
+					}
+				});
 
 
 				// Create the scroll pane and add the table to it.
-				scrollPaneUser = new JScrollPane(tableCalendar);
+				scrollPaneUser = new JScrollPane(tableUser);
 				scrollPaneUser.setBorder(new CompoundBorder(new BevelBorder(
 						BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 								255), new Color(0, 0, 205), new Color(255, 255, 255)),
@@ -84,6 +97,20 @@ public class ShareCalendar extends JPanel {
 				tableCalendar.setPreferredScrollableViewportSize(new Dimension(500, 100));
 				tableCalendar.setFillsViewportHeight(true);
 				tableCalendar.setRowSelectionAllowed(true);
+				tableCalendar.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent arg0) {
+						
+						row = tableCalendar.getSelectedRow();
+						if(row != -1){
+						
+						String calendarID = tableCalendar.getValueAt(row, 0).toString();
+						
+						textFieldChooseCalendar.setText(calendarID);
+
+						}
+					}
+				});
 
 
 
@@ -102,28 +129,12 @@ public class ShareCalendar extends JPanel {
 				// Add the scroll pane to this panel.
 				add(scrollPaneCalendar);
 		
-		btnChooseCalendar = new JButton("Choose Calendar");
-		btnChooseCalendar.setForeground(new Color (0, 0, 0));
-		btnChooseCalendar.setFont(new Font("Arial", Font.BOLD, 30));
-		btnChooseCalendar.setContentAreaFilled(false);
-		btnChooseCalendar.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnChooseCalendar.setBounds(249, 600, 266, 50);
-		add(btnChooseCalendar);
-		
-		btnChooseUser = new JButton("Choose User");
-		btnChooseUser.setForeground(new Color (0, 0, 0));
-		btnChooseUser.setFont(new Font("Arial", Font.BOLD, 30));
-		btnChooseUser.setContentAreaFilled(false);
-		btnChooseUser.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnChooseUser.setBounds(876, 600, 266, 50);
-		add(btnChooseUser);
-		
 		btnShare = new JButton("Share");
 		btnShare.setForeground(new Color (0, 0, 0));
 		btnShare.setFont(new Font("Arial", Font.BOLD, 30));
 		btnShare.setContentAreaFilled(false);
 		btnShare.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnShare.setBounds(598, 600, 194, 50);
+		btnShare.setBounds(811, 603, 194, 50);
 		add(btnShare);
 		
 		btnBack = new JButton("Back");
@@ -131,7 +142,7 @@ public class ShareCalendar extends JPanel {
 		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
 		btnBack.setContentAreaFilled(false);
 		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnBack.setBounds(598, 673, 194, 50);
+		btnBack.setBounds(811, 666, 194, 50);
 		add(btnBack);
 		
 		lblShareCalendar = new JLabel("Share Calendar");
@@ -140,20 +151,68 @@ public class ShareCalendar extends JPanel {
 		lblShareCalendar.setBounds(393, 83, 667, 90);
 		add(lblShareCalendar);
 		
+		lblChooseACalendar = new JLabel("Choose a calendar:");
+		lblChooseACalendar.setForeground(Color.BLACK);
+		lblChooseACalendar.setFont(new Font("Arial", Font.BOLD, 25));
+		lblChooseACalendar.setBounds(294, 593, 257, 60);
+		add(lblChooseACalendar);
+		
+		lblChooseAUser = new JLabel("Choose a user to share with:");
+		lblChooseAUser.setForeground(Color.BLACK);
+		lblChooseAUser.setFont(new Font("Arial", Font.BOLD, 25));
+		lblChooseAUser.setBounds(186, 656, 349, 60);
+		add(lblChooseAUser);
+		
+		textFieldChooseCalendar = new JTextField();
+		textFieldChooseCalendar.setBounds(563, 608, 210, 39);
+		add(textFieldChooseCalendar);
+		textFieldChooseCalendar.setColumns(10);
+		
+		textFieldChooseUser = new JTextField();
+		textFieldChooseUser.setColumns(10);
+		textFieldChooseUser.setBounds(563, 661, 210, 39);
+		add(textFieldChooseUser);
+		
 		
 	}
 	public void addActionListener(ActionListener l) {
-		btnChooseCalendar.addActionListener(l);
+	
 		btnShare.addActionListener(l);
-		btnChooseUser.addActionListener(l);
 		btnBack.addActionListener(l);
 	}
-	public JButton getBtnChooseCalendar() {
-		return btnChooseCalendar;
+	
+	
+	public JTextField getTextFieldChooseCalendar() {
+		return textFieldChooseCalendar;
 	}
-	public JButton getBtnChooseUser() {
-		return btnChooseUser;
+	public JTextField getTextFieldChooseUser() {
+		return textFieldChooseUser;
 	}
+	public JTable getTableCalendar() {
+		return tableCalendar;
+	}
+	public void setTableCalendar(JTable tableCalendar) {
+		this.tableCalendar = tableCalendar;
+	}
+	public JTable getTableUser() {
+		return tableUser;
+	}
+	public void setTableUser(JTable tableUser) {
+		this.tableUser = tableUser;
+	}
+	public DefaultTableModel getModelCalendar() {
+		return modelCalendar;
+	}
+	public void setModelCalendar(DefaultTableModel modelCalendar) {
+		this.modelCalendar = modelCalendar;
+	}
+	public DefaultTableModel getModelUser() {
+		return modelUser;
+	}
+	public void setModelUser(DefaultTableModel modelUser) {
+		this.modelUser = modelUser;
+	}
+
 	public JButton getBtnShare() {
 		return btnShare;
 	}

@@ -1,4 +1,3 @@
-/GUI
-/Logic
-/JsonClasses
-/tcpClasses
+/Logic/
+/tcpClasses/
+/GUI/

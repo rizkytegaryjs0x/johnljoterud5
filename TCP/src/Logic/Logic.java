@@ -9,11 +9,11 @@ import java.net.UnknownHostException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-<<<<<<< HEAD
-=======
+
+
+
 import tcpClasses.TCPClient;
 import GUI.AddNote;
->>>>>>> 9148818bc2969524149bdb67c64a9f2274244045
 import GUI.Container;
 import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
@@ -297,6 +297,9 @@ public class Logic {
 							e1.printStackTrace();
 						} catch (IOException e1) {
 							e1.printStackTrace();
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 					}
 					}
@@ -416,6 +419,9 @@ public class Logic {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							} catch (Exception e1) {
 								// TODO Auto-generated catch block
 								e1.printStackTrace();
 							}

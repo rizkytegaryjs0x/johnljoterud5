@@ -337,7 +337,12 @@ public class Logic {
 						try {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
-							clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+							ClientLogin cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+							System.out.println(cl.getEmail());
+							System.out.println(clientLogin.getRole());
+							System.out.println(clientLogin.getUserID());
+							System.out.println(clientLogin.getCalendars());
+							
 							setCurrentUser(clientLogin.getEmail());
 							
 					

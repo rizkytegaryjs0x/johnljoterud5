@@ -69,6 +69,7 @@ public class TCPClient {
 		modifiedSentence = inFromServer.readLine();
 		System.out.println(modifiedSentence);
 		System.out.println("FROM SERVER: " + modifiedSentence);
+		ny = modifiedSentence;
 		clientSocket.close();
 	
 	return ny;

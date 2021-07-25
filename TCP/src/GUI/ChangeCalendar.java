@@ -27,7 +27,7 @@ public class ChangeCalendar extends JPanel {
 	private JButton btnBack;
 	private JLabel lblChooseCalendar;
 	private int row;
-	private String name;
+	private String calId;
 
 	public ChangeCalendar() {
 
@@ -49,8 +49,8 @@ public class ChangeCalendar extends JPanel {
 				
 				row = table.getSelectedRow();
 				if(row != -1){
-				name = table.getValueAt(row, 0).toString();
-				setName(name);
+				calId = table.getValueAt(row, 0).toString();
+				setCalId(calId);
 				
 
 				}
@@ -100,14 +100,21 @@ public class ChangeCalendar extends JPanel {
 	}
 
 
-	public String getName() {
-		return name;
+
+
+
+	public String getCalId() {
+		return calId;
 	}
 
 
-	public void setName(String name) {
-		this.name = name;
+
+	public void setCalId(String calId) {
+		this.calId = calId;
 	}
+
+
+
 
 
 	public JTable getTable() {

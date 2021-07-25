@@ -55,7 +55,7 @@ public class Logic {
 		
 		
 		CalendarHandler cHandler;
-		private String currentCalendar;
+		private int currentCalendar;
 		private String currentEventId;
 		private String currentUser;
 		private String answer;
@@ -138,8 +138,8 @@ public class Logic {
 								container.getShowCalendar().setCurrentWeek(currentWeek +=1);
 
 							}
-							container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
-							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear));
+							container.getShowCalendar().refreshCalendar(currentWeek, currentYear, getCurrentCalendar());
+							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear, getCurrentCalendar()));
 							updateTableAddNote();
 					
 					
@@ -156,9 +156,9 @@ public class Logic {
 					} else { // Back one month
 						container.getShowCalendar().setCurrentWeek(currentWeek -=1);
 					}
-					container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
+					container.getShowCalendar().refreshCalendar(currentWeek, currentYear,getCurrentCalendar());
 					
-					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear));
+					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear,getCurrentCalendar()));
 					
 					updateTableAddNote();
 				if(e.getSource() == container.getShowCalendar().getCmbYear()) {
@@ -166,7 +166,7 @@ public class Logic {
 					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
 						String b = container.getShowCalendar().getCmbYear().getSelectedItem().toString();
 						container.getShowCalendar().setCurrentYear(Integer.parseInt(b));
-						container.getShowCalendar().refreshCalendar(currentWeek, currentYear);
+						container.getShowCalendar().refreshCalendar(currentWeek, currentYear,getCurrentCalendar());
 					}
 				}
 				}
@@ -257,7 +257,8 @@ public class Logic {
 						}
 						if (e.getSource() == container.getAddEvent().getBtnSubmit()) {
 						
-							createEvent.setCalendarID(getCurrentCalendar());
+							
+							createEvent.setCalendarID(String.valueOf(getCurrentCalendar()));
 							createEvent.setCreatedby(getCurrentUser());
 							createEvent.setLocation(container.getAddEvent().getTextField_Location().getText());
 							createEvent.setStart(container.getAddEvent().startDateTimeToString());
@@ -312,11 +313,9 @@ public class Logic {
 					}
 					if (e.getSource() == container.getChangeCalendar().getBtnChoose());
 					
-						setCurrentCalendar(container.getChangeCalendar().getName());
+						setCurrentCalendar(Integer.valueOf(container.getChangeCalendar().getCalId()));
 						
-							System.out.println(getCurrentCalendar());	
-							
-							//hent events for den valgte kalender. DET MÅ FIKSES
+						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 							
 							container.show(Container.SHOWCALENDAR);
 							}
@@ -337,8 +336,8 @@ public class Logic {
 						try {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
-							ClientLogin cl = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
-							System.out.println(cl.getEmail());
+							 clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+							System.out.println(clientLogin.getEmail());
 							System.out.println(clientLogin.getRole());
 							System.out.println(clientLogin.getUserID());
 							System.out.println(clientLogin.getCalendars());
@@ -368,9 +367,9 @@ public class Logic {
 							
 							
 							container.getShowCalendar().getCh().setCalendar(clientLogin.getCalendars());
-							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear());
+							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 							
-							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear()));
+							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar()));
 							updateTableAddNote();
 							
 							updateTableChangeCalendar();
@@ -543,12 +542,12 @@ public class Logic {
 				}
 
 
-				public String getCurrentCalendar() {
+				public int getCurrentCalendar() {
 					return currentCalendar;
 				}
 
 
-				public void setCurrentCalendar(String currentCalendar) {
+				public void setCurrentCalendar(int currentCalendar) {
 					this.currentCalendar = currentCalendar;
 				}
 

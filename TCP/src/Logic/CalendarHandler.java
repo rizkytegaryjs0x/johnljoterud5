@@ -12,12 +12,15 @@ public class CalendarHandler {
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
 
 
-	public CalendarInfo getWeekEvents(int weeknumber, int year){
+	public CalendarInfo getWeekEvents(int weeknumber, int year , int cId){
 		
 		CalendarInfo weekEvents = new CalendarInfo();
 
 		ArrayList<String> dates = YearAndWeekDates(weeknumber, year);
 		
+		
+		if(cId == 0){
+
 		for(String tempdate : dates){
 
 			for(CalendarInfo tempcal : calendar){
@@ -31,10 +34,32 @@ public class CalendarHandler {
 					
 				}
 			}
+			
+		}
+		}else{
+			
+			
+			for(String tempdate : dates){
+
+				for(CalendarInfo tempcal : calendar){
+
+					for (int i = 0 ; i < tempcal.getCalendars().size(); i++){
+								
+						if(tempcal.getCalendars().get(i).getStart().contains(tempdate + " ")&& tempcal.getCalendars().get(i).getCalendarID() ==cId){
+
+							weekEvents.getCalendars().add(tempcal.getCalendars().get(i));
+						}
+						
+					}
+				}
+				
+			}
+			
 		}
 		
 		return weekEvents;
 	}
+		
 
 	public void setCalendar(ArrayList<CalendarInfo> calendar) {
 		this.calendar = calendar;

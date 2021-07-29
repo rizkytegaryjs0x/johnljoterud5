@@ -1,15 +1,25 @@
 package Logic;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import tcpClasses.TCPClient;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 import JsonClasses.CalendarInfo;
+import JsonClasses.GetNotes;
 
 public class CalendarHandler {
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
+	Gson gson = new GsonBuilder().create();
+	TCPClient tcp = new TCPClient();
 
 
 	public CalendarInfo getWeekEvents(int weeknumber, int year){
@@ -190,5 +200,26 @@ public class CalendarHandler {
 		 String[] dateReturned = {String.valueOf(cal.get(Calendar.YEAR)), String.valueOf(cal.get(Calendar.MONTH)+1),String.valueOf(cal.get(Calendar.DAY_OF_MONTH)), String.valueOf(row+7)};
 		 return dateReturned;
 	 }
-
+	 public GetNotes getNotes(CalendarInfo weekEvents){
+     String answer = "";
+     String toClient = gson.toJson(weekEvents);
+     try {
+  	   
+		answer = tcp.TalkToServer(toClient);
+	} catch (UnknownHostException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 
+     GetNotes gn = (GetNotes)gson.fromJson(answer, GetNotes.class);
+     
+     return gn;
+     
+	 }
 }

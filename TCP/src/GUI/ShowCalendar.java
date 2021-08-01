@@ -97,10 +97,17 @@ public class ShowCalendar extends JPanel {
 		           selectedRow = tblCalendar.getSelectedRow();
 		           selectedColumn = tblCalendar.getSelectedColumn();
 		           
+		           if(tblCalendar.getValueAt(selectedRow, selectedColumn) != null){
 		           String [] celldates = ch.getCellDate(selectedColumn, selectedRow, currentYear, currentWeek);
-		           String dateCheck = String.format("%s-%s-%s %s", celldates[1], celldates[2], celldates[3], celldates[4]);
-	        	   ArrayList<UserEvent> array = weekEvents.getCalendars();
-	        	   ArrayList<CreateNote> notes = weekNotes.getNotes();
+		           String dateCheck = String.format("%s-%s-%s %s", celldates[0], celldates[1], celldates[2], celldates[3]);
+		           ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
+		           ArrayList<UserEvent> array = new ArrayList<UserEvent>();
+	        	   if(weekEvents.getCalendars() != null){
+	        		   array = weekEvents.getCalendars();
+	        	   
+	        	   if(weekNotes.getNotes() != null){
+	        		   notes = weekNotes.getNotes();
+				   
 	        	   String noteText = "";
 	        	   for (UserEvent ue : array){
 	        		   if(ue.getStart().contains(dateCheck)){
@@ -113,6 +120,9 @@ public class ShowCalendar extends JPanel {
 	        	   }
 	        	   txtTekstTilEvents.setText(dateCheck);
 	        	   refreshCalendar(currentWeek, currentYear);
+		           }
+	        	   }
+		           }
 			}
 		}});
 

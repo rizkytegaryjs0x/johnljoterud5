@@ -21,46 +21,15 @@ public class TCPClient {
 	private String incomingJson;
 	private EncryptionAES cryp =  new EncryptionAES();
 	
-//	public String TalkToServer (String StringFromClient) throws UnknownHostException, IOException, Exception{
-//		EncryptionAES cryp = new EncryptionAES();
-//		String modifiedSentence;
-//
-//		String gsonString = cryp.encrypt(StringFromClient);
-//
-//		Socket clientSocket = new Socket("localhost", 8888);
-//		DataOutputStream outToServer = new DataOutputStream(
-//				clientSocket.getOutputStream());
-//		byte[] input = gsonString.getBytes();
-//		byte key = (byte) 3.1470;
-//		byte[] encrypted = input;
-//		for (int i = 0; i < encrypted.length; i++)
-//			encrypted[i] = (byte) (encrypted[i] ^ key);
-//
-//		outToServer.write(encrypted);
-//		outToServer.flush();
-//		DataInputStream inFromServer = new DataInputStream(clientSocket.getInputStream());
-////		BufferedReader inFromServer = new BufferedReader(new InputStreamReader(
-////				clientSocket.getInputStream()));
-//		modifiedSentence = cryp.decrypt(inFromServer.readLine());
-//		System.out.println("FROM SERVER: " + modifiedSentence);
-//		clientSocket.close();
-//		return modifiedSentence;
-//	}
-	
 	public String TalkToServer (String StringFromClient) throws UnknownHostException, IOException, Exception{
 		
-	String ny = "";	
+		String ny = "";
+		String encryptedString = cryp.encrypt(StringFromClient);
 		String modifiedSentence;
-		Gson gson = new GsonBuilder().create();
-
 		Socket clientSocket = new Socket("localhost", 8888);
 		DataOutputStream outToServer = new DataOutputStream(
 				clientSocket.getOutputStream());
-		byte[] input = StringFromClient.getBytes();
-		byte key = (byte) 3.1470;
-		byte[] encrypted = input;
-		for (int i = 0; i < encrypted.length; i++)
-			encrypted[i] = (byte) (encrypted[i] ^ key);
+		byte[] encrypted = byteCryp.encrypt(encryptedString);
 		System.out.println(encrypted);
 		outToServer.write(encrypted);
 		outToServer.flush();

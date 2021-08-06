@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -24,7 +26,14 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import tcpClasses.TCPClient;
 import JsonClasses.CalendarInfo;
+import JsonClasses.CreateNote;
+import JsonClasses.DeleteEvent;
+import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
@@ -54,6 +63,10 @@ public class ShowCalendar extends JPanel {
 	private CalendarHandler ch = new CalendarHandler();
 	GregorianCalendar cal = new GregorianCalendar();
 	ArrayList<String> dateArray = new ArrayList<String>();
+	CalendarInfo weekEvents = new CalendarInfo();
+	GetNotes weekNotes = new GetNotes();
+
+
 
 	public ShowCalendar() {
 		setLayout(null);// Create frame
@@ -80,14 +93,38 @@ public class ShowCalendar extends JPanel {
 		tblCalendar.addMouseListener(new MouseAdapter() {
 		       @Override
 		       public void mouseClicked(MouseEvent evt) {
-		          
+		    	   if(selectedRow != -1 && selectedColumn != -1){ 
 		           selectedRow = tblCalendar.getSelectedRow();
 		           selectedColumn = tblCalendar.getSelectedColumn();
-
-		           tblCalendar.getModel().getValueAt(selectedRow, selectedColumn);
-		
+		           
+		           if(tblCalendar.getValueAt(selectedRow, selectedColumn) != null){
+		           String [] celldates = ch.getCellDate(selectedColumn, selectedRow, currentYear, currentWeek);
+		           String dateCheck = String.format("%s-%s-%s %s", celldates[0], celldates[1], celldates[2], celldates[3]);
+		           ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
+		           ArrayList<UserEvent> array = new ArrayList<UserEvent>();
+	        	   if(weekEvents.getCalendars() != null){
+	        		   array = weekEvents.getCalendars();
+	        	   
+	        	   if(weekNotes.getNotes() != null){
+	        		   notes = weekNotes.getNotes();
+				   
+	        	   String noteText = "";
+	        	   for (UserEvent ue : array){
+	        		   if(ue.getStart().contains(dateCheck)){
+	        			   for(CreateNote note : notes){
+	        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
+	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
+	        				   }
+	        			   }
+	        		   }
+	        	   }
+	        	   txtTekstTilEvents.setText(dateCheck);
+	        	   refreshCalendar(currentWeek, currentYear);
+		           }
+	        	   }
+		           }
 			}
-		});
+		}});
 
 		// Set border
 		setBorder(BorderFactory.createTitledBorder("Calendar"));
@@ -206,7 +243,7 @@ public class ShowCalendar extends JPanel {
 
 		// Refresh calendar
 
-		refreshCalendar(realWeek, realYear, 0); // Refresh calendar
+		refreshCalendar(realWeek, realYear); // Refresh calendar
 
 	}
 
@@ -274,7 +311,7 @@ public class ShowCalendar extends JPanel {
 		return btnAddNote;
 	}
 
-	public void refreshCalendar(int week, int year, int cId) {
+	public void refreshCalendar(int week, int year) {
 		// Variables
 
 		String[] weeks = { "0", "Week 1", "Week 2", "Week 3", "Week 4",
@@ -328,8 +365,9 @@ public class ShowCalendar extends JPanel {
 		}
 
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
-		CalendarInfo we = ch.getWeekEvents(week, year, cId);
-		
+		CalendarInfo we = ch.getWeekEvents(week, year);
+		setWeekEvents(we);
+		setWeekNotes(ch.getNotes(we));
 	
 		for (String date : weekDates){
 			ArrayList <UserEvent> de = new ArrayList <UserEvent>();
@@ -525,7 +563,25 @@ public class ShowCalendar extends JPanel {
 
 	public void setSelectedColumn(int selectedColumn) {
 		this.selectedColumn = selectedColumn;
-	}  
+	}
+
+	public CalendarInfo getWeekEvents() {
+		return weekEvents;
+	}
+
+	public void setWeekEvents(CalendarInfo weekEvents) {
+		this.weekEvents = weekEvents;
+	}
+
+	public GetNotes getWeekNotes() {
+		return weekNotes;
+	}
+
+	public void setWeekNotes(GetNotes weekNotes) {
+		this.weekNotes = weekNotes;
+	}
+
+
 	
 	
 }

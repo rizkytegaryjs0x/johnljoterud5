@@ -309,6 +309,8 @@ public class Logic {
 				private class ChangeCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getChangeCalendar().getBtnBack()) {
+						setCurrentCalendar(0);
+						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 						container.show(Container.SHOWCALENDAR);
 					}
 					if (e.getSource() == container.getChangeCalendar().getBtnChoose());

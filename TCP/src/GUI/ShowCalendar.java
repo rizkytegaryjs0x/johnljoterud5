@@ -119,7 +119,7 @@ public class ShowCalendar extends JPanel {
 	        		   }
 	        	   }
 	        	   txtTekstTilEvents.setText(dateCheck);
-	        	   refreshCalendar(currentWeek, currentYear);
+	        	   refreshCalendar(currentWeek, currentYear, 0);
 		           }
 	        	   }
 		           }
@@ -243,7 +243,7 @@ public class ShowCalendar extends JPanel {
 
 		// Refresh calendar
 
-		refreshCalendar(realWeek, realYear); // Refresh calendar
+		refreshCalendar(realWeek, realYear, 0); // Refresh calendar
 
 	}
 
@@ -311,7 +311,7 @@ public class ShowCalendar extends JPanel {
 		return btnAddNote;
 	}
 
-	public void refreshCalendar(int week, int year) {
+	public void refreshCalendar(int week, int year, int cId) {
 		// Variables
 
 		String[] weeks = { "0", "Week 1", "Week 2", "Week 3", "Week 4",
@@ -365,7 +365,7 @@ public class ShowCalendar extends JPanel {
 		}
 
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
-		CalendarInfo we = ch.getWeekEvents(week, year);
+		CalendarInfo we = ch.getWeekEvents(week, year, cId);
 		setWeekEvents(we);
 		setWeekNotes(ch.getNotes(we));
 	

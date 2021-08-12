@@ -100,27 +100,30 @@ public class ShowCalendar extends JPanel {
 		           if(tblCalendar.getValueAt(selectedRow, selectedColumn) != null){
 		           String [] celldates = ch.getCellDate(selectedColumn, selectedRow, currentYear, currentWeek);
 		           String dateCheck = String.format("%s-%s-%s %s", celldates[0], celldates[1], celldates[2], celldates[3]);
+		           
+		           System.out.println("DateCheckString: " + dateCheck);
+		           
 		           ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
 		           ArrayList<UserEvent> array = new ArrayList<UserEvent>();
-	        	   if(weekEvents.getCalendars() != null){
+	        	   if(!weekEvents.getCalendars().isEmpty()){
 	        		   array = weekEvents.getCalendars();
 	        	   
-	        	   if(weekNotes.getNotes() != null){
-	        		   notes = weekNotes.getNotes();
-				   
-	        	   String noteText = "";
-	        	   for (UserEvent ue : array){
-	        		   if(ue.getStart().contains(dateCheck)){
-	        			   for(CreateNote note : notes){
-	        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
-	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
-	        				   }
-	        			   }
-	        		   }
-	        	   }
-	        	   txtTekstTilEvents.setText(dateCheck);
-	        	   refreshCalendar(currentWeek, currentYear, 0);
-		           }
+		        	   if(!weekNotes.getNotes().isEmpty()){
+		        		   notes = weekNotes.getNotes();
+					   
+			        	   String noteText = "";
+			        	   for (UserEvent ue : array){
+			        		   if(ue.getStart().contains(dateCheck)){
+			        			   for(CreateNote note : notes){
+			        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
+			        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
+			        				   }
+			        			   }
+			        		   }
+			        	   }
+			        	   txtTekstTilEvents.setText(dateCheck);
+			        	   refreshCalendar(currentWeek, currentYear, 0);
+			           }
 	        	   }
 		           }
 			}

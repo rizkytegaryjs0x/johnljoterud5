@@ -12,6 +12,8 @@ import java.util.ArrayList;
 
 
 
+
+
 import tcpClasses.TCPClient;
 import GUI.AddNote;
 import GUI.Container;
@@ -21,7 +23,9 @@ import JsonClasses.ClientLogout;
 import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
+import JsonClasses.DeleteEvent;
 import JsonClasses.GetDailyUpdate;
+import JsonClasses.GetEvents;
 import JsonClasses.GetUsers;
 import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ShareCalendars;
@@ -52,6 +56,7 @@ public class Logic {
 		CreateNote createNote = new CreateNote();
 		GetUsers getUsers = new GetUsers();
 		ShareCalendars shareCalendar = new ShareCalendars();
+		DeleteEvent deleteEvent = new DeleteEvent();
 		
 		
 		CalendarHandler cHandler;
@@ -74,7 +79,7 @@ public class Logic {
 			container.getCreateCalendar().addActionListener(new CreateCalendarActionListener());
 			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
 			container.getShareCalendar().addActionListener(new ShareCalendarActionListener());
-			
+			container.getEventList().addActionlistener(new EventListActionListener());
 			
 		}
 	
@@ -186,7 +191,29 @@ public class Logic {
 //					
 //				}
 			}
-				private class CreateCalendarActionListener implements ActionListener {
+				
+		private class EventListActionListener implements ActionListener{
+		
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				if (e.getSource() == container.getEventList().getBtnDelete()){
+					
+					
+				}
+		
+		
+		
+			}
+		
+		}
+		
+		
+		
+		
+		
+		private class CreateCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getCreateCalendar().getBtnSubmit()) {
 						
@@ -490,14 +517,33 @@ public class Logic {
 					}
 				}
 			
+//				public void updateTableEventList(){
+//					
+//					try{
+//						GetEvents ge = new GetEvents();
+//						container.getEventList().getModel().getDataVector().removeAllElements();
+//						stringSendToServer = gson.toJson(ge);
+//						
+//						answer = tcp.TalkToServer(stringSendToServer);
+//						ge = (GetEvents)gson.fromJson(answer, GetEvents.class);
+//						for(UserEvent event)
+//						
+//						
+//						
+//						
+//					}catch(Exception ex){
+//						ex.printStackTrace();
+//					}
+//				}
+				
 				public void updateUserTableShareCalendar(){
 					try{
 						GetUsers ue = new GetUsers();
 						container.getShareCalendar().getModelUser().getDataVector().removeAllElements();
 						stringSendToServer = gson.toJson(ue);
 						answer = tcp.TalkToServer(stringSendToServer);
-						GetUsers gu = (GetUsers)gson.fromJson(answer, GetUsers.class);
-						for(UserInfo user  : gu.getUserArray()){
+						ue = (GetUsers)gson.fromJson(answer, GetUsers.class);
+						for(UserInfo user  : ue.getUserArray()){
 												
 							container.getShareCalendar().getModelUser().insertRow(container.getShareCalendar().getModelUser().getRowCount(), new Object[]{
 								user.getEmail(), user.getActive()
@@ -570,5 +616,8 @@ public class Logic {
 				public void setThisWeeksInfo(CalendarInfo thisWeeksInfo) {
 					this.thisWeeksInfo = thisWeeksInfo;
 				}
+				
+					
 }
+
 	

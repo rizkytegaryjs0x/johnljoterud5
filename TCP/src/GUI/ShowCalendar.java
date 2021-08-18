@@ -105,27 +105,25 @@ public class ShowCalendar extends JPanel {
 		           
 		           ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
 		           ArrayList<UserEvent> array = new ArrayList<UserEvent>();
-	        	   if(!weekEvents.getCalendars().isEmpty()){
-	        		   array = weekEvents.getCalendars();
+		           array = weekEvents.getCalendars();
 	        	   
-		        	   if(!weekNotes.getNotes().isEmpty()){
-		        		   notes = weekNotes.getNotes();
+        		   notes = weekNotes.getNotes();
 					   
-			        	   String noteText = "";
-			        	   for (UserEvent ue : array){
-			        		   if(ue.getStart().contains(dateCheck)){
-			        			   for(CreateNote note : notes){
-			        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
-			        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
-			        				   }
-			        			   }
-			        		   }
-			        	   }
-			        	   txtTekstTilEvents.setText(dateCheck);
-			        	   refreshCalendar(currentWeek, currentYear, 0);
-			           }
+	        	   String noteText = "";
+	        	   for (UserEvent ue : array){
+	        		   if(ue.getStart().contains(dateCheck)){
+	        			   for(CreateNote note : notes){
+	        				   System.out.println("Note EventID: " + note.getEventID());
+	        				   System.out.println("");
+	        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
+	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
+	        				   }
+	        			   }
+	        		   }
 	        	   }
-		           }
+	        	   txtTekstTilEvents.setText(dateCheck);
+//			        	   refreshCalendar(currentWeek, currentYear, 0);
+			           }	        	
 			}
 		}});
 

@@ -15,6 +15,7 @@ import com.google.gson.GsonBuilder;
 
 import JsonClasses.CalendarInfo;
 import JsonClasses.GetNotes;
+import JsonClasses.UserEvent;
 
 public class CalendarHandler {
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
@@ -227,7 +228,15 @@ public class CalendarHandler {
 	 }
 	 public GetNotes getNotes(CalendarInfo weekEvents){
      String answer = "";
-     String toClient = gson.toJson(weekEvents);
+     
+     GetNotes gn = new GetNotes();
+     ArrayList<UserEvent> aue = weekEvents.getCalendars();
+          
+     for ( UserEvent ue : aue){
+    	 gn.getEvents().add(ue);
+     }    	 
+     System.out.println("requesting notes from server");
+     String toClient = gson.toJson(gn);
      try {
   	   
 		answer = tcp.TalkToServer(toClient);
@@ -242,7 +251,7 @@ public class CalendarHandler {
 		e.printStackTrace();
 	}
 	 
-     GetNotes gn = (GetNotes)gson.fromJson(answer, GetNotes.class);
+     gn = (GetNotes)gson.fromJson(answer, GetNotes.class);
      
      return gn;
      

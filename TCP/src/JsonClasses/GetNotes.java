@@ -9,6 +9,7 @@ public class GetNotes {
 	@SuppressWarnings("unused")
 	private String overallID = "getNotes";
 	ArrayList<CreateNote> notes = new ArrayList<CreateNote>();
+	ArrayList<UserEvent> Events = new ArrayList<UserEvent>();
 	
 	public GetNotes(){
 		
@@ -20,6 +21,14 @@ public class GetNotes {
 
 	public void setNotes(ArrayList<CreateNote> notes) {
 		this.notes = notes;
+	}
+
+	public ArrayList<UserEvent> getEvents() {
+		return Events;
+	}
+
+	public void setEvents(ArrayList<UserEvent> events) {
+		Events = events;
 	}
 	
 }

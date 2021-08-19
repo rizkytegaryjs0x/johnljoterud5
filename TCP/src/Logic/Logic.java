@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 
 
+
 import tcpClasses.TCPClient;
 import GUI.AddNote;
 import GUI.Container;
@@ -25,6 +26,7 @@ import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
 import JsonClasses.DeleteEvent;
 import JsonClasses.GetDailyUpdate;
+import JsonClasses.EventInfo;
 import JsonClasses.GetEvents;
 import JsonClasses.GetUsers;
 import JsonClasses.RetrieveUserCalendar;
@@ -123,6 +125,12 @@ public class Logic {
 				if (e.getSource() == container.getShowCalendar().getBtnChangeCalendar()) {
 					updateTableChangeCalendar();
 					container.show(Container.CHANGECALENDAR);
+				}
+				if (e.getSource() == container.getShowCalendar().getBtnDeleteEvent()){
+					
+					updateTableEventList();
+					
+					container.show(Container.EVENTLIST);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnLogout()) {
 					container.show(Container.LOGINPANEL);
@@ -396,6 +404,7 @@ public class Logic {
 							
 							
 							container.getShowCalendar().getCh().setCalendar(clientLogin.getCalendars());
+							
 							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 							
 							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar()));
@@ -517,24 +526,30 @@ public class Logic {
 					}
 				}
 			
-//				public void updateTableEventList(){
-//					
-//					try{
-//						GetEvents ge = new GetEvents();
-//						container.getEventList().getModel().getDataVector().removeAllElements();
-//						stringSendToServer = gson.toJson(ge);
-//						
-//						answer = tcp.TalkToServer(stringSendToServer);
-//						ge = (GetEvents)gson.fromJson(answer, GetEvents.class);
-//						for(UserEvent event)
-//						
-//						
-//						
-//						
-//					}catch(Exception ex){
-//						ex.printStackTrace();
-//					}
-//				}
+				public void updateTableEventList(){
+					
+					try{
+						
+						container.getEventList().getModel().getDataVector().removeAllElements();
+						
+					ArrayList< UserEvent> myEvents = container.getShowCalendar().getCh().getMyEvents(getCurrentUser());
+						
+						for(UserEvent events : myEvents){
+							
+							container.getEventList().getModel().insertRow(container.getEventList().getModel().getRowCount(), new Object[]{
+								
+								events.getEventid(), events.getType(), events.getTitle(), events.getText()
+								
+							});
+						}
+						
+						
+						
+						
+					}catch(Exception ex){
+						ex.printStackTrace();
+					}
+				}
 				
 				public void updateUserTableShareCalendar(){
 					try{

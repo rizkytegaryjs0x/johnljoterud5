@@ -12,6 +12,7 @@ import tcpClasses.TCPClient;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.sun.org.apache.regexp.internal.recompile;
 
 import JsonClasses.CalendarInfo;
 import JsonClasses.GetNotes;
@@ -69,6 +70,24 @@ public class CalendarHandler {
 		}
 		
 		return weekEvents;
+	}
+	
+	public ArrayList<UserEvent> getMyEvents(String createdBy){
+		
+		ArrayList<UserEvent> myEvents = new ArrayList<UserEvent>();
+		
+		for(CalendarInfo myInfo : calendar){
+			
+			for(UserEvent ue: myInfo.getCalendars()){
+				
+				if(createdBy.equals(ue.getCreatedby())){
+					
+					myEvents.add(ue);
+				}
+			}
+		}
+		return myEvents;
+		
 	}
 		
 

@@ -3,10 +3,11 @@ package JsonClasses;
 import java.util.ArrayList;
 
 public class GetEvents {
-	private  final long serialVersionUID = 1L;
+
+	private static final long serialVersionUID = 1L;
 	private String overallID = "getEvents";
 	
-	ArrayList<UserEvent> events = new ArrayList<UserEvent>();
+	ArrayList<EventInfo> events = new ArrayList<EventInfo>();
 
 	public String getOverallID() {
 		return overallID;
@@ -16,17 +17,18 @@ public class GetEvents {
 		this.overallID = overallID;
 	}
 
-	public ArrayList<UserEvent> getEvents() {
+	public ArrayList<EventInfo> getEvents() {
 		return events;
 	}
 
-	public void setEvents(ArrayList<UserEvent> events) {
+	public void setEvents(ArrayList<EventInfo> events) {
 		this.events = events;
 	}
 
-	public long getSerialVersionUID() {
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
+	
 	
 	
 	

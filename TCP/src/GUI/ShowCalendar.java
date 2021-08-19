@@ -57,6 +57,7 @@ public class ShowCalendar extends JPanel {
 	private JButton btnAddCalendar;
 	private JButton btnAddEvent;
 	private JButton btnAddNote;
+	private JButton btnDeleteEvent;
 	private int selectedRow;
 	private int selectedColumn;
 
@@ -182,23 +183,23 @@ public class ShowCalendar extends JPanel {
 		add(lblYear);
 
 		btnChangeCalendar = new JButton("Change calendar");
-		btnChangeCalendar.setBounds(1218, 564, 117, 29);
+		btnChangeCalendar.setBounds(1206, 274, 136, 29);
 		add(btnChangeCalendar);
 
 		btnShareCalendar = new JButton("Share calendar");
-		btnShareCalendar.setBounds(1218, 523, 117, 29);
+		btnShareCalendar.setBounds(1211, 538, 136, 29);
 		add(btnShareCalendar);
 
 		btnAddCalendar = new JButton("Add calendar");
-		btnAddCalendar.setBounds(1218, 482, 117, 29);
+		btnAddCalendar.setBounds(1206, 400, 136, 29);
 		add(btnAddCalendar);
 
 		btnAddEvent = new JButton("Add event");
-		btnAddEvent.setBounds(1218, 441, 117, 29);
+		btnAddEvent.setBounds(1206, 358, 136, 29);
 		add(btnAddEvent);
 
 		btnAddNote = new JButton("Add note");
-		btnAddNote.setBounds(1218, 400, 117, 29);
+		btnAddNote.setBounds(1206, 316, 136, 29);
 		add(btnAddNote);
 
 		btnLogout = new JButton("Logout");
@@ -229,6 +230,10 @@ public class ShowCalendar extends JPanel {
 		lblWeatherForecast.setBounds(680, 122, 124, 16);
 		add(lblWeatherForecast);
 		
+		btnDeleteEvent = new JButton("Delete event");
+		btnDeleteEvent.setBounds(1206, 445, 136, 29);
+		add(btnDeleteEvent);
+		
 		
 		
 		
@@ -256,6 +261,7 @@ public class ShowCalendar extends JPanel {
 		btnChangeCalendar.addActionListener(l);
 		btnLogout.addActionListener(l);
 		btnShareCalendar.addActionListener(l);
+		btnDeleteEvent.addActionListener(l);
 		btnPrev.addActionListener(l);
 		btnNext.addActionListener(l);
 		cmbYear.addActionListener(l);
@@ -263,6 +269,10 @@ public class ShowCalendar extends JPanel {
 	}
 	
 	
+
+	public JButton getBtnDeleteEvent() {
+		return btnDeleteEvent;
+	}
 
 	public JTextField getTxtForecast() {
 		return txtForecast;
@@ -581,8 +591,4 @@ public class ShowCalendar extends JPanel {
 	public void setWeekNotes(GetNotes weekNotes) {
 		this.weekNotes = weekNotes;
 	}
-
-
-	
-	
 }

@@ -115,14 +115,14 @@ public class ShowCalendar extends JPanel {
 	        		   if(ue.getStart().contains(dateCheck)){
 	        			   for(CreateNote note : notes){
 	        				   System.out.println("Note EventID: " + note.getEventID());
-	        				   System.out.println("");
-	        				   if(note.getEventID().equals(String.valueOf(ue.getEventid()))){
+	        				   System.out.println("UE eventID: " + String.valueOf(ue.getEventid()));
+	        				   if(note.getEventID() != null && String.valueOf(ue.getEventid()) != null && note.getEventID().equals(String.valueOf(ue.getEventid()))){
 	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
 	        				   }
 	        			   }
 	        		   }
 	        	   }
-	        	   txtTekstTilEvents.setText(dateCheck);
+	        	   txtTekstTilEvents.setText(noteText);
 //			        	   refreshCalendar(currentWeek, currentYear, 0);
 			           }	        	
 			}

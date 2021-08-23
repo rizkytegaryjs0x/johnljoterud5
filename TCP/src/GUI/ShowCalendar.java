@@ -46,7 +46,7 @@ public class ShowCalendar extends JPanel {
 	private DefaultTableModel mtblCalendar; // Table model
 	private JScrollPane stblCalendar; // The scrollpane
 	private int realYear, realWeek, realDay, currentYear, currentWeek;
-	private JTextField txtTekstTilEvents;
+	private JLabel jLabelTekstTilEvents;
 	private JTextField txtForecast;
 	private JLabel lblWeatherForecast;
 	private JTextField txtQOTD;
@@ -110,19 +110,21 @@ public class ShowCalendar extends JPanel {
 	        	   
         		   notes = weekNotes.getNotes();
 					   
-	        	   String noteText = "";
+	        	   String noteText = "<html>";
 	        	   for (UserEvent ue : array){
 	        		   if(ue.getStart().contains(dateCheck)){
 	        			   for(CreateNote note : notes){
 	        				   System.out.println("Note EventID: " + note.getEventID());
 	        				   System.out.println("UE eventID: " + String.valueOf(ue.getEventid()));
 	        				   if(note.getEventID() != null && String.valueOf(ue.getEventid()) != null && note.getEventID().equals(String.valueOf(ue.getEventid()))){
-	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "\n";
+	        					   noteText += note.getText() + "- by: " + note.getCreatedBy() + "<br>";
 	        				   }
 	        			   }
 	        		   }
 	        	   }
-	        	   txtTekstTilEvents.setText(noteText);
+	        	   noteText += "</html>";
+	        	   System.out.println(noteText);
+	        	   jLabelTekstTilEvents.setText(noteText);
 //			        	   refreshCalendar(currentWeek, currentYear, 0);
 			           }	        	
 			}
@@ -206,11 +208,9 @@ public class ShowCalendar extends JPanel {
 		btnLogout.setBounds(1218, 605, 117, 29);
 		add(btnLogout);
 
-		txtTekstTilEvents = new JTextField();
-		txtTekstTilEvents.setBounds(6, 646, 1197, 82);
-		add(txtTekstTilEvents);
-		txtTekstTilEvents.setText("Tekst til events!");
-		txtTekstTilEvents.setColumns(10);
+		jLabelTekstTilEvents = new JLabel("Event Notes!");
+		jLabelTekstTilEvents.setBounds(55, 646, 1148, 82);
+		add(jLabelTekstTilEvents);
 
 		txtQOTD = new JTextField();
 		txtQOTD.setBounds(83, 89, 400, 82);

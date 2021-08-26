@@ -9,14 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 import tcpClasses.TCPClient;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.sun.org.apache.regexp.internal.recompile;
-
 import JsonClasses.CalendarInfo;
 import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class CalendarHandler {
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();

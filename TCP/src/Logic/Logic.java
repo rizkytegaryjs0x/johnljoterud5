@@ -15,6 +15,10 @@ import java.util.ArrayList;
 
 
 
+
+
+import javax.swing.JOptionPane;
+
 import tcpClasses.TCPClient;
 import GUI.AddNote;
 import GUI.Container;
@@ -209,8 +213,31 @@ public class Logic {
 				if (e.getSource() == container.getEventList().getBtnDelete()){
 					
 					
+					deleteEvent.setEventId(container.getEventList().getEventId()); 
+					deleteEvent.setEmail(getCurrentUser());
+					
+					System.out.println("event has been deleted");
+					stringSendToServer = gson.toJson(deleteEvent);
+					
+					try {
+						tcp.TalkToServer(stringSendToServer);
+					} catch (UnknownHostException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					container.show(Container.SHOWCALENDAR);
+					
 				}
-		
+				if (e.getSource() == container.getEventList().getBtnBack()){
+					
+					container.show(Container.SHOWCALENDAR);
+				}
 		
 		
 			}
@@ -304,7 +331,19 @@ public class Logic {
 							
 								stringSendToServer = gson.toJson(createEvent);
 								
-								
+								try {
+									tcp.TalkToServer(stringSendToServer);
+								} catch (UnknownHostException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (IOException e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								} catch (Exception e1) {
+									// TODO Auto-generated catch block
+									e1.printStackTrace();
+								}
+								container.show(Container.SHOWCALENDAR);
 						}
 				}
 				}
@@ -535,6 +574,8 @@ public class Logic {
 					ArrayList< UserEvent> myEvents = container.getShowCalendar().getCh().getMyEvents(getCurrentUser());
 						
 						for(UserEvent events : myEvents){
+							
+							
 							
 							container.getEventList().getModel().insertRow(container.getEventList().getModel().getRowCount(), new Object[]{
 								

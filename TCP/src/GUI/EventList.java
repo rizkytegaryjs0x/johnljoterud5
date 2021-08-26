@@ -99,6 +99,14 @@ public class EventList extends JPanel{
 
 	}
 
+	public JButton getBtnBack() {
+		return btnBack;
+	}
+
+	public void setBtnBack(JButton btnBack) {
+		this.btnBack = btnBack;
+	}
+
 	public DefaultTableModel getModel() {
 		return model;
 	}

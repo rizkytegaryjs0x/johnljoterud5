@@ -15,6 +15,7 @@ public class UserEvent {
 	private String start;
 	private String end;
 	private int calendarID;
+	
 //	String activityid
 	public UserEvent( int eventid, String type,
 			String location, String createdby, String start,

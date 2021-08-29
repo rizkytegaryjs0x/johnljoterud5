@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 
 
+
 import javax.swing.JOptionPane;
 
 import tcpClasses.TCPClient;
@@ -32,6 +33,7 @@ import JsonClasses.DeleteEvent;
 import JsonClasses.GetDailyUpdate;
 import JsonClasses.EventInfo;
 import JsonClasses.GetEvents;
+import JsonClasses.GetNotes;
 import JsonClasses.GetUsers;
 import JsonClasses.RetrieveUserCalendar;
 import JsonClasses.ShareCalendars;
@@ -86,6 +88,7 @@ public class Logic {
 			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
 			container.getShareCalendar().addActionListener(new ShareCalendarActionListener());
 			container.getEventList().addActionlistener(new EventListActionListener());
+			container.getNoteList().addActionlistener(new NoteListActionListener());
 			
 		}
 	
@@ -136,6 +139,7 @@ public class Logic {
 					
 					container.show(Container.EVENTLIST);
 				}
+				
 				if (e.getSource() == container.getShowCalendar().getBtnLogout()) {
 					container.show(Container.LOGINPANEL);
 				}
@@ -143,6 +147,14 @@ public class Logic {
 					updateCalendarTableShareCalendar();
 					updateUserTableShareCalendar();
 					container.show(Container.SHARECALENDAR);
+				}
+				if (e.getSource() == container.getShowCalendar().getBtnDeleteNote()){
+					
+				
+				updateTableNoteList();
+				
+				container.show(Container.NOTELIST);
+				
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnNext()) {
 					
@@ -243,9 +255,17 @@ public class Logic {
 			}
 		
 		}
-		
-		
-		
+	
+		private class NoteListActionListener implements ActionListener{
+
+			@Override
+			public void actionPerformed(ActionEvent paramActionEvent) {
+				
+				
+				
+			}
+			
+		}
 		
 		
 		private class CreateCalendarActionListener implements ActionListener {
@@ -308,11 +328,8 @@ public class Logic {
 						}
 				}
 				}
-				
-			
 
-
-				private class AddEventActionListener implements ActionListener {
+		private class AddEventActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getAddEvent().getBtnBack()) {
 							container.show(Container.SHOWCALENDAR);
@@ -347,7 +364,7 @@ public class Logic {
 						}
 				}
 				}
-				private class AddNoteActionListener implements ActionListener {
+		private class AddNoteActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getAddNote().getBtnBack()) {
 						container.show(Container.SHOWCALENDAR);
@@ -380,7 +397,7 @@ public class Logic {
 					}
 
 			}
-				private class ChangeCalendarActionListener implements ActionListener {
+		private class ChangeCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getChangeCalendar().getBtnBack()) {
 						setCurrentCalendar(0);
@@ -397,7 +414,7 @@ public class Logic {
 							}
 
 				}
-				private class LoginPanelActionListener implements ActionListener {
+		private class LoginPanelActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getLoginPanel().getBtnLogin()) {
 					
@@ -469,7 +486,7 @@ public class Logic {
 					}
 
 				}
-				private class ShareCalendarActionListener implements ActionListener {
+		private class ShareCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getShareCalendar().getBtnBack()) {
 						container.show(Container.SHOWCALENDAR);
@@ -635,6 +652,38 @@ public class Logic {
 				
 			}
 				}
+				
+				public void updateTableNoteList(){
+					try{
+					GetNotes  notes = container.getShowCalendar().getWeekNotes();
+					ArrayList<CreateNote> noteArray = notes.getNotes();
+					for(CreateNote note : noteArray){
+						
+						if(note.getCreatedBy().equals(getCurrentUser())){
+							
+							container.getNoteList().getModel().insertRow(container.getNoteList().getModel().getRowCount(), new Object[]{
+								 note.getNoteID(), note.getDateTime(), note.getText()
+								
+							});
+						}	
+					}
+						}catch(Exception ex)
+						{
+							ex.printStackTrace();
+						
+					
+				}
+					
+						}
+					
+					
+					
+					
+					
+					
+					
+					
+				
 
 				public String getCurrentUser() {
 					return currentUser;

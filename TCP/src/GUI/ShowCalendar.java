@@ -37,6 +37,7 @@ import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
+import javax.swing.SwingConstants;
 
 public class ShowCalendar extends JPanel {
 	private JLabel lblWeek, lblYear;
@@ -66,6 +67,7 @@ public class ShowCalendar extends JPanel {
 	ArrayList<String> dateArray = new ArrayList<String>();
 	CalendarInfo weekEvents = new CalendarInfo();
 	GetNotes weekNotes = new GetNotes();
+	private JButton btnDeleteNote;
 
 
 
@@ -189,7 +191,7 @@ public class ShowCalendar extends JPanel {
 		add(btnChangeCalendar);
 
 		btnShareCalendar = new JButton("Share calendar");
-		btnShareCalendar.setBounds(1211, 538, 136, 29);
+		btnShareCalendar.setBounds(1211, 529, 131, 29);
 		add(btnShareCalendar);
 
 		btnAddCalendar = new JButton("Add calendar");
@@ -234,6 +236,10 @@ public class ShowCalendar extends JPanel {
 		btnDeleteEvent.setBounds(1206, 445, 136, 29);
 		add(btnDeleteEvent);
 		
+		btnDeleteNote = new JButton("Delete note");
+		btnDeleteNote.setBounds(1206, 487, 136, 29);
+		add(btnDeleteNote);
+		
 		
 		
 		
@@ -262,6 +268,7 @@ public class ShowCalendar extends JPanel {
 		btnLogout.addActionListener(l);
 		btnShareCalendar.addActionListener(l);
 		btnDeleteEvent.addActionListener(l);
+		btnDeleteNote.addActionListener(l);
 		btnPrev.addActionListener(l);
 		btnNext.addActionListener(l);
 		cmbYear.addActionListener(l);
@@ -320,6 +327,10 @@ public class ShowCalendar extends JPanel {
 
 	public JButton getBtnAddNote() {
 		return btnAddNote;
+	}
+	
+	public JButton getBtnDeleteNote() {
+		return btnDeleteNote;
 	}
 
 	public void refreshCalendar(int week, int year, int cId) {

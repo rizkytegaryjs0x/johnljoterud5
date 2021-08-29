@@ -23,6 +23,7 @@ public class Container extends JFrame {
 	private final CreateCalendar createCalendar = new CreateCalendar();
 	private final ShareCalendarGUI shareCalendar = new ShareCalendarGUI();
 	private final EventList eventList = new EventList();
+	private final NoteList noteList  = new NoteList();
 	CardLayout c;
 	
 
@@ -40,6 +41,7 @@ public class Container extends JFrame {
 	public static final String CREATECALENDAR = "CREATECALENDAR";
 	public static final String SHARECALENDAR = "SHARECALENDAR";
 	public static final String EVENTLIST = "EVENTLIST";
+	public static final String NOTELIST = "NOTELIST";
 	
 	
 	public Container() {
@@ -69,9 +71,17 @@ public class Container extends JFrame {
 		
 		contentPane.add(eventList, "EVENTLIST");
 		
+		contentPane.add(noteList, "NOTELIST");
+		
 		c = (CardLayout) getContentPane().getLayout();
 		
 	}
+	
+
+	public NoteList getNoteList() {
+		return noteList;
+	}
+
 
 	public EventList getEventList() {
 		return eventList;

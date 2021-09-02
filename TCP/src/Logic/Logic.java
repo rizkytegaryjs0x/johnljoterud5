@@ -658,9 +658,9 @@ public class Logic {
 					GetNotes  notes = container.getShowCalendar().getWeekNotes();
 					ArrayList<CreateNote> noteArray = notes.getNotes();
 					for(CreateNote note : noteArray){
-						
+						System.out.println("Checking note: " + note.getNoteID());
 						if(note.getCreatedBy().equals(getCurrentUser())){
-							
+							System.out.println("Note has been added to table.");
 							container.getNoteList().getModel().insertRow(container.getNoteList().getModel().getRowCount(), new Object[]{
 								 note.getNoteID(), note.getDateTime(), note.getText()
 								
@@ -676,14 +676,6 @@ public class Logic {
 					
 						}
 					
-					
-					
-					
-					
-					
-					
-					
-				
 
 				public String getCurrentUser() {
 					return currentUser;

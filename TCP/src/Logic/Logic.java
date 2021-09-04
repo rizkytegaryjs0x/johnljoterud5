@@ -266,8 +266,6 @@ public class Logic {
 			}
 			
 		}
-		
-		
 		private class CreateCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getCreateCalendar().getBtnSubmit()) {
@@ -435,9 +433,11 @@ public class Logic {
 							System.out.println(clientLogin.getUserID());
 							System.out.println(clientLogin.getCalendars());
 							
-							setCurrentUser(clientLogin.getEmail());
 							
-					
+							
+							setCurrentUser(clientLogin.getEmail());
+						
+							
 							
 							
 						stringSendToServer = gson.toJson(getDailyUpdate);
@@ -662,7 +662,7 @@ public class Logic {
 						if(note.getCreatedBy().equals(getCurrentUser())){
 							System.out.println("Note has been added to table.");
 							container.getNoteList().getModel().insertRow(container.getNoteList().getModel().getRowCount(), new Object[]{
-								 note.getNoteID(), note.getDateTime(), note.getText()
+								 note.getNoteID(), note.getEventID(), note.getText()
 								
 							});
 						}	

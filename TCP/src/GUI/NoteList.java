@@ -38,7 +38,7 @@
 			setSize(new Dimension(1366, 768));
 			setLayout(null);
 
-			String[] columnNames = { "EventID","Type", "Name" ,"Text"};
+			String[] columnNames = { "NoteId", "EventID","Text"};
 			table = new JTable();
 			model = (DefaultTableModel) table.getModel();
 			model.setColumnIdentifiers(columnNames);

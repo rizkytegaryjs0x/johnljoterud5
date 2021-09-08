@@ -259,9 +259,12 @@ public class Logic {
 		private class NoteListActionListener implements ActionListener{
 
 			@Override
-			public void actionPerformed(ActionEvent paramActionEvent) {
+			public void actionPerformed(ActionEvent e) {
 				
-				
+				if (e.getSource() == container.getNoteList().getBtnBack()){
+					
+					container.show(Container.SHOWCALENDAR);
+				}
 				
 			}
 			

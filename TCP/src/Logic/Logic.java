@@ -67,11 +67,14 @@ public class Logic {
 		DeleteEvent deleteEvent = new DeleteEvent();
 		
 		
+		
 		CalendarHandler cHandler;
 		private int currentCalendar;
 		private String currentEventId;
 		private String currentUser;
 		private String answer;
+		int currentWeek;
+		int currentYear;
 		private CalendarInfo thisWeeksInfo = new CalendarInfo();
 		public Logic(){
 			
@@ -102,11 +105,14 @@ public class Logic {
 		
 		private class ShowCalendarActionListener implements ActionListener{
 
-				int currentWeek = container.getShowCalendar().getCurrentWeek();
-			
-				int currentYear = container.getShowCalendar().getCurrentYear();
+				
 			
 			public void actionPerformed(ActionEvent e) {
+				
+				currentWeek = container.getShowCalendar().getCurrentWeek();
+				
+				currentYear = container.getShowCalendar().getCurrentYear();
+				
 				if (e.getSource() == container.getShowCalendar().getBtnAddCalendar()) {
 					container.show(Container.CREATECALENDAR);
 				}
@@ -400,19 +406,26 @@ public class Logic {
 			}
 		private class ChangeCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
-					if (e.getSource() == container.getChangeCalendar().getBtnBack()) {
+					if (e.getSource() == container.getChangeCalendar().getBtnChooseAll()) {
 						setCurrentCalendar(0);
 						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 						container.show(Container.SHOWCALENDAR);
 					}
-					if (e.getSource() == container.getChangeCalendar().getBtnChoose());
+					 if (e.getSource() == container.getChangeCalendar().getBtnChoose()){
 					
-						setCurrentCalendar(Integer.valueOf(container.getChangeCalendar().getCalId()));
+					
+					int cid = Integer.valueOf(container.getChangeCalendar().getCalId());
+					
+					System.out.println(cid);
+					
+						setCurrentCalendar(cid);
 						
 						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 							
 							container.show(Container.SHOWCALENDAR);
-							}
+							
+					 }
+					 }
 
 				}
 		private class LoginPanelActionListener implements ActionListener {

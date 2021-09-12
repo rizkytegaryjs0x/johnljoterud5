@@ -164,7 +164,7 @@ public class ShowCalendar extends JPanel {
 		cal.set(GregorianCalendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
 		
 	
-		currentWeek = realWeek; // Match month and year
+		currentWeek = realWeek-1; // Match month and year
 		currentYear = realYear;
 
 
@@ -336,7 +336,7 @@ public class ShowCalendar extends JPanel {
 	public void refreshCalendar(int week, int year, int cId) {
 		// Variables
 
-		String[] weeks = { "0", "Week 1", "Week 2", "Week 3", "Week 4",
+		String[] weeks = { "Week 1", "Week 2", "Week 3", "Week 4",
 				"Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10",
 				"Week 11", "Week 12", "Week 13", "Week 14", "Week 15",
 				"Week 16", "Week 17", "Week 18", "Week 19", "Week 20",

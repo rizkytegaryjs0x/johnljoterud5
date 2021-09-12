@@ -24,7 +24,7 @@ public class ChangeCalendar extends JPanel {
 	private DefaultTableModel model;
 	private JScrollPane scrollPane;
 	private JButton btnChoose;
-	private JButton btnBack;
+	private JButton btnChooseAll;
 	private JLabel lblChooseCalendar;
 	private int row;
 	private String calId;
@@ -87,14 +87,14 @@ public class ChangeCalendar extends JPanel {
 		btnChoose.setBounds(530, 608, 360, 50);
 		add(btnChoose);
 		
-		btnBack = new JButton("Back");
-		btnBack.setContentAreaFilled(false);
-		btnBack.setForeground(new Color(0, 0, 0));
-		btnBack.setFont(new Font("Arial", Font.BOLD, 30));
-		btnBack.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
-		btnBack.setBackground(Color.WHITE);
-		btnBack.setBounds(616, 691, 194, 50);
-		add(btnBack);
+		btnChooseAll = new JButton("Show all calendars");
+		btnChooseAll.setContentAreaFilled(false);
+		btnChooseAll.setForeground(new Color(0, 0, 0));
+		btnChooseAll.setFont(new Font("Arial", Font.BOLD, 30));
+		btnChooseAll.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnChooseAll.setBackground(Color.WHITE);
+		btnChooseAll.setBounds(530, 691, 360, 50);
+		add(btnChooseAll);
 		
 
 	}
@@ -139,13 +139,13 @@ public class ChangeCalendar extends JPanel {
 
 	public void addActionListener(ActionListener l) {
 		btnChoose.addActionListener(l);
-		btnBack.addActionListener(l);
+		btnChooseAll.addActionListener(l);
 	}
 	public JButton getBtnChoose() {
 		return btnChoose;
 	}
-	public JButton getBtnBack() {
-		return btnBack;
+	public JButton getBtnChooseAll() {
+		return btnChooseAll;
 	}
 	
 }

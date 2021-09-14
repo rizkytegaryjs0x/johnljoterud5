@@ -164,7 +164,7 @@ public class ShowCalendar extends JPanel {
 		cal.set(GregorianCalendar.DAY_OF_WEEK, cal.getFirstDayOfWeek());
 		
 	
-		currentWeek = realWeek-1; // Match month and year
+		currentWeek = realWeek; // Match month and year
 		currentYear = realYear;
 
 
@@ -352,14 +352,14 @@ public class ShowCalendar extends JPanel {
 		// Allow/disallow buttons
 		btnPrev.setEnabled(true);
 		btnNext.setEnabled(true);
-		if (week == 0 && year <= realYear - 10) {
+		if (week == 1 && year <= realYear - 10) {
 			btnPrev.setEnabled(false);
 		} // Too early
 		if (week == 51 && year >= realYear + 100) {
 			btnNext.setEnabled(false);
 		} // Too late
 		
-		lblWeek.setText(weeks[week]); // Refresh the month label (at the top)
+		lblWeek.setText(weeks[week-1]); // Refresh the month label (at the top)
 		lblWeek.setBounds(160 - lblWeek.getPreferredSize().width / 2, 25, 180,
 				25); // Re-align label with calendar
 		cmbYear.setSelectedItem(String.valueOf(year)); // Select the correct
@@ -413,42 +413,6 @@ public class ShowCalendar extends JPanel {
 				 tblCalendar.setDefaultRenderer(Object.class, new MultiLineCellRenderer()); 
 	}
 
-//	private class btnPrev_Action implements ActionListener {
-//		public void actionPerformed(ActionEvent e) {
-//			if (currentWeek == 0) { // Back one year
-//				currentWeek = 52;
-//				currentYear -= 1;
-//			} else { // Back one month
-//				currentWeek -= 1;
-//			}
-//			refreshCalendar(currentWeek, currentYear);
-//		}
-//	}
-//
-//	private class btnNext_Action implements ActionListener {
-//		public void actionPerformed(ActionEvent e) {
-//
-//			if (currentWeek == 52) { // Foward one year
-//				currentWeek = 1;
-//				currentYear += 1;
-//			} else { // Foward one month
-//				currentWeek += 1;
-//
-//			}
-//			refreshCalendar(currentWeek, currentYear);
-//			
-//		}
-//	}
-//
-//	private class cmbYear_Action implements ActionListener {
-//		public void actionPerformed(ActionEvent e) {
-//			if (cmbYear.getSelectedItem() != null) {
-//				String b = cmbYear.getSelectedItem().toString();
-//				currentYear = Integer.parseInt(b);
-//				refreshCalendar(currentWeek, currentYear);
-//			}
-//		}cfrcfr
-//	}
 	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
 
 		 if(!dayEvents.isEmpty()){

@@ -109,8 +109,8 @@ public class Logic {
 			
 			public void actionPerformed(ActionEvent e) {
 				
-				currentWeek = container.getShowCalendar().getCurrentWeek();
 				
+				currentWeek = container.getShowCalendar().getCurrentWeek();
 				currentYear = container.getShowCalendar().getCurrentYear();
 				
 				if (e.getSource() == container.getShowCalendar().getBtnAddCalendar()) {
@@ -173,8 +173,8 @@ public class Logic {
 								container.getShowCalendar().setCurrentWeek(currentWeek +=1);
 
 							}
-							container.getShowCalendar().refreshCalendar(currentWeek, currentYear, getCurrentCalendar());
-							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear, getCurrentCalendar()));
+							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
+							setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar()));
 							updateTableAddNote();
 					
 					
@@ -183,7 +183,7 @@ public class Logic {
 				if (e.getSource() == container.getShowCalendar().getBtnPrev()) {
 					
 					
-					if (currentWeek == 0) { // Back one year
+					if (currentWeek == 1) { // Back one year
 						
 						container.getShowCalendar().setCurrentWeek(52);
 						container.getShowCalendar().setCurrentYear(currentYear -=1);
@@ -191,9 +191,9 @@ public class Logic {
 					} else { // Back one month
 						container.getShowCalendar().setCurrentWeek(currentWeek -=1);
 					}
-					container.getShowCalendar().refreshCalendar(currentWeek, currentYear,getCurrentCalendar());
+					container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar());
 					
-					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(currentWeek, currentYear,getCurrentCalendar()));
+					setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar()));
 					
 					updateTableAddNote();
 				if(e.getSource() == container.getShowCalendar().getCmbYear()) {

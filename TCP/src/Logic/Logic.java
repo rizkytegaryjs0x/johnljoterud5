@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 
 
+
 import javax.swing.JOptionPane;
 
 import tcpClasses.TCPClient;
@@ -65,6 +66,7 @@ public class Logic {
 		GetUsers getUsers = new GetUsers();
 		ShareCalendars shareCalendar = new ShareCalendars();
 		DeleteEvent deleteEvent = new DeleteEvent();
+		ClientLogout clientLogOut = new ClientLogout();
 		
 		
 		
@@ -147,6 +149,22 @@ public class Logic {
 				}
 				
 				if (e.getSource() == container.getShowCalendar().getBtnLogout()) {
+					
+					clientLogOut.setEmail(getCurrentUser());
+					stringSendToServer = gson.toJson(clientLogOut);
+					try {
+						tcp.TalkToServer(stringSendToServer);
+					} catch (UnknownHostException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
 					container.show(Container.LOGINPANEL);
 				}
 				if (e.getSource() == container.getShowCalendar().getBtnShareCalendar()) {

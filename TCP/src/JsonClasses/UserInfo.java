@@ -1,17 +1,15 @@
 package JsonClasses;
 
-import java.util.ArrayList;
 
 public class UserInfo implements java.io.Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private String overallID = "getUsers";
 	
 	private String email;
 	private String active;
+	
+	
 	
 	public String getActive() {
 		return active;

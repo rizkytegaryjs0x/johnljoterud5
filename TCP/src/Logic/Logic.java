@@ -1,28 +1,12 @@
 package Logic;
 
-import tcpClasses.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.UnknownHostException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-
-
-
-
-
-
-
-
-
-
-import javax.swing.JOptionPane;
-
 import tcpClasses.TCPClient;
-import GUI.AddNote;
 import GUI.Container;
 import JsonClasses.CalendarInfo;
 import JsonClasses.ClientLogin;
@@ -32,8 +16,6 @@ import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
 import JsonClasses.DeleteEvent;
 import JsonClasses.GetDailyUpdate;
-import JsonClasses.EventInfo;
-import JsonClasses.GetEvents;
 import JsonClasses.GetNotes;
 import JsonClasses.GetUsers;
 import JsonClasses.RetrieveUserCalendar;

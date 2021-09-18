@@ -16,13 +16,13 @@ public class UserEvent {
 	private String end;
 	private int calendarID;
 	
-//	String activityid
+
 	public UserEvent( int eventid, String type,
 			String location, String createdby, String start,
 			String end, String title, String text,
 			int calendarID) {
 		super();
-		// this.activityid = activityid;
+		
 		this.eventid = eventid;
 		this.type = type;
 		this.title = title;

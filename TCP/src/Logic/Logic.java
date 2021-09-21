@@ -128,6 +128,7 @@ public class Logic {
 					updateTableEventList();
 					
 					container.show(Container.EVENTLIST);
+					
 				}
 				
 				if (e.getSource() == container.getShowCalendar().getBtnLogout()) {
@@ -290,7 +291,7 @@ public class Logic {
 							ArrayList<String>sharedUsers = new ArrayList<String>();
 								
 							String shareWith = container.getCreateCalendar().getTxtShare().getText();
-							String createdBy = getCurrentUser();
+							String email = getCurrentUser();
 							if(container.getCreateCalendar().getChckbxIfYesCheck().isSelected())
 							{
 						
@@ -304,13 +305,10 @@ public class Logic {
 							int isCbs = 0;
 							createCalendar.setCalendarName(calendarName);
 							createCalendar.setPublicOrPrivate(pPublic);
-							createCalendar.setCreatedBy(createdBy);
+							createCalendar.setEmail(email);
 							createCalendar.setSharedUsers(sharedUsers);
 							createCalendar.setIsCBS(isCbs);
 							
-							
-							System.out.println("getcurrentUser" + getCurrentUser());
-							System.out.println("Check CreateCalendar cc for CU: " + createCalendar.getCreatedBy());
 							
 							stringSendToServer = gson.toJson(createCalendar);
 							

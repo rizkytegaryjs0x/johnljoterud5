@@ -202,7 +202,7 @@ public class Logic {
 					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
 						String b = container.getShowCalendar().getCmbYear().getSelectedItem().toString();
 						container.getShowCalendar().setCurrentYear(Integer.parseInt(b));
-						container.getShowCalendar().refreshCalendar(currentWeek, currentYear,getCurrentCalendar());
+						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar());
 					}
 				}
 				}

@@ -199,6 +199,7 @@ public class Logic {
 					updateTableAddNote();
 				if(e.getSource() == container.getShowCalendar().getCmbYear()) {
 					
+					System.out.println(container.getShowCalendar().getCmbYear().getSelectedItem());
 					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
 						String b = container.getShowCalendar().getCmbYear().getSelectedItem().toString();
 						container.getShowCalendar().setCurrentYear(Integer.parseInt(b));
@@ -673,7 +674,7 @@ public class Logic {
 					ArrayList<CreateNote> noteArray = notes.getNotes();
 					for(CreateNote note : noteArray){
 						System.out.println("Checking note: " + note.getNoteID());
-						if(note.getCreatedBy().equals(getCurrentUser())){
+						if(note.getCreatedBy().equals(getCurrentUser())){	
 							System.out.println("Note has been added to table.");
 							container.getNoteList().getModel().insertRow(container.getNoteList().getModel().getRowCount(), new Object[]{
 								 note.getNoteID(), note.getEventID(), note.getText()

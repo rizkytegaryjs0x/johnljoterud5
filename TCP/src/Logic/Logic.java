@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import tcpClasses.TCPClient;
 import GUI.Container;
 import JsonClasses.CalendarInfo;
@@ -15,6 +17,7 @@ import JsonClasses.CreateCalendar;
 import JsonClasses.CreateEvent;
 import JsonClasses.CreateNote;
 import JsonClasses.DeleteEvent;
+import JsonClasses.DeleteNote;
 import JsonClasses.GetDailyUpdate;
 import JsonClasses.GetNotes;
 import JsonClasses.GetUsers;
@@ -49,6 +52,7 @@ public class Logic {
 		ShareCalendars shareCalendar = new ShareCalendars();
 		DeleteEvent deleteEvent = new DeleteEvent();
 		ClientLogout clientLogOut = new ClientLogout();
+		DeleteNote deleteNote = new DeleteNote();
 		
 		
 		
@@ -251,6 +255,7 @@ public class Logic {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
+					updateTableEventList();
 					container.show(Container.SHOWCALENDAR);
 					
 				}
@@ -272,6 +277,30 @@ public class Logic {
 				if (e.getSource() == container.getNoteList().getBtnBack()){
 					
 					container.show(Container.SHOWCALENDAR);
+				}
+				if (e.getSource() == container.getNoteList().getBtnDelete()){
+					
+					String nId = container.getNoteList().getEventId();
+					
+					deleteNote.setNoteID(nId);
+					deleteNote.setEmail(getCurrentUser());
+					
+					stringSendToServer = gson.toJson(deleteNote);
+					
+					try {
+						tcp.TalkToServer(stringSendToServer);
+					} catch (UnknownHostException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (Exception e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+					updateTableNoteList();
 				}
 				
 			}
@@ -342,7 +371,14 @@ public class Logic {
 						}
 						if (e.getSource() == container.getAddEvent().getBtnSubmit()) {
 						
-							
+							if(getCurrentCalendar() == 0){
+								
+								JOptionPane.showMessageDialog(null,
+										"\nYou have to choose a specific calendar to create an event!",
+										"Error message", JOptionPane.PLAIN_MESSAGE);
+								
+								container.show(Container.CHANGECALENDAR);
+							}else{
 							createEvent.setCalendarID(String.valueOf(getCurrentCalendar()));
 							createEvent.setCreatedby(getCurrentUser());
 							createEvent.setLocation(container.getAddEvent().getTextField_Location().getText());
@@ -367,6 +403,7 @@ public class Logic {
 									e1.printStackTrace();
 								}
 								container.show(Container.SHOWCALENDAR);
+						}
 						}
 				}
 				}

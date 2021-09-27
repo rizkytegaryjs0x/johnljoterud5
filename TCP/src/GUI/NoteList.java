@@ -28,7 +28,7 @@
 		private JButton btnBack;
 		private JLabel lblChooseNote;
 		private int row;
-		private String eventId;
+		private String noteId;
 
 
 		public NoteList() {
@@ -53,8 +53,8 @@
 					
 					row = table.getSelectedRow();
 					if(row != -1){
-					eventId = table.getValueAt(row, 0).toString();
-					setEventId(eventId);
+					noteId = table.getValueAt(row, 0).toString();
+					setEventId(noteId);
 
 					}
 				}
@@ -135,12 +135,12 @@
 
 
 		public String getEventId() {
-			return eventId;
+			return noteId;
 		}
 
 
 		public void setEventId(String eventId) {
-			this.eventId = eventId;
+			this.noteId = eventId;
 		}
 		
 

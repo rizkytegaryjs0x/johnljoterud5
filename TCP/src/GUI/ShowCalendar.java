@@ -5,8 +5,6 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.IOException;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -26,24 +24,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import tcpClasses.TCPClient;
 import JsonClasses.CalendarInfo;
 import JsonClasses.CreateNote;
-import JsonClasses.DeleteEvent;
 import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
-import javax.swing.SwingConstants;
 
 public class ShowCalendar extends JPanel {
-	private JLabel lblWeek, lblYear;
+
 	private JButton btnPrev, btnNext;
 	private JTable tblCalendar;
-	private JComboBox cmbYear;
 	private DefaultTableModel mtblCalendar; // Table model
 	private JScrollPane stblCalendar; // The scrollpane
 	private int realYear, realWeek, realDay, currentYear, currentWeek;
@@ -76,7 +67,7 @@ public class ShowCalendar extends JPanel {
 		setSize(1366, 768); // Set size to 400x400 pixels
 
 		// Create controls
-		lblWeek = new JLabel("January");
+
 		btnPrev = new JButton("<<");
 		btnNext = new JButton(">>");
 		mtblCalendar = new DefaultTableModel() {
@@ -139,7 +130,7 @@ public class ShowCalendar extends JPanel {
 
 		// Add controls to pane
 
-		add(lblWeek);
+		
 		add(btnPrev);
 		add(btnNext);
 		add(stblCalendar);
@@ -177,14 +168,7 @@ public class ShowCalendar extends JPanel {
 		tblCalendar.setRowSelectionAllowed(true);
 		tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-		// Set row/column count
-		tblCalendar.setRowHeight(60);
-		cmbYear = new JComboBox();
-		cmbYear.setBounds(1063, 25, 136, 32);
-		add(cmbYear);
-		lblYear = new JLabel("Change year:");
-		lblYear.setBounds(931, 21, 108, 32);
-		add(lblYear);
+
 
 		btnChangeCalendar = new JButton("Change calendar");
 		btnChangeCalendar.setBounds(1206, 274, 136, 29);
@@ -248,11 +232,7 @@ public class ShowCalendar extends JPanel {
 
 		
 
-		// Populate table
-		for (int i = realYear - 5; i <= realYear + 25; i++) {
-			cmbYear.addItem(String.valueOf(i));
-		}
-
+	
 		// Refresh calendar
 
 		refreshCalendar(realWeek, realYear, 0); // Refresh calendar
@@ -271,7 +251,7 @@ public class ShowCalendar extends JPanel {
 		btnDeleteNote.addActionListener(l);
 		btnPrev.addActionListener(l);
 		btnNext.addActionListener(l);
-		cmbYear.addActionListener(l);
+		
 
 	}
 	
@@ -358,12 +338,7 @@ public class ShowCalendar extends JPanel {
 		if (week == 51 && year >= realYear + 100) {
 			btnNext.setEnabled(false);
 		} // Too late
-		
-		lblWeek.setText(weeks[week-1]); // Refresh the month label (at the top)
-		lblWeek.setBounds(160 - lblWeek.getPreferredSize().width / 2, 25, 180,
-				25); // Re-align label with calendar
-		cmbYear.setSelectedItem(String.valueOf(year)); // Select the correct
-		// year in the combo box
+
 
 		// Clear table
 		for (int i = 0; i < 15; i++) {
@@ -467,14 +442,6 @@ public class ShowCalendar extends JPanel {
 
 	public void setCurrentWeek(int currentWeek) {
 		this.currentWeek = currentWeek;
-	}
-
-	public JComboBox getCmbYear() {
-		return cmbYear;
-	}
-
-	public void setCmbYear(JComboBox cmbYear) {
-		this.cmbYear = cmbYear;
 	}
 
 	public CalendarHandler getCh() {

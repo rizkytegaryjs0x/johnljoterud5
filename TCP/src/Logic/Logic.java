@@ -203,11 +203,10 @@ public class Logic {
 					updateTableAddNote();
 				if(e.getSource() == container.getShowCalendar().getCmbYear()) {
 					
-					System.out.println(container.getShowCalendar().getCmbYear().getSelectedItem());
 					if (container.getShowCalendar().getCmbYear().getSelectedItem() != null) {
 						String b = container.getShowCalendar().getCmbYear().getSelectedItem().toString();
 						container.getShowCalendar().setCurrentYear(Integer.parseInt(b));
-						container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar());
+						container.getShowCalendar().refreshCalendar(currentWeek, currentYear,getCurrentCalendar());
 					}
 				}
 				}
@@ -402,6 +401,8 @@ public class Logic {
 									// TODO Auto-generated catch block
 									e1.printStackTrace();
 								}
+								JOptionPane.showMessageDialog(null,
+										"\nEvent has been added to ", "", JOptionPane.PLAIN_MESSAGE);
 								container.show(Container.SHOWCALENDAR);
 						}
 						}
@@ -711,7 +712,7 @@ public class Logic {
 					ArrayList<CreateNote> noteArray = notes.getNotes();
 					for(CreateNote note : noteArray){
 						System.out.println("Checking note: " + note.getNoteID());
-						if(note.getCreatedBy().equals(getCurrentUser())){	
+						if(note.getCreatedBy().equals(getCurrentUser())){
 							System.out.println("Note has been added to table.");
 							container.getNoteList().getModel().insertRow(container.getNoteList().getModel().getRowCount(), new Object[]{
 								 note.getNoteID(), note.getEventID(), note.getText()

@@ -17,6 +17,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class CalendarHandler {
+	
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
 	Gson gson = new GsonBuilder().create();
 	TCPClient tcp = new TCPClient();

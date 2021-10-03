@@ -35,7 +35,7 @@ public class EventList extends JPanel{
 		setSize(new Dimension(1366, 768));
 		setLayout(null);
 
-		String[] columnNames = { "EventID","Type", "Name" ,"Text"};
+		String[] columnNames = { "EventID","Type", "Name" ,"Text", "Start", "End"};
 		table = new JTable();
 		model = (DefaultTableModel) table.getModel();
 		model.setColumnIdentifiers(columnNames);
@@ -67,7 +67,7 @@ public class EventList extends JPanel{
 				BevelBorder.LOWERED, new Color(0, 0, 205), new Color(255, 255,
 						255), new Color(0, 0, 205), new Color(255, 255, 255)),
 				null));
-		scrollPane.setBounds(425, 240, 553, 315);
+		scrollPane.setBounds(339, 240, 680, 315);
 
 		// Add the scroll pane to this panel.
 		add(scrollPane);

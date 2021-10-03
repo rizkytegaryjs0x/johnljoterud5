@@ -5,6 +5,8 @@ import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -24,17 +26,24 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import tcpClasses.TCPClient;
 import JsonClasses.CalendarInfo;
 import JsonClasses.CreateNote;
+import JsonClasses.DeleteEvent;
 import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
+import javax.swing.SwingConstants;
 
 public class ShowCalendar extends JPanel {
-
+	private JLabel lblWeek;
 	private JButton btnPrev, btnNext;
 	private JTable tblCalendar;
+	
 	private DefaultTableModel mtblCalendar; // Table model
 	private JScrollPane stblCalendar; // The scrollpane
 	private int realYear, realWeek, realDay, currentYear, currentWeek;
@@ -67,9 +76,10 @@ public class ShowCalendar extends JPanel {
 		setSize(1366, 768); // Set size to 400x400 pixels
 
 		// Create controls
-
+		lblWeek = new JLabel("January");
 		btnPrev = new JButton("<<");
 		btnNext = new JButton(">>");
+		
 		mtblCalendar = new DefaultTableModel() {
 			/**
 			 * 
@@ -130,7 +140,7 @@ public class ShowCalendar extends JPanel {
 
 		// Add controls to pane
 
-		
+		add(lblWeek);
 		add(btnPrev);
 		add(btnNext);
 		add(stblCalendar);
@@ -168,7 +178,8 @@ public class ShowCalendar extends JPanel {
 		tblCalendar.setRowSelectionAllowed(true);
 		tblCalendar.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-
+		// Set row/column count
+		tblCalendar.setRowHeight(60);
 
 		btnChangeCalendar = new JButton("Change calendar");
 		btnChangeCalendar.setBounds(1206, 274, 136, 29);
@@ -232,7 +243,8 @@ public class ShowCalendar extends JPanel {
 
 		
 
-	
+
+
 		// Refresh calendar
 
 		refreshCalendar(realWeek, realYear, 0); // Refresh calendar
@@ -251,7 +263,7 @@ public class ShowCalendar extends JPanel {
 		btnDeleteNote.addActionListener(l);
 		btnPrev.addActionListener(l);
 		btnNext.addActionListener(l);
-		
+
 
 	}
 	
@@ -316,6 +328,9 @@ public class ShowCalendar extends JPanel {
 	public void refreshCalendar(int week, int year, int cId) {
 		// Variables
 
+		
+		
+		
 		String[] weeks = { "Week 1", "Week 2", "Week 3", "Week 4",
 				"Week 5", "Week 6", "Week 7", "Week 8", "Week 9", "Week 10",
 				"Week 11", "Week 12", "Week 13", "Week 14", "Week 15",
@@ -338,17 +353,20 @@ public class ShowCalendar extends JPanel {
 		if (week == 51 && year >= realYear + 100) {
 			btnNext.setEnabled(false);
 		} // Too late
+		
+		lblWeek.setText(weeks[week-1]); // Refresh the month label (at the top)
+		lblWeek.setBounds(160 - lblWeek.getPreferredSize().width / 2, 25, 180,
+				25); // Re-align label with calendar
 
-
-		// Clear table
+//		 Clear table
 		for (int i = 0; i < 15; i++) {
 			for (int j = 0; j < 7; j++) {
 				mtblCalendar.setValueAt(null, i, j);
 				
 			}
 		}
-
-		// Add headers
+		
+		
 
 		// All headers
 
@@ -427,6 +445,8 @@ public class ShowCalendar extends JPanel {
 			 
 		 }
 	 }
+	 
+	 
 
 	public int getCurrentYear() {
 		return currentYear;
@@ -502,6 +522,10 @@ public class ShowCalendar extends JPanel {
 	    }  
 	}
 
+	public DefaultTableModel getMtblCalendar() {
+		return mtblCalendar;
+	}
+
 	public int getSelectedRow() {
 		return selectedRow;
 	}
@@ -533,4 +557,5 @@ public class ShowCalendar extends JPanel {
 	public void setWeekNotes(GetNotes weekNotes) {
 		this.weekNotes = weekNotes;
 	}
+	
 }

@@ -420,8 +420,8 @@ public class ShowCalendar extends JPanel {
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
 				 cm.setText(
 				 		de.getText()+ "\n" 
-						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
-						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "\n");
+						 + de.getStart().substring(de.getStart().indexOf(" ") , de.getStart().length()) + 
+						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") , de.getEnd().length()) + "\n");
 
 				 alcm.add(cm);
 

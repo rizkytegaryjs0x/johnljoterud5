@@ -63,6 +63,7 @@ public class Logic {
 		private String answer;
 		int currentWeek;
 		int currentYear;
+		String password;
 		private CalendarInfo thisWeeksInfo = new CalendarInfo();
 		public Logic(){
 			
@@ -387,10 +388,10 @@ public class Logic {
 								
 								
 								//sender clientLogin på nytt, for å få oppdatert informasjon
-								
+								System.out.println("THE PASSWORD USED: " + getPassword());
 								ClientLogin cl = new ClientLogin();
-								cl.setEmail(container.getLoginPanel().getTextFieldUsername().getText());
-								cl.setPassWord(container.getLoginPanel().getTextFieldPassword().getText());
+								cl.setEmail(getCurrentUser());
+								cl.setPassWord(getPassword());
 								stringSendToServer = gson.toJson(cl);
 								try {
 									answer = tcp.TalkToServer(stringSendToServer);
@@ -406,8 +407,9 @@ public class Logic {
 									e1.printStackTrace();
 								}
 								
+								container.getShowCalendar().getCh().setCalendar(cl.getCalendars());
 								container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
-								setThisWeeksInfo(container.getShowCalendar().getCh().getWeekEvents(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(),getCurrentCalendar()));
+								
 								container.show(Container.SHOWCALENDAR);
 						}
 						}
@@ -477,24 +479,25 @@ public class Logic {
 						
 						clientLogin.setEmail(container.getLoginPanel().getTextFieldUsername().getText());
 						clientLogin.setPassWord(container.getLoginPanel().getTextFieldPassword().getText());
+						
+						
+						
+						
 						stringSendToServer = gson.toJson(clientLogin);
 						
-						
+						setCurrentUser(clientLogin.getEmail());
+						setPassword(clientLogin.getPassWord());
 						
 						
 						try {
 							
 							answer = tcp.TalkToServer(stringSendToServer);
 							 clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
-							System.out.println(clientLogin.getEmail());
-							System.out.println(clientLogin.getRole());
-							System.out.println(clientLogin.getUserID());
-							System.out.println(clientLogin.getCalendars());
 							
 							
+							if(clientLogin.isLoggedIn()){
+
 							
-							setCurrentUser(clientLogin.getEmail());
-						
 							
 							
 							
@@ -526,6 +529,13 @@ public class Logic {
 							
 							updateTableChangeCalendar();
 							container.show(Container.CHANGECALENDAR);
+							}
+							else{
+								
+								JOptionPane.showMessageDialog(null,
+										"\nBad login information! Try again.", "error message", JOptionPane.PLAIN_MESSAGE);
+							}
+						
 							
 						} catch (UnknownHostException e1) {
 							// TODO Auto-generated catch block
@@ -770,6 +780,16 @@ public class Logic {
 
 				public void setThisWeeksInfo(CalendarInfo thisWeeksInfo) {
 					this.thisWeeksInfo = thisWeeksInfo;
+				}
+
+
+				public String getPassword() {
+					return password;
+				}
+
+
+				public void setPassword(String password) {
+					this.password = password;
 				}
 				
 					

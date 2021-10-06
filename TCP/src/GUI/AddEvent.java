@@ -231,8 +231,7 @@ import javax.swing.border.CompoundBorder;
 		public String startDateTimeToString(){
 			
 			String start = getTextFieldStartYear().getText()+"-" + getTextFieldStartMonth().getText() + "-" + 
-					getTextFieldStartDateDay().getText() + " " + getTextFieldStartHour().getText()+":"+getTextFieldStartMinute().getText() + ":" +
-					"00";
+					getTextFieldStartDateDay().getText() + " " + getTextFieldStartHour().getText()+":" + "00";
 			
 			return start;
 		}
@@ -240,8 +239,7 @@ import javax.swing.border.CompoundBorder;
 		public String endDateTimeToString(){
 			
 			String end = getTextFieldEndYear().getText()+"-" + getTextFieldEndMonth().getText() + "-" + 
-					getTextFieldEndDateDay().getText() + " " + getTextFieldEndHour().getText()+":"+getTextFieldEndMinute().getText() + ":" +
-					"00";
+					getTextFieldEndDateDay().getText() + " " + getTextFieldEndHour().getText()+":" + "00";
 			
 			return end;
 		}

@@ -304,7 +304,7 @@ public class Logic {
 							String email = getCurrentUser();
 							if(container.getCreateCalendar().getChckbxIfYesCheck().isSelected())
 							{
-						
+								
 							
 							sharedUsers.add(shareWith);
 							
@@ -514,8 +514,8 @@ public class Logic {
 							
 							
 							container.getShowCalendar().getTxtQOTD().setText("DAGENS QUOTE: "+ qotd);
-							container.getShowCalendar().getTxtForecast().setText("Dagens værutsikter:\n celsius: "+ celsius 
-									+ "\nværbeskrivelse: " + desc);
+							container.getShowCalendar().getTxtForecast().setText("Dagens vejrudsigter: \n celsius: "+ celsius 
+									+ "\n - vvejrbeskrivelse: " + desc);
 							
 							
 							

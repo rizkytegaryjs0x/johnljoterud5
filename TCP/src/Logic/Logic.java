@@ -434,7 +434,7 @@ public class Logic {
 						try {
 							answer = tcp.TalkToServer(stringSendToServer);
 
-							
+							container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 							container.show(Container.SHOWCALENDAR);
 						} catch (UnknownHostException e1) {
 							e1.printStackTrace();

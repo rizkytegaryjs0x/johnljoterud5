@@ -244,34 +244,36 @@ public class CalendarHandler {
 		 String[] dateReturned = {String.valueOf(cal.get(Calendar.YEAR)), String.valueOf(cal.get(Calendar.MONTH)+1),String.valueOf(cal.get(Calendar.DAY_OF_MONTH)), String.valueOf(row+7)};
 		 return dateReturned;
 	 }
-	 public GetNotes getNotes(CalendarInfo weekEvents){
-     String answer = "";
-     
-     GetNotes gn = new GetNotes();
-     ArrayList<UserEvent> aue = weekEvents.getCalendars();
-          
-     for ( UserEvent ue : aue){
-    	 gn.getEvents().add(ue);
-     }    	 
-     System.out.println("requesting notes from server");
-     String toClient = gson.toJson(gn);
-     try {
-  	   
-		answer = tcp.TalkToServer(toClient);
-	} catch (UnknownHostException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (IOException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	} catch (Exception e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
+		 
 	 
-     gn = (GetNotes)gson.fromJson(answer, GetNotes.class);
-     
-     return gn;
-     
-	 }
+	 public GetNotes getNotes(CalendarInfo weekEvents){
+	     String answer = "";
+	     
+	     GetNotes gn = new GetNotes();
+	     ArrayList<UserEvent> aue = weekEvents.getCalendars();
+	          
+	     for ( UserEvent ue : aue){
+	    	 gn.getEvents().add(ue);
+	     }    	 
+	     System.out.println("requesting notes from server");
+	     String toClient = gson.toJson(gn);
+	     try {
+	  	   
+			answer = tcp.TalkToServer(toClient);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		 
+	     gn = (GetNotes)gson.fromJson(answer, GetNotes.class);
+	     
+	     return gn;
+	     
+		 }
 }

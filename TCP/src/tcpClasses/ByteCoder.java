@@ -5,7 +5,7 @@ package tcpClasses;
 
 
 public class ByteCoder {
-
+	// XOR dekryptering ift. key byte ff
 	public String decrypt(byte[] b)
 	{
 
@@ -17,7 +17,7 @@ public class ByteCoder {
 		String encrypted = new String(b).trim();
 		return encrypted;
 	}
-	
+	// XOR kryptering ift. key byte ff
 	public byte[] encrypt(String s){
 		System.out.println("Encoding string: '" + s + "'...");
 		byte[] input = s.getBytes();

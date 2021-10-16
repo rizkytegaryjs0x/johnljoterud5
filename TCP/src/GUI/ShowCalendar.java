@@ -2,6 +2,7 @@ package GUI;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -22,6 +23,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -37,6 +40,7 @@ import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
 import Logic.CalendarHandler;
 import Logic.CellModel;
+
 import javax.swing.SwingConstants;
 
 public class ShowCalendar extends JPanel {
@@ -181,28 +185,59 @@ public class ShowCalendar extends JPanel {
 		// Set row/column count
 		tblCalendar.setRowHeight(60);
 
-		btnChangeCalendar = new JButton("Change calendar");
-		btnChangeCalendar.setBounds(1206, 274, 136, 29);
+		btnChangeCalendar = new JButton("Change Calendar");
+		btnChangeCalendar.setContentAreaFilled(false);
+		btnChangeCalendar.setForeground(new Color(0, 0, 0));
+		btnChangeCalendar.setFont(new Font("Arial", Font.BOLD, 14));
+		btnChangeCalendar.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnChangeCalendar.setBackground(Color.WHITE);
+		btnChangeCalendar.setBounds(1211, 546, 129, 38);
 		add(btnChangeCalendar);
-
-		btnShareCalendar = new JButton("Share calendar");
-		btnShareCalendar.setBounds(1211, 529, 131, 29);
+		
+		
+		btnShareCalendar = new JButton("Share Calendar");
+		btnShareCalendar.setContentAreaFilled(false);
+		btnShareCalendar.setForeground(new Color(0, 0, 0));
+		btnShareCalendar.setFont(new Font("Arial", Font.BOLD, 14));
+		btnShareCalendar.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnShareCalendar.setBackground(Color.WHITE);
+		btnShareCalendar.setBounds(1211, 496, 129, 38);
 		add(btnShareCalendar);
 
-		btnAddCalendar = new JButton("Add calendar");
-		btnAddCalendar.setBounds(1206, 400, 136, 29);
+		btnAddCalendar = new JButton("Add Calendar");
+		btnAddCalendar.setContentAreaFilled(false);
+		btnAddCalendar.setForeground(new Color(0, 0, 0));
+		btnAddCalendar.setFont(new Font("Arial", Font.BOLD, 14));
+		btnAddCalendar.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnAddCalendar.setBackground(Color.WHITE);
+		btnAddCalendar.setBounds(1211, 246, 129, 38);
 		add(btnAddCalendar);
 
-		btnAddEvent = new JButton("Add event");
-		btnAddEvent.setBounds(1206, 358, 136, 29);
+		btnAddEvent = new JButton("Add Event");
+		btnAddEvent.setContentAreaFilled(false);
+		btnAddEvent.setForeground(new Color(0, 0, 0));
+		btnAddEvent.setFont(new Font("Arial", Font.BOLD, 14));
+		btnAddEvent.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnAddEvent.setBackground(Color.WHITE);
+		btnAddEvent.setBounds(1211, 296, 129, 38);
 		add(btnAddEvent);
 
-		btnAddNote = new JButton("Add note");
-		btnAddNote.setBounds(1206, 316, 136, 29);
+		btnAddNote = new JButton("Add Note");
+		btnAddNote.setContentAreaFilled(false);
+		btnAddNote.setForeground(new Color(0, 0, 0));
+		btnAddNote.setFont(new Font("Arial", Font.BOLD, 14));
+		btnAddNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnAddNote.setBackground(Color.WHITE);
+		btnAddNote.setBounds(1213, 346, 129, 38);
 		add(btnAddNote);
 
 		btnLogout = new JButton("Logout");
-		btnLogout.setBounds(1218, 605, 117, 29);
+		btnLogout.setContentAreaFilled(false);
+		btnLogout.setForeground(new Color(0, 0, 0));
+		btnLogout.setFont(new Font("Arial", Font.BOLD, 14));
+		btnLogout.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnLogout.setBackground(Color.WHITE);
+		btnLogout.setBounds(1211, 596, 129, 38);
 		add(btnLogout);
 
 		jLabelTekstTilEvents = new JLabel("Event Notes!");
@@ -227,15 +262,23 @@ public class ShowCalendar extends JPanel {
 		lblWeatherForecast.setBounds(680, 122, 124, 16);
 		add(lblWeatherForecast);
 		
-		btnDeleteEvent = new JButton("Delete event");
-		btnDeleteEvent.setBounds(1206, 445, 136, 29);
+		btnDeleteEvent = new JButton("Delete Event");
+		btnDeleteEvent.setContentAreaFilled(false);
+		btnDeleteEvent.setForeground(new Color(0, 0, 0));
+		btnDeleteEvent.setFont(new Font("Arial", Font.BOLD, 14));
+		btnDeleteEvent.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnDeleteEvent.setBackground(Color.WHITE);
+		btnDeleteEvent.setBounds(1211, 396, 129, 38);
 		add(btnDeleteEvent);
 		
-		btnDeleteNote = new JButton("Delete note");
-		btnDeleteNote.setBounds(1206, 487, 136, 29);
+		btnDeleteNote = new JButton("Delete Note");
+		btnDeleteNote.setContentAreaFilled(false);
+		btnDeleteNote.setForeground(new Color(0, 0, 0));
+		btnDeleteNote.setFont(new Font("Arial", Font.BOLD, 14));
+		btnDeleteNote.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0)), new BevelBorder(BevelBorder.LOWERED, new Color(255, 255, 255), new Color(0, 0, 0), new Color(255, 255, 255), new Color(0, 0, 0))));
+		btnDeleteNote.setBackground(Color.WHITE);
+		btnDeleteNote.setBounds(1211, 446, 129, 38);
 		add(btnDeleteNote);
-		
-		
 		
 		
 		mtblCalendar.setColumnCount(7);

@@ -38,8 +38,8 @@ import JsonClasses.CreateNote;
 import JsonClasses.DeleteEvent;
 import JsonClasses.GetNotes;
 import JsonClasses.UserEvent;
-import Logic.CalendarHandler;
-import Logic.CellModel;
+import logic.CalendarHandler;
+import logic.CellModel;
 
 import javax.swing.SwingConstants;
 
@@ -100,6 +100,8 @@ public class ShowCalendar extends JPanel {
 		stblCalendar = new JScrollPane(tblCalendar);
 		tblCalendar.addMouseListener(new MouseAdapter() {
 		       @Override
+		       //Contains methods for getting notes when user clicks on an event in the calendar.
+		       //Also sets the selected row & column.
 		       public void mouseClicked(MouseEvent evt) {
 		    	   if(selectedRow != -1 && selectedColumn != -1){ 
 		           selectedRow = tblCalendar.getSelectedRow();
@@ -116,7 +118,8 @@ public class ShowCalendar extends JPanel {
 		           array = weekEvents.getCalendars();
 	        	   
         		   notes = weekNotes.getNotes();
-					   
+        		   
+        		   //Creates the string that is shown in the note label. Uses html to breakline after each note.
 	        	   String noteText = "<html>";
 	        	   for (UserEvent ue : array){
 	        		   if(ue.getStart().contains(dateCheck)){
@@ -368,6 +371,8 @@ public class ShowCalendar extends JPanel {
 		return btnDeleteNote;
 	}
 
+	
+	//Will reset the calendar table.
 	public void refreshCalendar(int week, int year, int cId) {
 		// Variables
 
@@ -424,9 +429,11 @@ public class ShowCalendar extends JPanel {
 
 		ArrayList <String> weekDates = ch.YearAndWeekDates(week, year);
 		CalendarInfo we = ch.getWeekEvents(week, year, cId);
+		//Sets local variable weekEvents & weekNotes based on the given week.
 		setWeekEvents(we);
 		setWeekNotes(ch.getNotes(we));
 	
+		//Iterates over the week dates to find the events for the new week
 		for (String date : weekDates){
 			ArrayList <UserEvent> de = new ArrayList <UserEvent>();
 			System.out.printf("Finding events for date %s...\n", date);
@@ -440,6 +447,7 @@ public class ShowCalendar extends JPanel {
 			int column = ch.getArrayWeekDay(date);
 			System.out.printf("populating table for weekday %d...", ch.getWeekDay(date));
 			System.out.println(de.size());
+			//Calls method PopulateTable to put cells in for the dailyEvent (de) variable, and given column.
 			PopulateTable(de, column);
 			
 		}
@@ -448,24 +456,23 @@ public class ShowCalendar extends JPanel {
 
 				 tblCalendar.setDefaultRenderer(Object.class, new MultiLineCellRenderer()); 
 	}
-
+	 //Method to insert events for a given day into the Calendar Table.
 	 public void PopulateTable(ArrayList<UserEvent> dayEvents, int dayOfWeek){
 
 		 if(!dayEvents.isEmpty()){
-			 SimpleDateFormat sdf = new SimpleDateFormat("hh");
-
 			 ArrayList <CellModel> alcm = new ArrayList <CellModel>();
-			 
+			 //Iterates over the day events and checks the hours of the start time to find the row
+			 //in which to insert the events.
 			 for(UserEvent de : dayEvents){
 				 CellModel cm = new CellModel();
 				 String hours = de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().indexOf(":"));
-
+				 
 				 cm.setRowNumber(Integer.valueOf(hours) - 7);
 				 cm.setText(
 				 		de.getText()+ "\n" 
 						 + de.getStart().substring(de.getStart().indexOf(" ") + 1, de.getStart().length()) + 
 						 " to " + de.getEnd().substring(de.getStart().indexOf(" ") + 1, de.getEnd().length()) + "\n");
-
+				 //Adds the created cellModel object into the alcm ArrayList
 				 alcm.add(cm);
 
 				 
@@ -473,6 +480,7 @@ public class ShowCalendar extends JPanel {
 			 
 			 
 			 String newCell;
+			 //Iterates over the CellModel ArrayList to insert the events.
 			 for (CellModel cmTemp : alcm){
 				 
 				 Object value = tblCalendar.getValueAt(cmTemp.getRowNumber(),dayOfWeek);
@@ -517,16 +525,11 @@ public class ShowCalendar extends JPanel {
 	  
 	class MultiLineCellRenderer extends JTextArea implements TableCellRenderer {  
 	  
-	    /**
-		 * 
-		 */
-		private static final long serialVersionUID = 1L;
-
 		public MultiLineCellRenderer() {  
 	        setLineWrap(true);  
 	        setWrapStyleWord(true);  
 	        setOpaque(true);  
-	        setEditable(false); //this line doesn't seem to be doing anything  
+	        setEditable(false);
 	    }  
 	  
 	    public Component getTableCellRendererComponent(JTable table, Object value,  

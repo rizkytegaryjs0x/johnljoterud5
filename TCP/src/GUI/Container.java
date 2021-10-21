@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Logic.CalendarHandler;
+import logic.CalendarHandler;
 
 public class Container extends JFrame {
 
@@ -43,8 +43,9 @@ public class Container extends JFrame {
 	public static final String EVENTLIST = "EVENTLIST";
 	public static final String NOTELIST = "NOTELIST";
 	
-	
+	//Contains the different panels
 	public Container() {
+		
 		setTitle("CBS CALENDAR");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

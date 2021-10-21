@@ -19,7 +19,7 @@ public class EncryptionAES {
 			e.printStackTrace();
 		}
 	}
-	
+	// Her defineres hvilken type algoritme der skal benyttes, samt byte[] til nøglen der genrreres i generateKey() 
 		private static String algorithm = "AES";
 		private static byte[] keyValue=new byte[] 
 		{ 'D', 'I', 'S', 'T', '@', 'D', 'O', 'E', 'K', '4', 'E', 'V', 'A', 'H', '!', '!' };
@@ -42,9 +42,7 @@ public class EncryptionAES {
 		        @SuppressWarnings("restriction")
 				public String decrypt(String encryptedText) throws Exception 
 		        {
-		                // generate key 
 		        		System.out.println("Decrypting...");
-//		                Key key = generateKey();
 		                Cipher chiper = Cipher.getInstance(algorithm);
 		                chiper.init(Cipher.DECRYPT_MODE, key);
 		                byte[] decordedValue = new BASE64Decoder().decodeBuffer(encryptedText);
@@ -53,7 +51,7 @@ public class EncryptionAES {
 		                return decryptedValue;
 		        }
 
-		//generateKey() is used to generate a secret key for AES algorithm
+		        //generateKey() is used to generate a secret key for AES algorithm
 		        private static Key generateKey() throws Exception 
 		        {
 		                Key key = new SecretKeySpec(keyValue, algorithm);

@@ -444,7 +444,7 @@ public class ShowCalendar extends JPanel {
 					de.add(event);
 				}
 			}
-			int column = ch.getArrayWeekDay(date);
+			int column = ch.getWeekDay(date);
 			System.out.printf("populating table for weekday %d...", ch.getWeekDay(date));
 			System.out.println(de.size());
 			//Calls method PopulateTable to put cells in for the dailyEvent (de) variable, and given column.

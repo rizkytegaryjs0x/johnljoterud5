@@ -16,13 +16,20 @@ import JsonClasses.UserEvent;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+//Class that contains methods to handle the calendar data recieved from the server
 public class CalendarHandler {
 	
 	private ArrayList <CalendarInfo> calendar = new ArrayList <CalendarInfo>();
 	Gson gson = new GsonBuilder().create();
 	TCPClient tcp = new TCPClient();
 
-
+	/**Retrieves the events that take place in the given week.
+	 * @author Niklas Broge
+	 * @param weeknumber
+	 * @param year
+	 * @param cId
+	 * @return CalendarInfo
+	 */
 	public CalendarInfo getWeekEvents(int weeknumber, int year , int cId){
 		
 		CalendarInfo weekEvents = new CalendarInfo();
@@ -71,6 +78,11 @@ public class CalendarHandler {
 		return weekEvents;
 	}
 	
+	/**Retrieves the events that were created by the given username
+	 * @author Niklas Broge
+	 * @param createdBy
+	 * @return ArrayList<UserEvent>
+	 */
 	public ArrayList<UserEvent> getMyEvents(String createdBy){
 		
 		ArrayList<UserEvent> myEvents = new ArrayList<UserEvent>();
@@ -87,11 +99,6 @@ public class CalendarHandler {
 		}
 		return myEvents;
 		
-	}
-		
-
-	public void setCalendar(ArrayList<CalendarInfo> calendar) {
-		this.calendar = calendar;
 	}
 	
 	/**Method to get dates of given week in a given year, in the "yyyy-MM-dd" format
@@ -121,7 +128,13 @@ public class CalendarHandler {
 		
 		return dates;
 	 }	
-	 
+	 /**Retrieves int representation of WEEK_DAY
+	  *  in format of: "yyyy-MM-dd", based on given string date.
+	  *  MONDAY starts the week at value 0.
+	  * @author John, Mikkel, Jonathan
+	  * @param date
+	  * @return int DAY_OF_WEEK
+	  */
 	 public int getWeekDay(String date){
 		 int column = 0;
 			Calendar cal = Calendar.getInstance();
@@ -162,58 +175,17 @@ public class CalendarHandler {
 		return column;
 	
 	 }
-	
-	 public int getArrayWeekDay(String arraydate){
-		 int column = 0;
-			Calendar cal = Calendar.getInstance();
-			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-d");
-			Date d;
-			String datehandler = "";
-			try {
-				d = sdf.parse(arraydate);
-				cal.setTime(d);
-			} catch (ParseException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-			datehandler = sdf.format(cal.getTime());
-			int newMonth = cal.get(Calendar.MONTH);
-			newMonth ++;
-			datehandler = datehandler.replace("-MM-", "-" + newMonth + "-");
-			
-			int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
-			if (dayOfWeek == 1) {
-				column = 6;
-			}
-			else if (dayOfWeek == 2){
-				column = 0;
-			}
-			else if (dayOfWeek == 3){
-				column = 1;
-			}
-			else if (dayOfWeek == 4){
-				column = 2;
-			}
-			else if (dayOfWeek == 5){
-				column = 3;
-			}
-			else if (dayOfWeek == 6){
-				column = 4;
-			}
-			else if (dayOfWeek == 7){
-				column = 5;
-			}	
 
-		return column;
-	
-	 }
+	 /**Retrieves the date of the selected cell. Date is returned as a string
+	  * in the format: "yyyy-MM-d h".
+	  * @author Niklas Broge
+	  * @param column
+	  * @param row
+	  * @param year
+	  * @param week
+	  * @return	String
+	  */
 	 public String[] getCellDate(int column, int row, int year, int week){
-		 
-		 System.out.println("column: " + column);
-		 System.out.println("row: " + row);
-		 System.out.println("year: " + year);
-		 System.out.println("week: " + week);
 		 
 		 Calendar cal = Calendar.getInstance();
 		 cal.set(Calendar.YEAR, year);
@@ -245,7 +217,12 @@ public class CalendarHandler {
 		 return dateReturned;
 	 }
 		 
-	 
+	 /**Retrieves notes from server based on the given events. Uses eventID
+	  * to as key to find the respective notes.
+	  * @author Niklas Broge
+	  * @param weekEvents
+	  * @return GetNotes
+	  */
 	 public GetNotes getNotes(CalendarInfo weekEvents){
 	     String answer = "";
 	     
@@ -276,4 +253,8 @@ public class CalendarHandler {
 	     return gn;
 	     
 		 }
+
+		public void setCalendar(ArrayList<CalendarInfo> calendar) {
+			this.calendar = calendar;
+		}
 }

@@ -37,10 +37,6 @@ public class Logic {
 		TCPClient tcp = new TCPClient();
 		Gson gson = new GsonBuilder().create();
 		String stringSendToServer;
-//		int week;
-		
-		
-//		int year;
 		
 //		JSonClasses
 		ClientLogin clientLogin = new ClientLogin();
@@ -71,7 +67,7 @@ public class Logic {
 			container = new Container();
 			
 			
-//			container.getLoginPanel().addActionListener(new LoginPanelActionListener());
+
 			container.getShowCalendar().addActionListener(new ShowCalendarActionListener());
 			container.getAddEvent().addActionListener(new AddEventActionListener());
 			container.getAddNote().addActionListener(new AddNoteActionListener());
@@ -86,7 +82,7 @@ public class Logic {
 	
 		
 		public void run() {
-//			container.getShowCalendar().refreshCalendar(week, year);
+
 			container.show(Container.LOGINPANEL);
 			container.setVisible(true);
 		}

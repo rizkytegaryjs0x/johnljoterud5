@@ -87,7 +87,7 @@ public class Logic {
 			container.setVisible(true);
 		}
 		
-		
+		//Contains actionlisteners and logic for the different buttons in calendar view
 		private class ShowCalendarActionListener implements ActionListener{
 
 				
@@ -202,7 +202,7 @@ public class Logic {
 				}
 				}
 			}
-				
+		//Contains actionlisteners and logic for the different elements of eventList view 		
 		private class EventListActionListener implements ActionListener{
 		
 
@@ -244,7 +244,7 @@ public class Logic {
 			}
 		
 		}
-	
+		//Contains actionlisteners and logic for noteList view
 		private class NoteListActionListener implements ActionListener{
 
 			@Override
@@ -282,6 +282,7 @@ public class Logic {
 			}
 			
 		}
+		//Contains actionlisteners and logic for create calendar view
 		private class CreateCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getCreateCalendar().getBtnSubmit()) {
@@ -339,7 +340,7 @@ public class Logic {
 						}
 				}
 				}
-
+		//Contains actionlisteners and logic for add event view
 		private class AddEventActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 						if (e.getSource() == container.getAddEvent().getBtnBack()) {
@@ -411,6 +412,7 @@ public class Logic {
 						}
 				}
 				}
+		//Contains actionlisteners and logic for add note view
 		private class AddNoteActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getAddNote().getBtnBack()) {
@@ -444,6 +446,7 @@ public class Logic {
 					}
 
 			}
+		//Contains actionlisteners and logic for change calendar view
 		private class ChangeCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getChangeCalendar().getBtnChooseAll()) {
@@ -468,6 +471,7 @@ public class Logic {
 					 }
 
 				}
+		//Contains actionlisteners and logic for Login panel view
 		private class LoginPanelActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getLoginPanel().getBtnLogin()) {
@@ -550,6 +554,7 @@ public class Logic {
 					}
 
 				}
+		//Contains actionlisteners and logic for share calendar view
 		private class ShareCalendarActionListener implements ActionListener {
 					public void actionPerformed(ActionEvent e) {
 					if (e.getSource() == container.getShareCalendar().getBtnBack()) {
@@ -596,7 +601,7 @@ public class Logic {
 				}
 
 
-
+				//Method for updating the table in the add note view
 				public void updateTableAddNote(){
 					try{
 						container.getAddNote().getModel().getDataVector().removeAllElements();
@@ -621,6 +626,7 @@ public class Logic {
 						}
 					
 				}
+				//Updates table in the change calendar view
 				public void updateTableChangeCalendar() {
 
 					try{
@@ -645,7 +651,7 @@ public class Logic {
 						ex.printStackTrace();
 					}
 				}
-			
+				//Updates table in the event list view
 				public void updateTableEventList(){
 					
 					try{
@@ -672,7 +678,7 @@ public class Logic {
 						ex.printStackTrace();
 					}
 				}
-				
+				//Updates table containing users in the share calendar view
 				public void updateUserTableShareCalendar(){
 					try{
 						GetUsers ue = new GetUsers();
@@ -693,6 +699,7 @@ public class Logic {
 						}
 					
 				}
+				//Updates table containing calendars in share calendar view
 				public void updateCalendarTableShareCalendar(){
 					try{
 					RetrieveUserCalendar ru = new RetrieveUserCalendar();
@@ -716,7 +723,7 @@ public class Logic {
 				
 			}
 				}
-				
+				//Updates table in note list view
 				public void updateTableNoteList(){
 					try{
 					GetNotes  notes = container.getShowCalendar().getWeekNotes();

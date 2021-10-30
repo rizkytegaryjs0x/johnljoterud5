@@ -211,11 +211,12 @@ public class Logic {
 				
 				if (e.getSource() == container.getEventList().getBtnDelete()){
 					
+					setCurrentEventId(container.getEventList().getEventId());
 					
-					deleteEvent.setEventId(container.getEventList().getEventId()); 
+					deleteEvent.setEventId(getCurrentEventId()); 
 					deleteEvent.setEmail(getCurrentUser());
 					
-					System.out.println("event has been deleted");
+					
 					stringSendToServer = gson.toJson(deleteEvent);
 					
 					try {
@@ -321,9 +322,18 @@ public class Logic {
 							
 							try {
 								answer = tcp.TalkToServer(stringSendToServer);
-//								cc = (CreateCalendar)gson.fromJson(answer, CreateCalendar.class);
+//								
 								
-								container.show(Container.SHOWCALENDAR);
+								clientLogin.setEmail(getCurrentUser());
+								clientLogin.setPassWord(getPassword());
+								
+								stringSendToServer = gson.toJson(clientLogin);									
+								answer = tcp.TalkToServer(stringSendToServer);
+								clientLogin = (ClientLogin)gson.fromJson(answer, ClientLogin.class);
+								setCurrentUser(clientLogin.getEmail());
+								setPassword(clientLogin.getPassWord());
+								container.getShowCalendar().getCh().setCalendar(clientLogin.getCalendars());
+				
 							} catch (UnknownHostException e1) {
 								e1.printStackTrace();
 							} catch (IOException e1) {
@@ -333,6 +343,7 @@ public class Logic {
 								e1.printStackTrace();
 							}
 							
+							container.show(Container.SHOWCALENDAR);
 							
 						}
 						if (e.getSource() == container.getCreateCalendar().getBtnBack()) {
@@ -609,22 +620,21 @@ public class Logic {
 						
 						for(UserEvent temp : thisWeeksInfo.getCalendars()){
 							
-							System.out.println("eventid: " + temp.getEventid() + "title: " +temp.getEventid());
-							
+							if(temp.getCalendarID() == getCurrentCalendar()){
 							container.getAddNote().getModel().insertRow(container.getAddNote().getModel().getRowCount(), new Object[]{
 								temp.getEventid(),temp.getText(),temp.getType()
 								
 								
 							});
 							
-							
+							}
 							}
 						
 						}catch(Exception ex)
 						{
 							ex.printStackTrace();
 						}
-					
+					container.getShowCalendar().refreshCalendar(container.getShowCalendar().getCurrentWeek(), container.getShowCalendar().getCurrentYear(), getCurrentCalendar());
 				}
 				//Updates table in the change calendar view
 				public void updateTableChangeCalendar() {
@@ -635,7 +645,7 @@ public class Logic {
 					
 					for(CalendarInfo c  : clientLogin.getCalendars()){
 						
-					System.out.println("somethingsomething: " + c.getCalenderName());
+					
 
 						
 						container.getChangeCalendar().getModel().insertRow(container.getChangeCalendar().getModel().getRowCount(), new Object[]{
@@ -658,7 +668,7 @@ public class Logic {
 						
 						container.getEventList().getModel().getDataVector().removeAllElements();
 						
-					ArrayList< UserEvent> myEvents = container.getShowCalendar().getCh().getMyEvents(getCurrentUser());
+					ArrayList< UserEvent> myEvents = container.getShowCalendar().getCh().getCalendarEvents(getCurrentCalendar());
 						
 						for(UserEvent events : myEvents){
 							
@@ -672,7 +682,7 @@ public class Logic {
 						}
 						
 						
-						
+	
 						
 					}catch(Exception ex){
 						ex.printStackTrace();
@@ -726,6 +736,9 @@ public class Logic {
 				//Updates table in note list view
 				public void updateTableNoteList(){
 					try{
+						
+					container.getNoteList().getModel().getDataVector().removeAllElements();	
+					
 					GetNotes  notes = container.getShowCalendar().getWeekNotes();
 					ArrayList<CreateNote> noteArray = notes.getNotes();
 					for(CreateNote note : noteArray){

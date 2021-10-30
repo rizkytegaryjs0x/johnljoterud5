@@ -100,6 +100,28 @@ public class CalendarHandler {
 		return myEvents;
 		
 	}
+	/**
+	 * 
+	 * @param createdBy
+	 * @return
+	 */
+	public ArrayList<UserEvent> getCalendarEvents(int calendarID){
+		
+		ArrayList<UserEvent> calendarEvents = new ArrayList<UserEvent>();
+		
+		for(CalendarInfo myInfo : calendar){
+			
+			for(UserEvent ue: myInfo.getCalendars()){
+				
+				if(calendarID == (ue.getCalendarID())){
+					
+					calendarEvents.add(ue);
+				}
+			}
+		}
+		return calendarEvents;
+		
+	}
 	
 	/**Method to get dates of given week in a given year, in the "yyyy-MM-dd" format
 	 * @author Niklas Broge
